@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AGHAI TV — Player Edition</title>
+<meta name="theme-color" content="#080c13"><meta name="description" content="AGHAI TV VIP media hub with clickable channel cards, categories and in-screen playback for supported links.">
+<style>
+:root{color-scheme:dark;--bg:#080c13;--panel:#111a27;--panel2:#172335;--line:#26384c;--neon:#38f5c5;--blue:#53a8ff;--txt:#edf7ff;--muted:#9aafc4;--danger:#ff6685}
+*{box-sizing:border-box}html,body{overflow-anchor:none;scroll-behavior:auto}.channelgrid{overflow-anchor:none}.channel img{flex:none}@media(hover:none){.channel:hover,.app-tile:hover{transform:none;animation:none;box-shadow:0 3px 8px #0004}}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#17364b 0,#0a1020 38%,#080c13 75%);color:var(--txt);font:15px system-ui,Arial,sans-serif;min-height:100vh;overflow-x:hidden}body:before{content:"";position:fixed;inset:-25%;z-index:-2;pointer-events:none;background:conic-gradient(from 0deg,transparent 0 18%,#38f5c511 24%,transparent 32% 48%,#a855f711 58%,transparent 70% 88%,#53a8ff11);filter:blur(35px);animation:aurora 22s linear infinite}body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(#b9faff26 1px,transparent 1.5px);background-size:36px 36px;mask-image:linear-gradient(to bottom,black,transparent 88%);animation:starDrift 35s linear infinite}@keyframes aurora{to{transform:rotate(360deg)}}@keyframes starDrift{to{background-position:180px 260px}}button,input,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:11px;padding:10px 13px;background:var(--panel2);color:var(--txt)}button:hover{border-color:var(--neon)}input,select{width:100%;background:#080f19;color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:12px;min-width:0}a{color:var(--neon)}.app{max-width:1200px;margin:auto;padding:16px;position:relative;isolation:isolate}.app:before{content:"";position:fixed;inset:5px;pointer-events:none;border:1px solid #38f5c566;border-radius:18px;box-shadow:inset 0 0 18px #38f5c51a,0 0 18px #38f5c522;animation:edgePulse 4s ease-in-out infinite;z-index:-1}@keyframes logoGlow{0%,100%{filter:brightness(1);text-shadow:0 2px 0 #187b81,0 4px 0 #10414f,0 0 12px #38f5c5,0 0 24px #53a8ff}50%{filter:brightness(1.35);text-shadow:0 2px 0 #187b81,0 4px 0 #10414f,0 0 18px #38f5c5,0 0 34px #53a8ff}}@keyframes edgePulse{0%,100%{opacity:.55;filter:hue-rotate(0deg);box-shadow:inset 0 0 20px #38f5c522,0 0 16px #38f5c533}50%{opacity:1;filter:hue-rotate(70deg);box-shadow:inset 0 0 30px #38f5c544,0 0 28px #53a8ff66}}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:8px 0 16px}.brand{display:flex;gap:11px;align-items:center}.logo{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--neon),var(--blue));color:#031017;font-weight:1000;font-size:18px;box-shadow:0 0 22px #38f5c544}.brand h1{animation:logoGlow 3s ease-in-out infinite;margin:0;font-size:27px;letter-spacing:2px;color:#eaffff;text-shadow:0 2px 0 #187b81,0 4px 0 #10414f,0 0 12px #38f5c5,0 0 24px #53a8ff;transform:perspective(240px) rotateX(4deg)}.brand small{color:var(--muted)}.searchrow{display:grid;grid-template-columns:1fr auto;gap:8px;margin:18px 0}.app-launcher{margin:14px 0}.launcher-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:9px}.app-tile{min-height:86px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:linear-gradient(145deg,#1b2d40,#101825);border:1px solid color-mix(in srgb,var(--neon),transparent 55%);box-shadow:inset 0 0 14px #38f5c511}.app-tile .app-icon{font-size:27px}.app-tile span:last-child{font-size:12px;font-weight:700;text-align:center}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.tabs button.active{background:var(--neon);color:#06111a;border-color:var(--neon);font-weight:800}.layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,1fr);gap:16px}.panel{background:#101a27ed;border:1px solid var(--line);border-radius:17px;padding:15px;min-width:0}.panel h2{font-size:16px;margin:0 0 12px}.screen{background:#03070b;border:1px solid #29445a;border-radius:14px;overflow:hidden;aspect-ratio:16/9;display:grid;place-items:center;position:relative}.screen iframe,.screen video{width:100%;height:100%;border:0}.screen:after{content:"AGHAI TV";position:absolute;top:9px;right:10px;z-index:4;padding:5px 9px;border:1px solid var(--neon);border-radius:8px;background:#06111bd9;color:var(--neon);font-weight:900;letter-spacing:1.5px;text-shadow:0 0 10px var(--neon);pointer-events:none;box-shadow:0 0 14px color-mix(in srgb,var(--neon),transparent 65%)}.no-anim *, .no-anim *:before,.no-anim *:after{animation:none!important;transition:none!important}.theme-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.theme-tools select{width:auto;min-width:135px}.music-hint{font-size:12px;color:var(--neon);padding:8px}.welcome{text-align:center;padding:18px;color:var(--muted)}.welcome b{display:block;color:var(--neon);font-size:25px;letter-spacing:2px;margin-bottom:5px}.playerbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.note{font-size:12px;color:var(--muted);line-height:1.5;margin:10px 0 0}.channelgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px}.channel{border:1px solid var(--line);background:linear-gradient(150deg,#182638,#0d1520);padding:12px;border-radius:13px;min-width:0}.channel{overflow:hidden;transition:transform .22s,border-color .22s,box-shadow .22s;contain-intrinsic-size:220px}.channel:hover{transform:translateY(-4px) scale(1.01);border-color:var(--neon);box-shadow:0 0 22px #38f5c544;animation:cardGlow 1.5s ease-in-out infinite alternate}@keyframes cardGlow{from{box-shadow:0 0 8px #38f5c522}to{box-shadow:0 0 24px #53a8ff66}}.thumb{width:100%;height:92px;object-fit:cover;border-radius:9px;margin-bottom:8px;background:linear-gradient(135deg,#1c5360,#35245b);display:block}.channel .symbol{font-size:25px;width:48px;height:48px;display:grid;place-items:center;border-radius:14px;margin:2px 0 7px;background:linear-gradient(135deg,color-mix(in srgb,var(--neon),#172335 35%),color-mix(in srgb,var(--blue),#101a27 35%));border:1px solid color-mix(in srgb,var(--neon),transparent 45%);box-shadow:0 0 16px color-mix(in srgb,var(--neon),transparent 72%);text-shadow:0 2px 10px #000}.channel h3{font-size:14px;margin:7px 0 3px;overflow-wrap:anywhere}.channel p{font-size:12px;color:var(--muted);margin:0 0 10px}.channel .actions{display:flex;gap:6px;flex-wrap:wrap}.channel button{font-size:12px;padding:7px 9px}.fields{display:grid;gap:9px}.two{display:grid;grid-template-columns:1fr 1fr;gap:9px}.hidden{display:none!important}.status{font-size:12px;color:var(--neon);min-height:18px;margin-top:8px}.footer{color:var(--muted);font-size:12px;text-align:center;padding:18px}.danger{color:var(--danger)}@media(max-width:760px){.layout{grid-template-columns:1fr}.app{padding:11px}.brand h1{font-size:20px}.panel{padding:12px}} 
+
+/* AGHAI TV — classic television styling, lightweight motion */
+:root{--tv-glass:#07101b;--tv-edge:#43566c}
+body{perspective:none;background:radial-gradient(ellipse at 50% 0%,#182b3c 0,#0b111b 45%,#070a10 100%)}
+body:before{display:block;z-index:0;opacity:.45;filter:blur(48px);animation:none!important}
+body:after{display:block;z-index:0;opacity:.25;animation:none!important}
+@keyframes softSweep{from{background-position:0 0}to{background-position:80px 30px}}
+.app{max-width:1200px;z-index:1}
+.app:before{display:none!important}.edge-frame{position:fixed;inset:5px;z-index:30;pointer-events:none;border-radius:18px;overflow:hidden;background:linear-gradient(90deg,#38f5c5,#53a8ff,#b66bff,#ff6ec7,#38f5c5) top/220% 2px no-repeat,linear-gradient(180deg,#38f5c5,#53a8ff,#b66bff,#ff6ec7,#38f5c5) right/2px 220% no-repeat,linear-gradient(270deg,#38f5c5,#53a8ff,#b66bff,#ff6ec7,#38f5c5) bottom/220% 2px no-repeat,linear-gradient(0deg,#38f5c5,#53a8ff,#b66bff,#ff6ec7,#38f5c5) left/2px 220% no-repeat;filter:drop-shadow(0 0 5px #38f5c566);animation:borderLight 5s linear infinite}@keyframes borderLight{0%{background-position:0% 0,100% 0,100% 100%,0 100%}50%{background-position:100% 0,100% 100%,0% 100%,0 0}100%{background-position:0% 0,100% 0,100% 100%,0 100%}}
+.pak-time{font-size:12px;font-weight:800;white-space:nowrap;padding:9px 11px;border:1px solid #38f5c566;border-radius:10px;background:#07121ddd;color:#bfffee;box-shadow:inset 0 0 12px #38f5c511}.logo{transform:none;animation:logoGlow 3s ease-in-out infinite;border-radius:13px;box-shadow:0 0 22px #38f5c555}
+.brand h1{transform:none;letter-spacing:2px;animation:logoGlow 6s ease-in-out infinite}
+.panel{background:#101a27;border-color:#26384c;box-shadow:0 4px 14px #0004;transform:none}
+.screen{padding:0;border:4px solid #35465a;border-radius:12px;box-shadow:inset 0 0 0 2px #03060a,0 4px 0 #05080d,0 8px 16px #0008}
+.screen:before{display:block}
+.screen:after{right:9px;top:9px;letter-spacing:1px;box-shadow:0 0 8px #38f5c522}
+.channel{background:linear-gradient(150deg,#182638,#0d1520);border-radius:12px;box-shadow:0 3px 8px #0004;transition:border-color .18s,box-shadow .18s}
+.channel:hover{transform:none;box-shadow:0 0 12px #38f5c522;animation:none}
+.channel .symbol{width:48px;height:48px;border-radius:12px;font-size:26px;box-shadow:0 0 10px #38f5c522;transform:none}
+.app-tile{position:relative;overflow:hidden;min-height:82px;border-radius:12px;background:linear-gradient(145deg,#1c2b3c,#0b1320);box-shadow:0 3px 8px #0004;transition:border-color .18s,box-shadow .18s}
+.app-tile:before{display:block;content:"";position:absolute;inset:-80% -40%;pointer-events:none;background:linear-gradient(110deg,transparent 42%,#ffffff15 50%,transparent 58%);transform:translateX(-65%);animation:tileShine 7s ease-in-out infinite} @keyframes tileShine{50%,100%{transform:translateX(65%)}}
+.app-tile:hover{transform:none;box-shadow:0 0 12px #38f5c522}
+.motivation{position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;padding:17px 19px;margin:15px 0;border:1px solid #38f5c555;border-radius:16px;background:linear-gradient(105deg,#0b1b2beF,#16243bef 55%,#21163aef);box-shadow:inset 0 0 30px #38f5c510,0 0 24px #53a8ff18;animation:brandBreath 6s ease-in-out infinite}
+.motivation:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 20%,#38f5c511 45%,#53a8ff18 50%,transparent 75%);background-size:220% 100%;animation:brandSweep 8s linear infinite}
+.motivation .mot-icon{font-size:32px;color:#38f5c5;text-shadow:0 0 16px #38f5c5;z-index:1}.motivation strong{font-size:clamp(17px,2.4vw,23px);letter-spacing:1px;color:#eaffff;text-shadow:0 0 16px #53a8ff55;z-index:1}.motivation p{margin:4px 0 0;color:#a9c6d9;font-size:12px;z-index:1}.motivation .mot-stars{margin-left:auto;color:#38f5c5;letter-spacing:7px;animation:starsTwinkle 2.8s ease-in-out infinite;z-index:1;white-space:nowrap}
+@keyframes brandSweep{to{background-position:-220% 0}}@keyframes brandBreath{50%{border-color:#53a8ff99;box-shadow:inset 0 0 35px #38f5c518,0 0 26px #53a8ff22}}@keyframes starsTwinkle{50%{opacity:.45;filter:brightness(1.8)}}
+.mot-stars{animation:none}
+/* Simple animation choices; no heavy 3D transforms or continuously moving card grids */
+body.anim-rainbow .app:before{animation:edgePulse 5s ease-in-out infinite;filter:hue-rotate(45deg)}
+body.anim-scan .screen:before{display:block;background:repeating-linear-gradient(0deg,#0000 0 7px,#ffffff08 8px 9px);animation:scanPass 10s linear infinite}
+body.anim-pulse .panel{animation:panelPulse 7s ease-in-out infinite}
+body.anim-retro .screen{box-shadow:inset 0 0 18px #000,0 0 0 1px #52657a}
+@keyframes scanPass{from{background-position:0 0}to{background-position:0 90px}}
+@keyframes panelPulse{0%,100%{border-color:#26384c}50%{border-color:#38f5c566}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* AGHAI TV cinematic auto-reel and responsive TV branding */
+.logo{width:58px;height:52px;border-radius:13px;background:linear-gradient(135deg,#0c1d2b,#152e42);border:1px solid #38f5c588;display:grid;place-items:center;box-shadow:0 0 22px #38f5c533,inset 0 0 16px #53a8ff22;flex-shrink:0}.logo svg{width:49px;height:49px;filter:drop-shadow(0 0 6px #38f5c566)}
+.screen{aspect-ratio:16/9;min-height:230px;background:#02050b;isolation:isolate}.screen:before{content:"";display:block;position:absolute;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 5px,#d9ffff08 6px 7px);opacity:.42;animation:scanPass 8s linear infinite}.screen:after{top:12px;right:12px;z-index:5}.auto-reel{position:absolute;inset:0;overflow:hidden;background:#07111e;color:white}.reel-art{position:absolute;inset:-4%;background-size:cover;background-position:center;transform:scale(1.05);animation:reelKen 8s ease-in-out infinite alternate;transition:opacity .7s ease,filter .7s ease}.reel-shade{position:absolute;inset:0;background:linear-gradient(90deg,#030712ed 0%,#030712a8 47%,#03071216 100%),linear-gradient(0deg,#02050bcc,transparent 55%);z-index:1}.reel-copy{position:absolute;z-index:3;left:clamp(14px,4%,36px);bottom:clamp(13px,6%,38px);max-width:70%;animation:reelEnter .7s ease both}.live-pill{display:inline-flex;align-items:center;gap:7px;font-size:9px;font-weight:900;letter-spacing:1.7px;color:#dffff8;border:1px solid #38f5c588;background:#06151bcc;padding:6px 9px;border-radius:99px;box-shadow:0 0 14px #38f5c522}.live-pill i{width:7px;height:7px;background:#38f5c5;border-radius:50%;box-shadow:0 0 10px #38f5c5;animation:liveBlink 1.5s infinite}.reel-copy h3{font-size:clamp(19px,3.5vw,34px);line-height:1.08;letter-spacing:-.5px;margin:12px 0 6px;text-shadow:0 3px 18px #000;max-width:450px}.reel-copy p{font-size:clamp(10px,1.4vw,13px);color:#d1e3f2;margin:0 0 13px}.reel-actions{display:flex;gap:8px;flex-wrap:wrap}.reel-actions button{padding:8px 11px;font-size:11px;font-weight:800;border-radius:9px;background:linear-gradient(120deg,#38f5c5,#53a8ff);color:#06111a;border:0;box-shadow:0 4px 18px #38f5c533}.reel-actions button+button{background:#0b182bd9;color:#efffff;border:1px solid #a4eaff66}.reel-dots{display:flex;gap:5px;margin-top:12px}.reel-dots button{padding:0;width:18px;height:3px;min-height:3px;border:0;border-radius:9px;background:#ffffff55}.reel-dots button.active{width:29px;background:#38f5c5;box-shadow:0 0 8px #38f5c5}.reel-watermark{position:absolute;z-index:3;right:14px;bottom:12px;font-size:10px;letter-spacing:2px;color:#efffff9c;text-shadow:0 0 8px #38f5c5}.reel-watermark b{color:#38f5c5}.screen:has(iframe):before,.screen:has(video):before{display:none}.screen:has(iframe) .auto-reel,.screen:has(video) .auto-reel{display:none}@keyframes reelKen{from{transform:scale(1.04) translate3d(-.4%,0,0);filter:saturate(1.04)}to{transform:scale(1.14) translate3d(.6%,-.6%,0);filter:saturate(1.25)}}@keyframes reelEnter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes liveBlink{50%{opacity:.35;box-shadow:0 0 2px #38f5c5}}@keyframes scanPass{from{background-position:0 0}to{background-position:0 80px}}body.no-anim .reel-art,body.no-anim .reel-copy,body.no-anim .live-pill i,body.no-anim .screen:before,body.no-anim .app:before,body.no-anim .edge-frame,body.no-anim .motivation,body.no-anim .motivation:before,body.no-anim .motivation .mot-stars,body.no-anim .app-tile:before{animation:none!important}@media(max-width:480px){.reel-copy{max-width:84%;left:12px;bottom:12px}.reel-copy h3{font-size:20px;margin:8px 0 4px}.reel-copy p{margin-bottom:8px}.reel-actions button{padding:7px 8px}.reel-dots{margin-top:8px}.reel-watermark{display:none}.screen{min-height:215px}}
+
+/* AGHAI social-channel ambience: fixed, subtle logo watermark; the player screen stays still */
+body{background:radial-gradient(ellipse at 15% 0%,#15384a 0,#0b1425 42%,#070b14 100%)}
+body:after{content:"AGHAI TV  •  YOUR CHANNEL  •  AGHAI TV  •  LIVE STUDIO";display:flex;align-items:center;justify-content:center;text-align:center;color:#79dfff0a;font-size:clamp(24px,5vw,64px);font-weight:1000;letter-spacing:clamp(5px,1.6vw,20px);line-height:2.5;white-space:normal;overflow:hidden;z-index:0;animation:none;background-image:radial-gradient(#b9faff18 1px,transparent 1.5px);background-size:34px 34px;mask-image:linear-gradient(to bottom,black,transparent 95%)}
+.social-watermark{position:fixed;z-index:0;pointer-events:none;right:3.5vw;bottom:9vh;width:clamp(84px,13vw,150px);height:clamp(84px,13vw,150px);border-radius:50%;display:grid;place-items:center;border:1px solid #53a8ff36;background:radial-gradient(circle at 30% 25%,#38f5c51c,#14233a25 65%,transparent);color:#9aeaff17;font-size:clamp(22px,4vw,42px);font-weight:1000;letter-spacing:2px;box-shadow:0 0 40px #53a8ff0a;animation:watermarkFloat 8s ease-in-out infinite}
+.social-watermark:before{content:"";position:absolute;inset:8px;border:2px solid #38f5c51c;border-radius:50%;box-shadow:0 0 20px #38f5c512}
+@keyframes watermarkFloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-13px) rotate(4deg)}}
+.app{z-index:1}.panel,.motivation,.app-launcher,.tabs,.top,.searchrow,.footer{position:relative;z-index:1}
+.logo{border-radius:50%!important;border:2px solid #d4fff7;outline:2px solid #38f5c544;outline-offset:3px;position:relative}
+.logo:after{content:"";position:absolute;inset:-6px;border:1px solid #53a8ff77;border-radius:50%;animation:logoOrbit 7s linear infinite}
+@keyframes logoOrbit{to{transform:rotate(360deg)}}
+.pak-time{font-variant-numeric:tabular-nums;letter-spacing:.3px;background:linear-gradient(135deg,#07121dee,#14243aee);box-shadow:0 0 14px #38f5c522,inset 0 0 12px #38f5c511}
+
+
+/* AGHAI TV social broadcast skin: viewport-fixed ambience, independent of page scrolling */
+body{background:#070b16;background-image:radial-gradient(ellipse at 18% 15%,#174c60 0%,transparent 42%),radial-gradient(ellipse at 85% 75%,#32184f 0%,transparent 45%),linear-gradient(135deg,#080d19,#10192b 55%,#080b15);background-attachment:fixed}
+body:before{position:fixed!important;inset:0!important;transform:none!important;animation:none!important;filter:none!important;background:radial-gradient(circle at 20% 30%,#43f4d00b 0 2px,transparent 3px),radial-gradient(circle at 78% 62%,#65b9ff10 0 2px,transparent 3px),linear-gradient(115deg,transparent 0 30%,#51c9ff06 48%,transparent 66%);background-size:54px 54px,72px 72px,100% 100%;z-index:0!important}
+body:after{position:fixed!important;inset:0!important;animation:none!important;background-size:38px 38px!important;mask-image:none!important;opacity:.45}
+.social-watermark{position:fixed!important;right:4vw!important;bottom:8vh!important;z-index:0!important;animation:liveBob 3.4s ease-in-out infinite!important;transform-origin:center;contain:layout paint}
+@keyframes liveBob{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-16px) scale(1.035)}}
+.logo{animation:logoLiveBob 2.8s ease-in-out infinite!important}
+.logo:after{position:absolute;inset:-7px;pointer-events:none}
+@keyframes logoLiveBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.app{position:relative;z-index:1;background:linear-gradient(135deg,#08111a55,#0a0f1b33);border-radius:22px;box-shadow:0 0 70px #4ccfff08}
+.panel{backdrop-filter:blur(12px);background:linear-gradient(145deg,#111e30f2,#0b1422ed)!important;border-color:#65cfff36!important;box-shadow:0 10px 35px #0003,inset 0 1px #d8faff08}
+.motivation{background:linear-gradient(110deg,#123f4ce8,#1b2340ed,#321b45d9)!important;border:1px solid #66e8ff55;box-shadow:0 0 30px #44d9ff14}
+.channel{background:linear-gradient(150deg,#162a3ef2,#0a1423f5)!important;border-color:#65cfff30}
+@media(prefers-reduced-motion:reduce){.social-watermark,.logo{animation:none!important}}
+
+
+/* Premium social-network canvas + raised 3D broadcast identity (fixed to viewport) */
+html{background:#070b16}
+body{background-color:#070b16!important;background-image:
+ radial-gradient(ellipse at 12% 14%,#08d9c51c 0,transparent 31%),
+ radial-gradient(ellipse at 88% 23%,#5c63ff20 0,transparent 34%),
+ radial-gradient(ellipse at 78% 86%,#f04ec512 0,transparent 35%),
+ linear-gradient(135deg,#070b16 0%,#0b1426 48%,#080b17 100%)!important;background-attachment:fixed!important}
+/* Decorative social bubbles and feed-like signal bands stay fixed while content scrolls */
+body:before{position:fixed!important;inset:0!important;z-index:0!important;pointer-events:none!important;animation:none!important;filter:none!important;opacity:1!important;background-image:
+ radial-gradient(circle at 8% 24%,#38f5c512 0 42px,transparent 44px),
+ radial-gradient(circle at 91% 17%,#7b8dff12 0 58px,transparent 60px),
+ radial-gradient(circle at 88% 78%,#ff65d012 0 72px,transparent 74px),
+ radial-gradient(circle at 13% 83%,#53a8ff10 0 54px,transparent 56px),
+ linear-gradient(115deg,transparent 0 24%,#55e9ff05 35%,transparent 48% 72%,#bb7cff06 82%,transparent 94%);
+ background-size:100% 100%;background-repeat:no-repeat}
+body:after{position:fixed!important;inset:0!important;z-index:0!important;pointer-events:none!important;animation:none!important;opacity:.55!important;mask-image:none!important;background-image:
+ radial-gradient(#9beaff26 1px,transparent 1.5px),
+ linear-gradient(90deg,transparent 0 9%,#77c9ff06 9.1% 9.2%,transparent 9.3% 90%,#77c9ff06 90.1% 90.2%,transparent 90.3%);
+ background-size:30px 30px,100% 100%;background-attachment:fixed}
+.app{background:linear-gradient(135deg,#08111a55,#0a0f1b28)!important;backdrop-filter:none}
+/* Round chrome-and-glass 3D logo with a gentle live-broadcast bob */
+.logo{position:relative!important;width:58px!important;height:58px!important;flex:0 0 58px!important;border-radius:50%!important;overflow:visible!important;isolation:isolate;background:radial-gradient(circle at 28% 20%,#eaffff 0%,#52f4df 8%,#11617a 34%,#101a36 67%,#050913 100%)!important;border:2px solid #a4fff1!important;box-shadow:0 2px 0 #0a3c50,0 5px 0 #06101d,0 9px 18px #000b,0 0 0 3px #50e9ff1f,0 0 25px #38f5c566,inset 0 2px 5px #fff9,inset 0 -7px 12px #020611!important;animation:logoLiveBob 2.8s ease-in-out infinite!important}
+.logo:before{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid #65eaff88;box-shadow:0 0 10px #38f5c533;pointer-events:none}
+.logo:after{content:"LIVE";position:absolute;right:-8px;top:-5px;padding:2px 5px;border-radius:6px;background:linear-gradient(180deg,#ff5b75,#a90835);color:white;font-size:7px;line-height:1.3;font-weight:1000;letter-spacing:.7px;border:1px solid #ffc0cc;box-shadow:0 2px 0 #60051c,0 4px 7px #0009;pointer-events:none}
+.logo svg{width:43px!important;height:43px!important;filter:drop-shadow(0 2px 0 #03111b) drop-shadow(0 0 7px #74fff0)!important}
+.brand h1{letter-spacing:2.5px!important;text-shadow:0 1px 0 #247f88,0 3px 0 #14505f,0 5px 0 #092b3c,0 8px 14px #000c,0 0 20px #38f5c566!important}
+/* Raised smart digital clock; content and PKT update remain controlled by the existing clock script */
+.pak-time{position:relative!important;display:inline-flex;align-items:center;gap:7px;min-height:42px;padding:10px 13px 10px 37px!important;border-radius:13px!important;border:1px solid #79ffe0a6!important;background:linear-gradient(145deg,#1b3547f5,#07111ff5 58%,#101d35f5)!important;color:#dcfff7!important;font-size:12px!important;font-weight:900!important;letter-spacing:.35px!important;font-variant-numeric:tabular-nums;box-shadow:0 2px 0 #06101b,0 5px 0 #03070d,0 9px 18px #0008,0 0 20px #38f5c52b,inset 0 1px 0 #ffffff30,inset 0 -5px 12px #0005!important;text-shadow:0 0 9px #38f5c533}
+.pak-time:before{content:"◷";position:absolute;left:11px;top:50%;transform:translateY(-50%);width:19px;height:19px;display:grid;place-items:center;border-radius:50%;color:#04131a;background:linear-gradient(145deg,#cafff4,#38f5c5 58%,#53a8ff);font-size:15px;box-shadow:0 2px 0 #07576b,0 0 10px #38f5c555}
+/* The decorative watermark is fixed to the viewport, never the scrolling page */
+.social-watermark{position:fixed!important;right:4vw!important;bottom:8vh!important;z-index:0!important;width:clamp(100px,14vw,165px)!important;height:clamp(100px,14vw,165px)!important;border:2px solid #8beaff25!important;background:radial-gradient(circle at 28% 20%,#38f5c522,#14233a2b 58%,#10172b10 72%)!important;color:#b9faff16!important;text-shadow:0 0 24px #53a8ff14!important;box-shadow:0 0 0 8px #53a8ff05,0 0 45px #53a8ff0c,inset 0 0 24px #38f5c509!important;animation:liveBob 3.4s ease-in-out infinite!important}
+.social-watermark:before{inset:9px!important;border:2px solid #38f5c51c!important;box-shadow:inset 0 0 18px #38f5c50b,0 0 18px #38f5c50a!important}
+@media(max-width:600px){.logo{width:52px!important;height:52px!important;flex-basis:52px!important}.logo svg{width:39px!important;height:39px!important}.pak-time{font-size:10px!important;padding-left:34px!important;white-space:normal!important;max-width:100%}.social-watermark{right:3vw!important;bottom:4vh!important}}
+@media(prefers-reduced-motion:reduce){.logo,.social-watermark{animation:none!important}}
+
+
+/* AGHAI TV final fit: contained branding + attractive fixed wallpaper rotation */
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body{position:relative}
+.app{width:100%;max-width:1200px;min-width:0;overflow:clip}
+.top,.brand,.theme-tools{min-width:0;max-width:100%}
+.brand{flex:1 1 230px;gap:10px}
+.brand>div:last-child{min-width:0;max-width:100%}
+.brand h1{font-size:clamp(17px,4.5vw,27px)!important;line-height:1.12;overflow-wrap:anywhere;word-break:normal;max-width:100%;letter-spacing:clamp(1px,.5vw,2.5px)!important}
+.brand small{display:block;max-width:100%;overflow-wrap:anywhere;font-size:clamp(9px,2.7vw,12px)}
+.theme-tools{flex:1 1 100%;gap:7px}
+.theme-tools select,.theme-tools button{max-width:100%;min-width:0}
+.screen{width:100%;max-width:100%;min-width:0;overflow:hidden;contain:layout paint;aspect-ratio:16/9;min-height:0!important}
+.auto-reel{inset:0!important;width:100%;height:100%;overflow:hidden}
+.reel-copy{left:clamp(10px,3.5%,30px)!important;right:clamp(10px,3.5%,30px);bottom:clamp(10px,5%,28px)!important;width:auto;max-width:calc(100% - 20px)!important;min-width:0;overflow-wrap:anywhere}
+.reel-copy h3{font-size:clamp(15px,3.4vw,34px)!important;max-width:100%;overflow-wrap:anywhere}
+.reel-copy p{max-width:100%;overflow-wrap:anywhere}
+.reel-actions{max-width:100%;gap:6px}
+.reel-actions button{max-width:100%;white-space:normal}
+.reel-watermark{right:8px!important;bottom:7px!important;max-width:42%;overflow:hidden;white-space:nowrap}
+.screen:after{max-width:calc(100% - 20px);white-space:nowrap;font-size:clamp(8px,2vw,12px);right:8px!important;top:8px!important}
+.playerbar input{min-width:0!important;width:100%}
+.layout>*{min-width:0}
+@media(max-width:420px){.app{padding:8px!important}.brand{flex-basis:100%}.logo{width:48px!important;height:48px!important;flex-basis:48px!important}.logo svg{width:36px!important;height:36px!important}.reel-copy{bottom:8px!important;left:9px!important;right:9px!important;max-width:calc(100% - 18px)!important}.reel-copy h3{font-size:16px!important;margin:6px 0 4px!important}.reel-copy p{font-size:10px!important;margin-bottom:6px!important}.live-pill{font-size:8px;padding:4px 7px}.reel-actions button{font-size:10px!important;padding:6px 8px!important}.reel-dots{margin-top:6px!important}.screen:after{font-size:8px!important;padding:3px 5px!important}}
+/* Wallpaper cards are fixed to the viewport, so scrolling never moves the wallpaper itself. */
+#ag-wallpaper-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;isolation:isolate;background:#070b16}
+#ag-wallpaper-layer .ag-wallpaper{position:absolute;inset:-1.5%;background-size:cover;background-position:center;opacity:0;transform:scale(1.02);animation:agWallpaperFade 32s ease-in-out infinite;will-change:opacity}
+#ag-wallpaper-layer .ag-wallpaper:nth-child(1){background-image:linear-gradient(135deg,#06101bd9,#07101b70),url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1800&q=85');animation-delay:0s}
+#ag-wallpaper-layer .ag-wallpaper:nth-child(2){background-image:linear-gradient(135deg,#08131bd9,#0b102a80),url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=1800&q=85');animation-delay:-8s}
+#ag-wallpaper-layer .ag-wallpaper:nth-child(3){background-image:linear-gradient(135deg,#061522db,#1b103180),url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1800&q=85');animation-delay:-16s}
+#ag-wallpaper-layer .ag-wallpaper:nth-child(4){background-image:linear-gradient(135deg,#071a22db,#15102d80),url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=85');animation-delay:-24s}
+#ag-wallpaper-layer .ag-wallpaper-shade{position:absolute;inset:0;background:linear-gradient(180deg,#050a16a8,#050a16d9),radial-gradient(ellipse at 15% 15%,#38f5c51a,transparent 42%),radial-gradient(ellipse at 85% 80%,#a855f71a,transparent 42%)}
+@keyframes agWallpaperFade{0%,22%{opacity:.52}27%,96%{opacity:0}100%{opacity:.52}}
+body:before,body:after{z-index:0!important;pointer-events:none!important}
+.app{z-index:1!important}
+.edge-frame{z-index:30!important}
+@media(prefers-reduced-motion:reduce){#ag-wallpaper-layer .ag-wallpaper{animation:none;opacity:0}#ag-wallpaper-layer .ag-wallpaper:first-child{opacity:.35}}
+
+
+/* Final user-requested polish: compact in-box AGHAI LIVE badge, static header logo, subtle fixed wallpapers */
+.logo{animation:none!important;transform:none!important;overflow:hidden;max-width:100%;}
+.brand h1{animation:logoGlow 5s ease-in-out infinite!important;transform:none!important;max-width:100%;}
+.live-pill{position:relative;display:inline-flex;align-items:center;justify-content:flex-start;gap:6px;max-width:calc(100% - 4px);width:max-content;min-width:0;overflow:hidden;white-space:nowrap;box-sizing:border-box;padding:4px 8px;border-radius:999px;font-size:clamp(8px,2vw,10px);letter-spacing:.65px;line-height:1.2;background:linear-gradient(120deg,#06151beF,#102a3beF);border-color:#38f5c599;box-shadow:inset 0 0 8px #38f5c51a,0 0 10px #38f5c51c;}
+.live-pill:before{content:"";position:absolute;inset:1px;border:1px solid #53a8ff55;border-radius:inherit;pointer-events:none;animation:liveRing 4s linear infinite;}
+.live-mark{display:grid;place-items:center;flex:0 0 19px;width:19px;height:19px;border-radius:50%;background:linear-gradient(135deg,#38f5c5,#53a8ff);color:#06111a;font-size:11px;font-weight:1000;letter-spacing:0;box-shadow:inset 0 1px 1px #fff9,0 0 7px #38f5c577;}
+.live-brand{font-size:clamp(8px,2.2vw,10px);font-weight:1000;letter-spacing:.45px;text-shadow:0 0 7px #38f5c555;}
+.live-brand b{color:#38f5c5;}
+.live-label{font-size:7px;font-weight:1000;letter-spacing:.6px;padding:3px 5px;border-radius:5px;background:#ff355b;color:white;box-shadow:0 0 7px #ff355b44;}
+.live-pill i{flex:0 0 5px;width:5px;height:5px;margin-left:0;animation:liveBlink 1.5s infinite;}
+@keyframes liveRing{to{transform:rotate(360deg)}}
+.reel-copy{min-width:0;max-width:calc(100% - 20px)!important;}
+.reel-copy .live-pill{max-width:100%;}
+#ag-wallpaper-layer .ag-wallpaper-shade{background:linear-gradient(180deg,#050a1680,#050a16b8),radial-gradient(ellipse at 15% 15%,#38f5c51c,transparent 42%),radial-gradient(ellipse at 85% 80%,#a855f71c,transparent 42%)}
+@media(max-width:420px){.live-pill{gap:4px;padding:3px 6px;max-width:100%;}.live-mark{width:16px;height:16px;flex-basis:16px;font-size:9px}.live-label{font-size:6px;padding:2px 4px}.live-brand{font-size:8px}.reel-copy{right:8px!important;max-width:calc(100% - 16px)!important}}
+
+
+/* Header branding: replace the old orbiting logo box with the same compact LIVE badge used in the player. */
+.brand .header-live-pill{flex:0 0 auto;max-width:100%;margin:0 2px 0 0;padding:5px 8px;gap:6px;border:1px solid #38f5c599;border-radius:999px;background:linear-gradient(120deg,#06151bef,#102a3bef);box-shadow:inset 0 0 8px #38f5c51a,0 0 10px #38f5c51c;animation:none!important;transform:none!important;}
+.brand .header-live-pill:before{animation:none!important;transform:none!important;}
+.brand .header-live-pill .live-label{display:inline-flex;align-items:center;gap:4px;}
+.brand .header-live-pill .live-label i{display:inline-block;background:#fff;width:5px;height:5px;border-radius:50%;box-shadow:0 0 6px #fff;animation:liveBlink 1.5s infinite;}
+.brand .logo,.brand .logo:after{display:none!important;animation:none!important;transform:none!important;}
+@media(max-width:420px){.brand .header-live-pill{padding:4px 6px;gap:4px}.brand .header-live-pill .live-mark{width:16px;height:16px;flex-basis:16px;font-size:9px}.brand .header-live-pill .live-brand{font-size:8px}.brand .header-live-pill .live-label{font-size:6px;padding:2px 4px}}
+
+.brand-facebook{color:#1877f2!important;font-family:Arial,sans-serif;font-size:31px!important;background:#fff!important}.brand-tiktok{color:#fff!important;text-shadow:-2px 0 #25f4ee,2px 0 #fe2c55;background:#111!important}.brand-google{color:#4285f4!important;background:#fff!important;text-shadow:1px 1px #34a853}.brand-internet{background:#0c6bdc!important;color:white!important}.brand-youtube{background:#fff!important;color:#f00!important}.brand-instagram{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)!important;color:#fff!important}.brand-whatsapp{background:#25d366!important;color:white!important}.brand-x{background:#050505!important;color:#fff!important}
+/* Soft floral + cinematic wallpapers; player screen and channel layout are deliberately unchanged. */
+#ag-wallpaper-layer{background:#10131c!important;z-index:0!important}
+#ag-wallpaper-layer .ag-wallpaper{background-size:cover!important;background-position:center!important;opacity:0!important;filter:saturate(.78) brightness(1.12)!important;animation:agSoftWallpaper 36s ease-in-out infinite!important}
+#ag-wallpaper-layer .ag-wallpaper:nth-child(1){background-image:linear-gradient(135deg,#08101a50,#08101a20),url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1800&q=85')!important;animation-delay:0s!important}
+#ag-wallpaper-layer .ag-wallpaper:nth-child(2){background-image:linear-gradient(135deg,#08101a58,#08101a25),url('https://images.unsplash.com/photo-1494972308805-463bc619d34e?auto=format&fit=crop&w=1800&q=85')!important;animation-delay:-9s!important}
+#ag-wallpaper-layer .ag-wallpaper:nth-child(3){background-image:linear-gradient(135deg,#08101a58,#08101a25),url('https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=1800&q=85')!important;animation-delay:-18s!important}
+#ag-wallpaper-layer .ag-wallpaper:nth-child(4){background-image:linear-gradient(135deg,#08101a58,#08101a25),url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=85')!important;animation-delay:-27s!important}
+#ag-wallpaper-layer .ag-wallpaper-shade{background:linear-gradient(180deg,#070b16a6,#070b16c4),radial-gradient(ellipse at 12% 16%,#ffb8d20b,transparent 44%),radial-gradient(ellipse at 84% 75%,#bca8ff0c,transparent 45%)!important}
+@keyframes agSoftWallpaper{0%,22%{opacity:.22}28%,96%{opacity:0}100%{opacity:.22}}
+.social-watermark{display:none!important}
+body:after{content:none!important;display:none!important}
+body:before{content:none!important;display:none!important}
+#ambientMusicBtn{white-space:nowrap;border:1px solid #f1c6e9aa;background:linear-gradient(135deg,#412846,#18243a);color:#fff0fc;box-shadow:0 0 14px #e5a7dd20}
+#ambientMusicBtn[aria-pressed="true"]{background:linear-gradient(135deg,#28635a,#192c3e);border-color:#8df5d8;color:#eafff8}
+@media(prefers-reduced-motion:reduce){#ag-wallpaper-layer .ag-wallpaper{animation:none!important;opacity:0!important}#ag-wallpaper-layer .ag-wallpaper:first-child{opacity:.18!important}}
+
+
+/* User-selectable smart wallpapers; player screen/layout intentionally untouched. */
+#wallpaperChoice{max-width:100%;min-width:0;border:1px solid #7adfdc88;border-radius:10px;padding:9px 10px;background:#101b2beF;color:#f1fbff;font-weight:650;box-shadow:0 0 12px #38f5c514}
+#ag-wallpaper-layer{background-color:#08111d;background-size:cover;background-position:center;background-repeat:no-repeat;transition:background-image .35s ease}
+#ag-wallpaper-layer .ag-wallpaper{animation:none!important;opacity:0!important}
+#ag-wallpaper-layer .ag-wallpaper-shade{background:linear-gradient(180deg,#050a168c,#050a16b8),linear-gradient(90deg,#06111a44,#07101a22)}
+@media(max-width:600px){#wallpaperChoice{flex:1 1 145px;font-size:12px;padding:8px}}
+
+
+/* Final correction: restore the player frame's previous generous size and keep it centered in its column. */
+.layout{grid-template-columns:minmax(0,1.7fr) minmax(260px,1fr)!important;align-items:start!important}
+.layout>.panel:first-child{min-width:0!important;width:100%!important}
+.layout>.panel:first-child .screen{display:grid!important;width:100%!important;max-width:100%!important;min-width:0!important;aspect-ratio:16/9!important;min-height:clamp(215px,34vw,430px)!important;height:auto!important;box-sizing:border-box!important}
+#socialWallpaperBtn,#customWallpaperLabel{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:38px;padding:8px 11px;border:1px solid #65e6e0a8;border-radius:10px;background:linear-gradient(135deg,#142b43f2,#18233af2);color:#f0ffff;font:700 12px/1.2 system-ui,sans-serif;cursor:pointer;box-shadow:0 4px 16px #0003;white-space:nowrap}
+#customWallpaperLabel{background:linear-gradient(135deg,#402a55f2,#1b2b45f2);border-color:#e5b6ff88}
+#socialWallpaperBtn:active,#customWallpaperLabel:active{transform:scale(.98)}
+#ag-wallpaper-layer{position:fixed!important;inset:0!important;z-index:0!important;pointer-events:none!important;overflow:hidden!important;background:#111827!important;background-size:cover!important;background-position:center!important;transition:background-image .25s ease}
+#ag-wallpaper-layer .ag-wallpaper{display:none!important;animation:none!important;opacity:0!important}
+#ag-wallpaper-layer .ag-wallpaper-shade{position:absolute!important;inset:0!important;background:linear-gradient(180deg,rgba(6,12,25,.48),rgba(6,12,25,.68))!important;pointer-events:none!important}
+@media(max-width:600px){.layout{grid-template-columns:minmax(0,1fr)!important}.layout>.panel:first-child .screen{min-height:215px!important;aspect-ratio:16/9!important}#socialWallpaperBtn,#customWallpaperLabel{font-size:11px;padding:8px 9px;white-space:normal}}
+
+</style></head>
+<body><div id="ag-wallpaper-layer" aria-hidden="true"><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper-shade"></div></div><div class="edge-frame" aria-hidden="true"></div><main class="app">
+
+<header class="top"><div class="brand"><span class="live-pill header-live-pill" aria-label="AGHAI TV live"><span class="live-mark">A</span><span class="live-brand">AGHAI <b>TV</b></span><span class="live-label"><i></i> LIVE</span></span><div class="header-tagline">Drama • Cartoons<br>News • Music</div></div><div class="theme-tools"><div id="pakTime" class="pak-time" aria-live="off">🇵🇰 Pakistan · --:--:--</div><button id="socialWallpaperBtn" type="button" title="Try another soft social-media background">✨ New Social Wallpaper</button><label id="customWallpaperLabel" for="customWallpaperInput" title="Choose a wallpaper image from your phone">🖼️ My Wallpaper</label><input id="customWallpaperInput" type="file" accept="image/*" hidden><select id="colorTheme" aria-label="Color theme"><option value="mint">Mint Neon</option><option value="purple">Purple Glow</option><option value="blue">Electric Blue</option><option value="gold">Gold Luxe</option><option value="pink">Pink Neon</option><option value="ice">Ice Cyan</option><option value="red">Ruby Red</option><option value="lime">Lime Laser</option><option value="sunset">Sunset</option><option value="white">Pearl White</option></select><button id="animToggle">✨ Animations: ON</button><select id="animStyle" aria-label="Animation style"><option value="aurora">Classic Glow</option><option value="rainbow">Soft Color Edge</option><option value="scan">TV Scanlines</option><option value="pulse">Soft Panel Glow</option><option value="retro">Retro TV</option></select><button id="ambientMusicBtn" type="button" aria-pressed="false">🎵 Soft Music: OFF</button><span class="music-hint">Tap to enable gentle background music</span><button id="adminToggle">⚙ Admin / Channels</button></div></header>
+<div class="searchrow"><input id="search" placeholder="Search naats, news, dramas, movies, live channels…"><button id="searchBtn">Search</button></div>
+<section class="motivation"><span class="mot-icon">✦</span><div><strong>YOUR CHANNEL. YOUR WORLD.</strong><p>Drama • Cartoons • News • Music — Welcome to AGHAI TV, your personal entertainment network.</p></div><span class="mot-stars">✧ ✦ ✧</span></section><section class="panel app-launcher"><h2>📱 Explore Channels & Apps — apni pasand ka section kholein</h2><div class="launcher-grid" id="launcherGrid"></div><p class="note">Choice Channels ka maqsad: apni pasand ki category (Cartoons, Dramas, News, Sports, Naat ya Music) ek tap mein filter/open karna. Yeh alag channel list hai, video khud se create nahi karti.</p></section>
+<nav class="tabs" id="tabs"><button class="active" data-cat="All">All</button><button data-cat="News">News</button><button data-cat="Sports">Sports</button><button data-cat="Naat">Naat</button><button data-cat="Entertainment">🎭 Entertainment</button><button data-cat="Drama">📺 Dramas</button><button data-cat="Stories">📖 Stories</button><button data-cat="Audio Songs">🎵 Audio Songs</button><button data-cat="Live TV">📡 Live TV</button><button data-cat="Indian Dramas">🇮🇳 Indian Dramas</button><button data-cat="Turkish Dramas">🇹🇷 Turkish Dramas</button><button data-cat="HBO & English">🎬 HBO & English</button><button data-cat="TV Channels">📺 TV Channels</button><button data-cat="Cartoons">Cartoons</button><button data-cat="English Movies">English Movies</button><button data-cat="Hindi Movies">Hindi Movies</button><button data-cat="Pakistani Movies">Pakistani Movies</button><button data-cat="Islamic">Islamic</button><button data-cat="Bayanat">🎙️ Sirf Bayanat</button><button data-cat="Education">Education</button><button data-cat="Audio">Audio</button><button data-cat="Live">Live</button><button data-cat="Favourites">♥ Favourites</button></nav>
+<div class="layout"><section class="panel"><h2 id="nowTitle">AGHAI Player</h2><div class="screen" id="screen"><div class="auto-reel" id="autoReel" aria-live="polite"><div class="reel-art" id="reelArt"></div><div class="reel-shade"></div><span class="live-pill station-bug"><span class="live-mark">A</span><span class="live-brand">AGHAI <b>TV</b></span><span class="live-label"><i></i> LIVE</span></span><div class="reel-copy"><h3 id="reelTitle">Your entertainment starts here</h3><p id="reelSub">Dramas • Cartoons • News • Music</p><div class="reel-actions"><button id="reelPlay">▶ Watch on YouTube</button><button id="reelBrowse">Explore</button></div><div class="reel-dots" id="reelDots"></div></div><div class="reel-watermark">AGHAI <b>TV</b></div></div></div><div class="playerbar"><input id="videoUrl" placeholder="Paste YouTube / direct video URL" style="flex:1;min-width:210px"><button id="playUrl">▶ Play</button><button id="stopBtn">Stop</button></div><p class="note">Paste a specific YouTube video URL to play here when embedding is allowed. Search pages themselves cannot reliably be embedded by YouTube; videos with embedding disabled must open on YouTube.</p><div class="status" id="playerStatus"></div></section>
+<aside class="panel"><h2>Search & Global Links</h2><p class="note">YouTube, Google, translation and international news links.</p><div class="fields"><button id="googleSearch">🔎 Google Search</button><button id="translateBtn">🌐 Translate / WhatsApp text</button><button id="ytSearch">▶ Search YouTube</button><button id="ytTrending">🔥 YouTube Trending</button><button id="ytMusic">🎵 YouTube Music</button><button id="ytLive">🔴 Live streams</button><button id="ytNaat">🤲 Naat search</button><button id="aryBtn">📺 ARY News</button><button id="sportsBtn">🏏 Live Sports</button><button id="tamashaBtn">📱 Tamasha</button><button id="bbcBtn">🌍 BBC News</button><button id="aljazeeraBtn">🌐 Al Jazeera</button><button id="wikiBtn">📚 Wikipedia</button><button id="whatsappBtn">🟢 Share on WhatsApp</button><hr style="border-color:var(--line);width:100%"><button id="instagramBtn">📸 Instagram</button><button id="tiktokBtn">🎵 TikTok</button><button id="facebookBtn">🔵 Facebook</button><button id="xBtn">𝕏 X / Twitter</button><button id="telegramBtn">✈️ Telegram</button></div><p class="note">Channel buttons open their destination directly. For free Indian dramas, use the official YouTube tiles (ZEE5 / Sony SAB). Paid apps can require a subscription or may be unavailable in Pakistan.</p></aside></div>
+<section class="panel" style="margin-top:16px"><h2 id="listTitle">Channels & shortcuts</h2><div class="channelgrid" id="channelGrid"></div><p class="note" id="emptyMsg"></p></section>
+<section class="panel hidden" id="adminPanel" style="margin-top:16px"><h2>Admin — Manage your shortcuts</h2><p class="note">Add your own channel cards or direct media links. Block/unblock any card. Settings are saved on this device/browser. Per-channel password locks are basic local protection only; they are not secure parental controls and do not travel with a shared HTML file.</p><div class="two"><div class="fields"><label>Admin password<input id="adminPass" type="password" placeholder="Enter password"></label><button id="unlockBtn">Unlock settings</button><div id="adminStatus" class="status"></div></div><div class="fields"><label>Change password<input id="newPass" type="password" placeholder="New password (optional)"></label><button id="changePass">Save new password</button></div></div><div id="adminTools" class="hidden"><hr style="border-color:var(--line);margin:16px 0"><div class="two"><label>Channel / video name<input id="newName" placeholder="e.g. My Naat Channel"></label><label>Category<select id="newCat"><option>News</option><option>Sports</option><option>Naat</option><option>Entertainment</option><option>Cartoons</option><option>English Movies</option><option>Hindi Movies</option><option>Pakistani Movies</option><option>Indian Dramas</option><option>Turkish Dramas</option><option>HBO & English</option><option>TV Channels</option><option>Islamic</option><option>Bayanat</option><option>Education</option><option>Audio</option><option>Live</option><option>Other</option></select></label></div><label style="display:block;margin-top:9px">YouTube or media URL<input id="newUrl" placeholder="https://www.youtube.com/watch?v=... or direct .mp4/.m3u8"></label><label style="display:block;margin-top:9px">Card image URL (optional)<input id="newImage" placeholder="https://... image URL"></label><div class="two" style="margin-top:9px"><label>Lock this channel with password<select id="newLocked"><option value="no">No lock</option><option value="yes">Password required</option></select></label><label>Channel password (if locked)<input id="newLockPass" type="password" placeholder="Set a channel password"></label></div><div class="playerbar"><button id="addChannel">＋ Add channel</button><button id="exportData">Export list</button><button id="resetChannels" class="danger">Reset shortcuts</button></div><p class="note">Direct MP4/audio files may play in the app. HLS (.m3u8) support depends on browser/device. Use only content you have permission to stream.</p></div></section>
+<footer class="footer">AGHAI TV • Personal streaming hub • Only authorized content</footer></main>
+<script>
+const DEFAULTS=[
+{name:'Latest News',cat:'News',url:'https://www.youtube.com/results?search_query=live+news+Pakistan',kind:'link',icon:'📰',image:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=80'},
+{name:'Naat Sharif',cat:'Naat',url:'https://www.youtube.com/results?search_query=naat+sharif',kind:'link',icon:'🤲',image:'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=600&q=80'},
+{name:'Islamic Lectures',cat:'Islamic',url:'https://www.youtube.com/results?search_query=islamic+lectures',kind:'link',icon:'☪',image:'https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=600&q=80'},
+{name:'Makkah Haram Live — Kaaba',cat:'Islamic',url:'https://www.youtube.com/results?search_query=Makkah+Haram+live+official+Kaaba',kind:'link',icon:'🕋',image:'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=600&q=80'},
+{name:'Madinah Masjid Nabawi Live',cat:'Islamic',url:'https://www.youtube.com/results?search_query=Masjid+Nabawi+Madinah+live+official',kind:'link',icon:'🕌',image:'https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=600&q=80'},
+{name:'Madani Channel — Official',cat:'Islamic',url:'https://www.youtube.com/results?search_query=Madani+Channel+official+live',kind:'link',icon:'☪️',image:'https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=600&q=80'},
+{name:'Quran Recitation — Live',cat:'Islamic',url:'https://www.youtube.com/results?search_query=Quran+recitation+live+official',kind:'link',icon:'📖',image:'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=600&q=80'},
+{name:'BAYAN • Muhammad Raza Saqib Mustafai',cat:'Bayanat',url:'https://www.youtube.com/watch?v=HXhxQiIGJGM',kind:'video',icon:'🎙️',image:'https://img.youtube.com/vi/HXhxQiIGJGM/hqdefault.jpg'},
+{name:'BAYAN • Maulana Tariq Jameel',cat:'Bayanat',url:'https://www.youtube.com/watch?v=03Or6R-auXk',kind:'video',icon:'🎙️',image:'https://img.youtube.com/vi/03Or6R-auXk/hqdefault.jpg'},
+{name:'BAYAN • Mufti Tariq Masood',cat:'Bayanat',url:'https://www.youtube.com/results?search_query=Mufti+Tariq+Masood+complete+bayan+official',kind:'link',icon:'🎙️',image:'https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=600&q=80'},
+{name:'BAYAN • Ajmal Raza Qadri',cat:'Bayanat',url:'https://www.youtube.com/results?search_query=Ajmal+Raza+Qadri+complete+bayan+official',kind:'link',icon:'🎙️',image:'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=600&q=80'},
+{name:'BAYAN • Allama Khadim Hussain Rizvi',cat:'Bayanat',url:'https://www.youtube.com/results?search_query=Allama+Khadim+Hussain+Rizvi+complete+bayan',kind:'link',icon:'🎙️',image:'https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=600&q=80'},
+{name:'BAYAN • Hafiz Tahir Qadri',cat:'Bayanat',url:'https://www.youtube.com/results?search_query=Hafiz+Tahir+Qadri+bayan+official',kind:'link',icon:'🎙️',image:'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=600&q=80'},
+{name:'Pakistani Dramas',cat:'Entertainment',url:'https://www.youtube.com/results?search_query=official+Pakistani+dramas',kind:'link',icon:'🎬',image:'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80'},
+{name:'Cartoons for Kids',cat:'Cartoons',url:'https://www.youtube.com/results?search_query=official+kids+cartoons',kind:'link',icon:'🧸',image:'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80'},
+{name:'English Movies',cat:'English Movies',url:'https://www.youtube.com/results?search_query=official+English+full+movies',kind:'link',icon:'🎞️',image:'https://images.unsplash.com/photo-1440404653325-ab127d49eac1?auto=format&fit=crop&w=600&q=80'},
+{name:'Hindi / Indian Movies',cat:'Hindi Movies',url:'https://www.youtube.com/results?search_query=official+Hindi+Indian+full+movies',kind:'link',icon:'🎥',image:'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'},
+{name:'Pakistani Movies',cat:'Pakistani Movies',url:'https://www.youtube.com/results?search_query=official+Pakistani+full+movies',kind:'link',icon:'🇵🇰',image:'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=600&q=80'},
+{name:'Education',cat:'Education',url:'https://www.youtube.com/results?search_query=educational+videos',kind:'link',icon:'📚',image:'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80'},
+{name:'Live Streams',cat:'Live',url:'https://www.youtube.com/results?search_query=live+streams',kind:'link',icon:'🔴',image:'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=600&q=80'},
+{name:'YouTube Music',cat:'Audio',url:'https://music.youtube.com/',kind:'link',icon:'🎵',image:'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=600&q=80'},
+{name:'ARY News Live',cat:'News',url:'https://arynews.tv/',kind:'link',icon:'📺',image:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=80'},
+{name:'Live Sports',cat:'Sports',url:'https://www.youtube.com/results?search_query=official+live+sports+Pakistan',kind:'link',icon:'🏏',image:'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=600&q=80'},
+{name:'Tamasha',cat:'Entertainment',url:'https://tamashaweb.com/',kind:'link',icon:'📱',image:'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80'},
+{name:'Geo News',cat:'News',url:'https://www.geo.tv/',icon:'🌐',image:'https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=600&q=80'},
+{name:'Geo News Live Search',cat:'News',url:'https://www.youtube.com/results?search_query=Geo+News+Live+official',icon:'🟡',image:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=80'},
+{name:'Dawn News',cat:'News',url:'https://www.dawn.com/',icon:'🗞️',image:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=80'},
+{name:'Express News',cat:'News',url:'https://www.express.pk/',icon:'📡',image:'https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=600&q=80'},
+{name:'Samaa TV',cat:'News',url:'https://www.samaa.tv/',icon:'🔴',image:'https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=600&q=80'},
+{name:'ARY Digital Dramas',cat:'Drama',url:'https://www.youtube.com/results?search_query=ARY+Digital+latest+drama+official',icon:'🎭',image:'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80'},
+{name:'HUM TV Dramas',cat:'Drama',url:'https://www.youtube.com/results?search_query=HUM+TV+latest+drama+official',icon:'💗',image:'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'},
+{name:'Green Entertainment Dramas',cat:'Drama',url:'https://www.youtube.com/results?search_query=Green+Entertainment+latest+drama+official',icon:'💚',image:'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80'},
+{name:'Har Pal Geo Dramas',cat:'Drama',url:'https://www.youtube.com/results?search_query=Har+Pal+Geo+latest+drama+official',icon:'🌟',image:'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'},
+{name:'Latest Pakistani Dramas',cat:'Drama',url:'https://www.youtube.com/results?search_query=latest+Pakistani+drama+official+2026',icon:'🎬',image:'https://images.unsplash.com/photo-1440404653325-ab127d49eac1?auto=format&fit=crop&w=600&q=80'},
+{name:'English Stories',cat:'Stories',url:'https://www.youtube.com/results?search_query=English+short+stories+official',icon:'📖',image:'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80'},
+{name:'Bedtime Stories',cat:'Stories',url:'https://www.youtube.com/results?search_query=bedtime+stories+English',icon:'🌙',image:'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80'},
+{name:'Animated Stories',cat:'Stories',url:'https://www.youtube.com/results?search_query=animated+stories+English',icon:'🧚',image:'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80'},
+{name:'Audio Songs',cat:'Audio Songs',url:'https://music.youtube.com/',icon:'🎧',image:'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=600&q=80'},
+{name:'Soft Instrumental',cat:'Audio Songs',url:'https://www.youtube.com/results?search_query=soft+piano+instrumental+music',icon:'🎹',image:'https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=600&q=80'},
+{name:'Guitar Instrumentals',cat:'Audio Songs',url:'https://www.youtube.com/results?search_query=soft+guitar+instrumental+music',icon:'🎸',image:'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=600&q=80'},
+{name:'Piano — Soft Notes',cat:'Audio Songs',soundStyle:'piano',icon:'🎹',image:'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=600&q=80',url:'https://www.youtube.com/results?search_query=soft+piano+instrumental'},
+{name:'Guitar — Gentle Strings',cat:'Audio Songs',soundStyle:'guitar',icon:'🎸',image:'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=600&q=80',url:'https://www.youtube.com/results?search_query=soft+acoustic+guitar+instrumental'},
+{name:'Drums — Light Beat',cat:'Audio Songs',soundStyle:'drums',icon:'🥁',image:'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?auto=format&fit=crop&w=600&q=80',url:'https://www.youtube.com/results?search_query=light+drum+instrumental'},
+{name:'Light English Music',cat:'Audio Songs',soundStyle:'english',icon:'🎶',image:'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=600&q=80',url:'https://www.youtube.com/results?search_query=light+english+music+official'},
+{name:'Light Instrumental Mix',cat:'Audio Songs',soundStyle:'piano',icon:'🎼',image:'https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=600&q=80',url:'https://www.youtube.com/results?search_query=light+instrumental+music'},
+{name:'Live TV Channels',cat:'Live TV',url:'https://www.youtube.com/results?search_query=Pakistan+TV+channels+official+live',icon:'📡',image:'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=600&q=80'},
+{name:'Pakistan Super League',cat:'Sports',url:'https://www.youtube.com/results?search_query=official+PSL+highlights+live',icon:'🏏',image:'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=600&q=80'},
+{name:'Football Highlights',cat:'Sports',url:'https://www.youtube.com/results?search_query=official+football+highlights',icon:'⚽',image:'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80'},
+{name:'Cricket Highlights',cat:'Sports',url:'https://www.youtube.com/results?search_query=official+cricket+highlights',icon:'🏆',image:'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=600&q=80'},
+{name:'BBC News',cat:'News',url:'https://www.bbc.com/news',icon:'🌍',image:'https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=600&q=80'},
+{name:'Al Jazeera',cat:'News',url:'https://www.aljazeera.com/',icon:'🌐',image:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=80'},
+{name:'SonyLIV — Indian Shows',cat:'Indian Dramas',url:'https://www.sonyliv.com/',icon:'🇮🇳',image:'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80'},
+{name:'ZEE5 Official YouTube — Free Clips',cat:'Indian Dramas',url:'https://www.youtube.com/@ZEE5',icon:'Z5',image:'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'},
+{name:'JioHotstar',cat:'Indian Dramas',url:'https://www.hotstar.com/',icon:'✨',image:'https://images.unsplash.com/photo-1440404653325-ab127d49eac1?auto=format&fit=crop&w=600&q=80'},
+{name:'Sony SAB — Official YouTube',cat:'Indian Dramas',url:'https://www.youtube.com/@sonysab',icon:'SAB',image:'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80'},
+{name:'Zee TV — Official Search',cat:'Indian Dramas',url:'https://www.youtube.com/results?search_query=Zee+TV+official+full+episodes',icon:'ZEE',image:'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'},
+{name:'Indian Drama Official Search',cat:'Indian Dramas',url:'https://www.youtube.com/results?search_query=official+Indian+TV+serial+full+episode',icon:'🇮🇳',image:'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80'},
+{name:'MX Player',cat:'Indian Dramas',url:'https://www.mxplayer.in/',icon:'▶️',image:'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'},
+{name:'HBO Max — Official',cat:'HBO & English',url:'https://www.hbomax.com/',icon:'HBO',image:'https://images.unsplash.com/photo-1440404653325-ab127d49eac1?auto=format&fit=crop&w=600&q=80'},
+{name:'English Drama Series',cat:'HBO & English',url:'https://www.youtube.com/results?search_query=official+English+drama+series+episodes',icon:'🇬🇧',image:'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80'},
+{name:'English Movies & Series',cat:'HBO & English',url:'https://www.youtube.com/results?search_query=official+English+movies+and+series',icon:'🎬',image:'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=600&q=80'},
+{name:'Turkish Dramas — Official Search',cat:'Turkish Dramas',url:'https://www.youtube.com/results?search_query=official+Turkish+drama+English+subtitles',icon:'🇹🇷',image:'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=600&q=80'},
+{name:'Kanal D International',cat:'Turkish Dramas',url:'https://www.kanald.com.tr/',icon:'🔷',image:'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80'},
+{name:'TRT — Turkish Series',cat:'Turkish Dramas',url:'https://www.trt1.com.tr/',icon:'🇹🇷',image:'https://images.unsplash.com/photo-1440404653325-ab127d49eac1?auto=format&fit=crop&w=600&q=80'},
+{name:'Turkish Movies',cat:'Turkish Dramas',url:'https://www.youtube.com/results?search_query=official+Turkish+movies+English+subtitles',icon:'🎞️',image:'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=600&q=80'},
+{name:'ARY ZAP',cat:'Pakistani Movies',url:'https://aryzap.com/',icon:'🇵🇰',image:'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80'},
+{name:'ARY QTV — Live',cat:'Islamic',url:'https://live.aryqtv.tv/',icon:'☪️',image:'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=600&q=80'},
+{name:'ARY PLUS — Official',cat:'TV Channels',url:'https://aryplus.tv/',icon:'ARY+',image:'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80'},
+{name:'Pakistani Movies — Official',cat:'Pakistani Movies',url:'https://www.youtube.com/results?search_query=official+Pakistani+movies+full+movie',icon:'🇵🇰',image:'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=600&q=80'},
+{name:'PTV Home',cat:'TV Channels',url:'https://ptv.com.pk/',icon:'📺',image:'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=600&q=80'},
+{name:'HUM News',cat:'TV Channels',url:'https://humnews.pk/',icon:'🟣',image:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=80'},
+{name:'BOL News',cat:'TV Channels',url:'https://www.bolnews.com/',icon:'🔴',image:'https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=600&q=80'},
+{name:'Dunya News',cat:'TV Channels',url:'https://dunyanews.tv/',icon:'🌐',image:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=80'},
+{name:'GNN News',cat:'TV Channels',url:'https://gnnhd.tv/',icon:'📡',image:'https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=600&q=80'},
+{name:'A Sports',cat:'TV Channels',url:'https://www.youtube.com/results?search_query=A+Sports+Pakistan+official+live',icon:'🏏',image:'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=600&q=80'},
+{name:'TV Channels — Pakistan Live Search',cat:'TV Channels',url:'https://www.youtube.com/results?search_query=official+Pakistan+TV+channels+live',icon:'📡',image:'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=600&q=80'},
+];
+const $=id=>document.getElementById(id);let channels=loadChannels(),category='All',favs=JSON.parse(localStorage.getItem('aghaifavs')||'[]'),unlocked=false;
+function loadChannels(){try{const v=JSON.parse(localStorage.getItem('aghaichannels')||'null');if(Array.isArray(v)){const aliases={'ZEE5 — Indian Dramas':'ZEE5 Official YouTube — Free Clips'};const byName=new Map(DEFAULTS.map(d=>[d.name,d]));const migrated=v.map(c=>{const name=aliases[c.name]||c.name;const d=byName.get(name);return d?({...c,...d,id:c.id,name,blocked:c.blocked??false,locked:c.locked??false,lockPass:c.lockPass||''}):c});const unique=[];const seen=new Set();migrated.forEach(c=>{if(!seen.has(c.name)){seen.add(c.name);unique.push(c)}});return [...unique,...DEFAULTS.filter(c=>!seen.has(c.name)).map((x,i)=>({...x,id:Date.now()+i,blocked:false,locked:false,lockPass:''}))]}return DEFAULTS.map((x,i)=>({...x,id:i+1,blocked:false,locked:false,lockPass:''}))}catch{return DEFAULTS.map((x,i)=>({...x,id:i+1,blocked:false,locked:false,lockPass:''}))}}
+function save(){localStorage.setItem('aghaichannels',JSON.stringify(channels))}
+function isYouTube(u){return /(^|\.)youtube\.com|youtu\.be|youtube-nocookie\.com/i.test(new URL(u).hostname)}
+function ytIdSafe(u){try{return ytId(u)}catch{return null}}
+function ytId(u){try{let x=new URL(u);if(x.hostname==='youtu.be')return x.pathname.slice(1);if(x.pathname==='/watch')return x.searchParams.get('v');if(x.pathname.startsWith('/shorts/'))return x.pathname.split('/')[2];if(x.pathname.startsWith('/embed/'))return x.pathname.split('/')[2]}catch{}return null}
+function showExternalFallback(url, name){const box=$('screen');box.innerHTML='';const wrap=document.createElement('div');wrap.className='welcome';const b=document.createElement('b');b.textContent=name||'AGHAI TV';const msg=document.createElement('div');msg.textContent='This service does not permit playback inside another app, or this is a search/channel page.';const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Open official source';a.style.display='inline-block';a.style.marginTop='12px';a.style.padding='10px 14px';a.style.border='1px solid var(--neon)';a.style.borderRadius='10px';wrap.append(b,msg,a);box.append(wrap);$('playerStatus').textContent='For same-screen playback, use a specific embeddable YouTube video or a direct MP4/MP3/HLS stream you are authorized to use.'}
+function play(u,name='AGHAI Player'){let url;try{url=new URL(u)}catch{$('playerStatus').textContent='Enter a complete valid URL beginning with https://';return}if(!/^https?:$/.test(url.protocol)){$('playerStatus').textContent='Only http/https media URLs are supported.';return} $('nowTitle').textContent=name;$('playerStatus').textContent='';const box=$('screen');if(isYouTube(url.href)){const id=ytId(url.href);if(id){box.innerHTML='';const f=document.createElement('iframe');f.title='AGHAI TV video player';f.src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id)+'?autoplay=1&rel=0';f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.referrerPolicy='strict-origin-when-cross-origin';box.append(f);$('playerStatus').textContent='If the video reports an error, its owner may have disabled embedding or restricted playback.'}else{showExternalFallback(url.href,name);}}else if(/\.(mp4|webm|ogg)(\?|$)/i.test(url.href)){box.innerHTML='';const v=document.createElement('video');v.controls=true;v.autoplay=true;v.playsInline=true;v.src=url.href;box.append(v);v.play().catch(()=>{$('playerStatus').textContent='Tap Play. If it still fails, the URL may not be a direct public video file or may block access.'})}else if(/\.mp3(\?|$)/i.test(url.href)){box.innerHTML='';const a=document.createElement('audio');a.controls=true;a.autoplay=true;a.src=url.href;a.style.width='90%';box.append(a);a.play().catch(()=>{$('playerStatus').textContent='Tap Play or verify that this is a direct MP3 URL.'});}else if(/\.m3u8(\?|$)/i.test(url.href)){box.innerHTML='';const v=document.createElement('video');v.controls=true;v.autoplay=true;v.playsInline=true;v.style.width='100%';v.style.height='100%';box.append(v);if(v.canPlayType('application/vnd.apple.mpegurl')){v.src=url.href;v.play().catch(()=>{$('playerStatus').textContent='Tap Play or verify stream permission.'})}else{const script=document.createElement('script');script.src='https://cdn.jsdelivr.net/npm/hls.js@latest';script.onload=()=>{if(window.Hls&&Hls.isSupported()){const h=new Hls();h.loadSource(url.href);h.attachMedia(v);h.on(Hls.Events.ERROR,(_,data)=>{if(data.fatal)$('playerStatus').textContent='Stream could not play. The stream may be offline, restricted, or blocked by CORS.'})}else $('playerStatus').textContent='This browser cannot play this HLS stream.'};script.onerror=()=>{$('playerStatus').textContent='HLS player library could not load. Try a direct MP4 URL.'};document.head.append(script)}}else{showExternalFallback(url.href,name)}}
+function render(){const q=$('search').value.trim().toLowerCase();const list=channels.filter(c=>!c.blocked&&(category==='All'||(category==='Favourites'?favs.includes(c.id):c.cat===category))&&(!q||(c.name+' '+c.cat).toLowerCase().includes(q)));$('channelGrid').innerHTML='';list.forEach(c=>{const card=document.createElement('article');card.className='channel';const img=document.createElement('img');img.className='thumb';img.alt=c.name+' thumbnail';img.loading='lazy';img.decoding='async';img.src=c.image||(ytIdSafe(c.url)?'https://img.youtube.com/vi/'+ytIdSafe(c.url)+'/hqdefault.jpg':'');img.onerror=()=>{img.style.display='none'};const sym=document.createElement('div');sym.className='symbol';sym.textContent=c.icon||'📺';const h=document.createElement('h3');h.textContent=c.name+(c.locked?' 🔒':'');const p=document.createElement('p');p.textContent=c.cat;const actions=document.createElement('div');actions.className='actions';const open=document.createElement('button');open.textContent=c.soundStyle&&c.soundStyle!=='english'?'▶ Play '+(c.soundStyle==='piano'?'Piano':c.soundStyle==='guitar'?'Guitar':'Drums'):(c.soundStyle==='english'?'▶ Play Light English Music':(c.locked?'🔒 Unlock & Open':'Open'));open.onclick=()=>{if(c.locked){const pw=prompt('Enter password for '+c.name);if(pw===null)return;if(pw!==c.lockPass){alert('Wrong password. Channel stays locked.');return}}if(c.soundStyle&&c.soundStyle!=='english'){playInstrument(c.soundStyle,c.name);return}if(c.playInside&&ytIdSafe(c.url)){play(c.url,c.name);return}window.open(c.url,'_blank','noopener,noreferrer')};const fav=document.createElement('button');fav.textContent=favs.includes(c.id)?'♥':'♡';fav.title='Favourite';fav.onclick=()=>{favs=favs.includes(c.id)?favs.filter(x=>x!==c.id):[...favs,c.id];localStorage.setItem('aghaifavs',JSON.stringify(favs));render()};actions.append(open,fav);if(unlocked){const lock=document.createElement('button');lock.textContent=c.locked?'Unlock off':'Set lock';lock.onclick=()=>{if(c.locked){if(confirm('Remove password lock from this channel?')){c.locked=false;c.lockPass='';save();render()}}else{const pw=prompt('Set a password for '+c.name+' (not the admin password):');if(pw&&pw.length>=4){c.locked=true;c.lockPass=pw;save();render()}else alert('Password must be at least 4 characters.')}};const b=document.createElement('button');b.textContent='Block';b.onclick=()=>{c.blocked=true;save();render()};const d=document.createElement('button');d.textContent='Delete';d.onclick=()=>{channels=channels.filter(x=>x.id!==c.id);save();render()};actions.append(lock,b,d)}card.append(img,sym,h,p,actions);$('channelGrid').append(card)});$('emptyMsg').textContent=list.length?'':'No matching channels. Clear search or add a channel in Admin.';$('listTitle').textContent=category==='All'?'Channels & shortcuts':category}
+function doSearch(){const q=$('search').value.trim();if(!q){$('playerStatus').textContent='Type a topic first, for example Naat, News, Cartoons or Drama.';return}startAmbient();window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(q),'_blank','noopener,noreferrer')}
+$('searchBtn').onclick=doSearch;$('search').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch()});$('tabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{category=b.dataset.cat;$('tabs').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));render()});$('playUrl').onclick=()=>play($('videoUrl').value.trim());$('videoUrl').addEventListener('keydown',e=>{if(e.key==='Enter')play($('videoUrl').value.trim())});$('stopBtn').onclick=()=>{stopInstrument();$('screen').innerHTML='<div class="auto-reel" id="autoReel"><div class="reel-art" id="reelArt"></div><div class="reel-shade"></div><span class="live-pill station-bug"><span class="live-mark">A</span><span class="live-brand">AGHAI <b>TV</b></span><span class="live-label"><i></i> LIVE</span></span><div class="reel-copy"><h3 id="reelTitle">Your entertainment starts here</h3><p id="reelSub">Dramas • Cartoons • News • Music</p><div class="reel-actions"><button id="reelPlay">▶ Watch on YouTube</button><button id="reelBrowse">Explore</button></div><div class="reel-dots" id="reelDots"></div></div><div class="reel-watermark">AGHAI <b>TV</b></div></div>';$('playerStatus').textContent='Auto Reel resumed.';showReel(reelIndex);startReel();$('reelPlay').onclick=()=>{const item=REEL_ITEMS[reelIndex];window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(item.q),'_blank','noopener,noreferrer')};$('reelBrowse').onclick=browseReel};
+$('instagramBtn').onclick=()=>window.open('https://www.instagram.com/','_blank','noopener');$('tiktokBtn').onclick=()=>window.open('https://www.tiktok.com/','_blank','noopener');$('facebookBtn').onclick=()=>window.open('https://www.facebook.com/','_blank','noopener');$('xBtn').onclick=()=>window.open('https://x.com/','_blank','noopener');$('telegramBtn').onclick=()=>window.open('https://web.telegram.org/','_blank','noopener');
+const themes={mint:['#38f5c5','#53a8ff'],purple:['#c084fc','#818cf8'],blue:['#38bdf8','#2563eb'],gold:['#fbbf24','#f97316'],pink:['#fb7185','#e879f9'],ice:['#67e8f9','#60a5fa'],red:['#fb334f','#f97316'],lime:['#a3e635','#22c55e'],sunset:['#fb923c','#e879f9'],white:['#f8fafc','#94a3b8']};function applyTheme(k){const t=themes[k]||themes.mint;document.documentElement.style.setProperty('--neon',t[0]);document.documentElement.style.setProperty('--blue',t[1]);localStorage.setItem('aghaicolor',k);$('colorTheme').value=k}applyTheme(localStorage.getItem('aghaicolor')||'mint');$('colorTheme').onchange=()=>applyTheme($('colorTheme').value);let animations=localStorage.getItem('aghaianim')!=='off';function setAnimations(on){animations=on;document.body.classList.toggle('no-anim',!on);$('animToggle').textContent='✨ Animations: '+(on?'ON':'OFF');localStorage.setItem('aghaianim',on?'on':'off')}setAnimations(animations);$('animToggle').onclick=()=>setAnimations(!animations);function setAnimStyle(k){['aurora','rainbow','scan','pulse','retro'].forEach(x=>document.body.classList.remove('anim-'+x));document.body.classList.add('anim-'+k);$('animStyle').value=k;localStorage.setItem('aghaianimstyle',k)}setAnimStyle(localStorage.getItem('aghaianimstyle')||'aurora');$('animStyle').onchange=()=>setAnimStyle($('animStyle').value);function updatePakTime(){const now=new Date();$('pakTime').textContent='🇵🇰 Pakistan (PKT) · '+new Intl.DateTimeFormat('en-PK',{timeZone:'Asia/Karachi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}).format(now)+' · '+new Intl.DateTimeFormat('en-PK',{timeZone:'Asia/Karachi',day:'2-digit',month:'short',year:'numeric'}).format(now)}updatePakTime();setInterval(updatePakTime,1000);
+$('googleSearch').onclick=()=>{const q=$('search').value.trim()||prompt('Google par kya search karna hai?')||'';if(q)window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank','noopener')};$('translateBtn').onclick=()=>{const q=$('search').value.trim();window.open('https://translate.google.com/?sl=auto&tl=en&text='+encodeURIComponent(q)+'&op=translate','_blank','noopener')};$('aryBtn').onclick=()=>window.open('https://arynews.tv/','_blank','noopener,noreferrer');$('sportsBtn').onclick=()=>window.open('https://www.youtube.com/results?search_query=official+live+sports+Pakistan','_blank','noopener,noreferrer');$('tamashaBtn').onclick=()=>window.open('https://tamashaweb.com/','_blank','noopener,noreferrer');$('bbcBtn').onclick=()=>window.open('https://www.bbc.com/news','_blank','noopener,noreferrer');$('aljazeeraBtn').onclick=()=>window.open('https://www.aljazeera.com/','_blank','noopener,noreferrer');$('wikiBtn').onclick=()=>window.open('https://www.wikipedia.org/','_blank','noopener,noreferrer');$('whatsappBtn').onclick=()=>window.open('https://wa.me/?text='+encodeURIComponent('Check out AGHAI TV — my personal media hub.'),'_blank','noopener');$('ytSearch').onclick=doSearch;$('ytTrending').onclick=()=>window.open('https://www.youtube.com/feed/trending','_blank','noopener');$('ytMusic').onclick=()=>window.open('https://music.youtube.com/','_blank','noopener');$('ytLive').onclick=()=>window.open('https://www.youtube.com/results?search_query=live+streams&sp=EgJAAQ%253D%253D','_blank','noopener');$('ytNaat').onclick=()=>window.open('https://www.youtube.com/results?search_query=naat+sharif','_blank','noopener');
+let musicCtx=null,musicTimer=null,musicNodes=[],musicStyle='piano',musicStep=0;
+function stopInstrument(){if(musicTimer)clearInterval(musicTimer);musicTimer=null;musicNodes.forEach(n=>{try{n.stop()}catch(e){}});musicNodes=[]}
+function playInstrument(style,label){if(style==='english'){window.open('https://www.youtube.com/results?search_query=light+english+music+official','_blank','noopener,noreferrer');return}try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC){$('playerStatus').textContent='Audio is not supported by this browser.';return}stopInstrument();musicCtx=musicCtx||new AC();musicCtx.resume();musicStyle=style;musicStep=0;$('nowTitle').textContent=label;$('playerStatus').textContent='Playing generated '+style+'-style notes. Tap another instrument to switch; Stop ends the sound.';instrumentBeat();musicTimer=setInterval(instrumentBeat,style==='drums'?480:style==='guitar'?620:760)}catch(e){$('playerStatus').textContent='Sound could not start. Tap the instrument again.'}}
+function instrumentBeat(){if(!musicCtx)return;const t=musicCtx.currentTime;const piano=[261.63,329.63,392,523.25,392,329.63,293.66,349.23,440,523.25,440,349.23];const guitar=[196,246.94,293.66,392,329.63,293.66,246.94,220];const f=(musicStyle==='guitar'?guitar:piano)[musicStep++%(musicStyle==='guitar'?guitar.length:piano.length)];const notes=musicStyle==='drums'?[[90,'sine',0.14,.16],[180,'triangle',0.045,.09]]:musicStyle==='guitar'?[[f,'triangle',.09,.65],[f*2,'sine',.025,.4]]:[[f,'sine',.075,1.0],[f*2,'sine',.018,.7],[f*1.5,'triangle',.012,.8]];notes.forEach(([hz,type,vol,dur])=>{const o=musicCtx.createOscillator(),g=musicCtx.createGain();o.type=type;o.frequency.setValueAtTime(hz,t);if(musicStyle==='drums')o.frequency.exponentialRampToValueAtTime(45,t+dur);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g);g.connect(musicCtx.destination);o.start(t);o.stop(t+dur+.02);musicNodes.push(o)});if(musicNodes.length>80)musicNodes=musicNodes.slice(-30)}
+$('stopBtn').addEventListener('click',stopInstrument);
+function buildLauncher(){const apps=[
+['f','Facebook','https://www.facebook.com/'],['♪','TikTok','https://www.tiktok.com/'],['G','Google','https://www.google.com/'],['🌐','Internet','https://www.google.com/'],['▶','YouTube','https://www.youtube.com/'],['◎','Instagram','https://www.instagram.com/'],['✆','WhatsApp','https://web.whatsapp.com/'],['𝕏','X','https://x.com/'],['📰','News','https://arynews.tv/'],['🏏','Sports','https://www.youtube.com/results?search_query=official+live+sports+Pakistan'],['🎭','Pak Dramas','https://www.youtube.com/results?search_query=ARY+Digital+HUM+TV+official+dramas'],['🇮🇳','Indian Dramas','https://www.youtube.com/results?search_query=official+Indian+dramas+full+episodes'],['🇹🇷','Turkish Dramas','https://www.youtube.com/results?search_query=official+Turkish+dramas+English+subtitles'],['🎬','Movies','https://www.youtube.com/results?search_query=official+full+movies'],['📡','Live TV','https://www.youtube.com/results?search_query=Pakistan+TV+channels+official+live'],['📱','Tamasha','https://tamashaweb.com/'],['Z5','ZEE5','https://www.youtube.com/@ZEE5'],['SAB','Sony SAB','https://www.youtube.com/@sonysab'],['🇵🇰','Pak Movies','https://www.youtube.com/results?search_query=official+Pakistani+movies'],['🎵','Music','https://music.youtube.com/'],['🎹','Piano','instrument:piano'],['🎸','Guitar','instrument:guitar'],['🥁','Drums','instrument:drums'],['📖','Stories','https://www.youtube.com/results?search_query=kids+stories+official'],['🧸','Cartoons','https://www.youtube.com/results?search_query=official+kids+cartoons'],['🤲','Naat','https://www.youtube.com/results?search_query=naat+sharif+official'],['☪️','Islamic','https://www.youtube.com/results?search_query=islamic+lectures+official'],['🕋','Makkah Live','https://www.youtube.com/results?search_query=Makkah+Haram+live+official'],['🕌','Madinah Live','https://www.youtube.com/results?search_query=Masjid+Nabawi+live+official'],['📚','Education','https://www.youtube.com/results?search_query=educational+videos+official']];const root=$('launcherGrid');root.innerHTML='';apps.forEach(([icon,name,target])=>{const b=document.createElement('button');b.className='app-tile portrait-tile';b.setAttribute('aria-label',name);const ico=document.createElement('span');ico.className='app-icon';ico.textContent=icon;const brandClass={'Facebook':'brand-facebook','TikTok':'brand-tiktok','Google':'brand-google','Internet':'brand-internet','YouTube':'brand-youtube','Instagram':'brand-instagram','WhatsApp':'brand-whatsapp','X':'brand-x'}[name];if(brandClass)ico.classList.add(brandClass);const label=document.createElement('span');label.textContent=name;b.append(ico,label);b.onclick=()=>{if(target.startsWith('instrument:')){playInstrument(target.split(':')[1],name);return}window.open(target,'_blank','noopener,noreferrer')};root.append(b)})}
+buildLauncher();
+// Auto-running visual reel: no URL entry needed. Real videos open on official YouTube because search pages cannot autoplay inside embeds.
+const REEL_ITEMS=[
+ {title:'Pakistani Dramas',sub:'Latest stories from official drama channels',cat:'Drama',q:'official Pakistani dramas latest episodes',img:'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1400&q=85',emoji:'🎭'},
+ {title:'Cartoon Time',sub:'Family-friendly cartoons and animated stories',cat:'Cartoons',q:'official kids cartoons full episodes',img:'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1400&q=85',emoji:'🧸'},
+ {title:'News & Live Updates',sub:'Catch up with the latest headlines',cat:'News',q:'Pakistan news live official',img:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1400&q=85',emoji:'📰'},
+ {title:'Movies & Cinema',sub:'Explore official movie clips and trailers',cat:'English Movies',q:'official movie trailers English',img:'https://images.unsplash.com/photo-1440404653325-ab127d49eac1?auto=format&fit=crop&w=1400&q=85',emoji:'🎬'},
+ {title:'Music & Chill',sub:'Relax with music, instrumentals and performances',cat:'Audio Songs',q:'official soft music performances',img:'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1400&q=85',emoji:'🎵'}
+];let reelIndex=0,reelTimer=null;
+function showReel(i){reelIndex=(i+REEL_ITEMS.length)%REEL_ITEMS.length;const item=REEL_ITEMS[reelIndex];const art=$('reelArt');if(!art)return;art.style.opacity='.15';setTimeout(()=>{art.style.backgroundImage='url("'+item.img+'")';art.style.opacity='1';$('reelTitle').textContent=item.title;$('reelSub').textContent=item.sub;const dots=$('reelDots');dots.innerHTML='';REEL_ITEMS.forEach((it,n)=>{const d=document.createElement('button');d.className=n===reelIndex?'active':'';d.title=it.title;d.setAttribute('aria-label','Show '+it.title);d.onclick=()=>{showReel(n);startReel()};dots.append(d)});},180)}
+function startReel(){if(reelTimer)clearInterval(reelTimer);reelTimer=setInterval(()=>showReel(reelIndex+1),9000)}
+function browseReel(){const item=REEL_ITEMS[reelIndex];category=item.cat;$('tabs').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x.dataset.cat===category));$('search').value='';render();$('channelGrid').scrollIntoView({behavior:'smooth',block:'start'})}
+$('reelPlay').onclick=()=>{const item=REEL_ITEMS[reelIndex];window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(item.q),'_blank','noopener,noreferrer')};$('reelBrowse').onclick=browseReel;showReel(0);startReel();
+
+$('adminToggle').onclick=()=>{$('adminPanel').classList.toggle('hidden')};$('unlockBtn').onclick=()=>{const expected=localStorage.getItem('aghaipass')||'AGHAI7860';if($('adminPass').value===expected){unlocked=true;$('adminTools').classList.remove('hidden');$('adminStatus').textContent='Settings unlocked on this browser.';render()}else $('adminStatus').textContent='Password incorrect. Default password: AGHAI7860'};$('changePass').onclick=()=>{if(!unlocked){$('adminStatus').textContent='Unlock settings first.';return}const p=$('newPass').value.trim();if(p.length<4){$('adminStatus').textContent='Use at least 4 characters.';return}localStorage.setItem('aghaipass',p);$('newPass').value='';$('adminStatus').textContent='Password saved on this browser.'};$('addChannel').onclick=()=>{if(!unlocked)return;const name=$('newName').value.trim(),url=$('newUrl').value.trim(),cat=$('newCat').value;if(!name||!url){$('adminStatus').textContent='Enter both channel name and URL.';return}try{new URL(url)}catch{$('adminStatus').textContent='URL must start with https:// or http://';return}const locked=$('newLocked').value==='yes',lockPass=$('newLockPass').value;if(locked&&lockPass.length<4){$('adminStatus').textContent='For a locked channel, set a password of at least 4 characters.';return}const image=$('newImage').value.trim();if(image){try{new URL(image)}catch{$('adminStatus').textContent='Image URL must be valid.';return}}channels.push({id:Date.now(),name,url,cat,icon:cat==='News'?'📰':cat==='Naat'?'🤲':cat==='Audio'?'🎵':cat==='Live'?'🔴':cat==='Cartoons'?'🧸':'📺',image,locked,lockPass:locked?lockPass:'',blocked:false});save();$('newName').value='';$('newUrl').value='';$('newImage').value='';$('newLockPass').value='';$('newLocked').value='no';$('adminStatus').textContent='Channel added.';render()};$('exportData').onclick=()=>{const blob=new Blob([JSON.stringify(channels,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='agha-tv-channels.json';a.click();URL.revokeObjectURL(a.href)};$('resetChannels').onclick=()=>{if(confirm('Reset channel shortcuts to defaults?')){channels=DEFAULTS.map((x,i)=>({...x,id:i+1,blocked:false}));save();render()}};render();
+</script>
+<script>
+(()=>{
+ const btn=document.getElementById('ambientMusicBtn'); if(!btn)return;
+ let ctx=null,timer=null,active=false,step=0,nodes=[];
+ const notes=[261.63,329.63,392,493.88,392,329.63,293.66,349.23,440,523.25,440,349.23];
+ function note(){if(!ctx||!active)return;const now=ctx.currentTime;const f=notes[step++%notes.length];
+   [[f,.018,2.8,'sine'],[f*1.5,.006,2.3,'sine'],[f*2,.003,1.8,'triangle']].forEach(([hz,vol,dur,type])=>{const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.setValueAtTime(hz,now);g.gain.setValueAtTime(.0001,now);g.gain.exponentialRampToValueAtTime(vol,now+.5);g.gain.setTargetAtTime(.0001,now+dur,.5);o.connect(g);g.connect(ctx.destination);o.start(now);o.stop(now+dur+1);nodes.push(o)});
+   if(nodes.length>60)nodes=nodes.slice(-24);
+ }
+ function stop(){active=false;if(timer)clearInterval(timer);timer=null;nodes.forEach(o=>{try{o.stop()}catch(e){}});nodes=[];btn.textContent='🎵 Soft Music: OFF';btn.setAttribute('aria-pressed','false')}
+ btn.addEventListener('click',async()=>{if(active){stop();return}try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC){btn.textContent='Audio unavailable';return}ctx=ctx||new AC();await ctx.resume();active=true;step=0;note();timer=setInterval(note,2100);btn.textContent='🎵 Soft Music: ON';btn.setAttribute('aria-pressed','true')}catch(e){btn.textContent='Tap to enable music';}});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden&&active&&ctx)ctx.suspend();else if(!document.hidden&&active&&ctx)ctx.resume()});
+})();
+</script>
+
+<script>
+(()=>{
+ const layer=document.getElementById('ag-wallpaper-layer');
+ const next=document.getElementById('socialWallpaperBtn');
+ const file=document.getElementById('customWallpaperInput');
+ if(!layer)return;
+ // Social-media inspired backgrounds: soft abstract gradients work offline; photo options load online.
+ const wallpapers=[
+  'linear-gradient(135deg,rgba(7,14,31,.36),rgba(15,23,42,.62)),radial-gradient(ellipse at 12% 18%,#ff4da655 0,transparent 38%),radial-gradient(ellipse at 82% 26%,#7c4dff66 0,transparent 40%),linear-gradient(125deg,#101a38,#251b48 52%,#102a3b)',
+  'linear-gradient(135deg,rgba(5,16,29,.38),rgba(5,16,29,.66)),radial-gradient(ellipse at 15% 85%,#00e5ff55,transparent 40%),radial-gradient(ellipse at 82% 15%,#00ffa355,transparent 38%),linear-gradient(120deg,#071b2c,#113b4c,#13223b)',
+  'linear-gradient(135deg,rgba(10,9,28,.4),rgba(10,9,28,.68)),radial-gradient(ellipse at 20% 25%,#ffb86b55,transparent 40%),radial-gradient(ellipse at 85% 75%,#ff4d8d55,transparent 42%),linear-gradient(125deg,#1c1732,#38213d,#101a30)',
+  'linear-gradient(135deg,rgba(4,14,24,.38),rgba(4,14,24,.65)),radial-gradient(ellipse at 15% 20%,#3ee7b655,transparent 40%),radial-gradient(ellipse at 80% 75%,#3a86ff55,transparent 43%),linear-gradient(125deg,#0b2c32,#172a48,#101827)',
+  'linear-gradient(135deg,rgba(11,10,22,.38),rgba(11,10,22,.68)),radial-gradient(ellipse at 25% 80%,#f9d97655,transparent 40%),radial-gradient(ellipse at 80% 18%,#e879f955,transparent 40%),linear-gradient(125deg,#241a35,#37233c,#131b30)',
+  'linear-gradient(135deg,rgba(4,11,26,.35),rgba(4,11,26,.68)),url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=2000&q=85")',
+  'linear-gradient(135deg,rgba(4,11,26,.36),rgba(4,11,26,.68)),url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=2000&q=85")',
+  'linear-gradient(135deg,rgba(4,11,26,.36),rgba(4,11,26,.68)),url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2000&q=85")',
+  'linear-gradient(135deg,rgba(4,9,20,.48),rgba(7,13,30,.76)),url("https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=2000&q=85")',
+  'linear-gradient(135deg,rgba(4,9,20,.44),rgba(7,13,30,.74)),url("https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=2000&q=85")',
+  'linear-gradient(135deg,rgba(4,9,20,.46),rgba(7,13,30,.75)),url("https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=2000&q=85")',
+  'linear-gradient(135deg,rgba(4,9,20,.45),rgba(7,13,30,.72)),url("https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=2000&q=85")',
+  'linear-gradient(135deg,rgba(4,9,20,.46),rgba(7,13,30,.76)),url("https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=2000&q=85")'
+ ];
+ let idx=-1;let userUrl=null;
+ function applyBackground(bg){layer.style.setProperty('background-image',bg,'important');layer.style.setProperty('background-size','cover','important');layer.style.setProperty('background-position','center','important');layer.style.setProperty('background-repeat','no-repeat','important');}
+ function nextWallpaper(){if(userUrl){URL.revokeObjectURL(userUrl);userUrl=null;}idx=(idx+1)%wallpapers.length;applyBackground(wallpapers[idx]);}
+ if(next)next.addEventListener('click',nextWallpaper);
+ if(file)file.addEventListener('change',()=>{const f=file.files&&file.files[0];if(!f)return;if(userUrl)URL.revokeObjectURL(userUrl);userUrl=URL.createObjectURL(f);applyBackground('linear-gradient(135deg,rgba(5,10,22,.28),rgba(5,10,22,.55)),url("'+userUrl+'")');});
+ nextWallpaper();
+})();
+</script>
+
+
+<style id="aghai-full-app-lock-style">
+#aghai-contact-social-footer .ag-social-link.ag-s-only{min-width:42px;width:42px;padding:8px;justify-content:center}
+#aghai-contact-social-footer .ag-contact-lines a{color:#d7f8ff;text-decoration:none;overflow-wrap:anywhere}
+#aghai-contact-social-footer .ag-contact-lines a:hover{text-decoration:underline}
+#aghai-app-lock{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(ellipse at 50% 0%,#123a58 0%,#080d19 58%,#03060b 100%);color:#f3fdff;font-family:system-ui,Arial,sans-serif}
+#aghai-app-lock[hidden]{display:none!important}
+#aghai-app-lock .lock-card{width:min(100%,390px);padding:27px 22px 22px;border:1px solid #56e9ff66;border-radius:23px;text-align:center;background:linear-gradient(145deg,#0c1929f7,#10182bf7 55%,#17132af7);box-shadow:0 0 42px #19d8ff20,inset 0 1px 0 #ffffff17}
+#aghai-app-lock .lock-logo{width:72px;height:72px;margin:0 auto 14px;display:grid;place-items:center;border-radius:20px;font-size:48px;font-weight:1000;font-style:italic;color:#f7ffff;background:linear-gradient(145deg,#f4ffff,#39d9ec 27%,#3178db 55%,#18275a 78%,#c9a5ff);text-shadow:0 3px 0 #173b70,0 0 18px #43eaff;box-shadow:inset 2px 2px 6px #fff9,inset -4px -5px 8px #07152dbb,0 0 25px #37dfff70;animation:aghaiLockS 4s ease-in-out infinite}
+#aghai-app-lock h1{font-size:23px;letter-spacing:2px;margin:0 0 6px}
+#aghai-app-lock p{font-size:13px;line-height:1.5;color:#a9c6d8;margin:0 0 17px}
+#aghai-app-lock input{width:100%;padding:13px 14px;border:1px solid #4fd9ed66;border-radius:12px;background:#050c16;color:#f7ffff;outline:none;margin-bottom:10px}
+#aghai-app-lock button{width:100%;padding:12px;border:0;border-radius:12px;background:linear-gradient(110deg,#38f5c5,#53a8ff);color:#04121b;font-weight:900}
+#aghai-app-lock .lock-status{min-height:20px;margin-top:10px;font-size:12px;color:#ff9cae}
+@keyframes aghaiLockS{0%,100%{transform:perspective(200px) rotateY(-10deg)}50%{transform:perspective(200px) rotateY(10deg)}}
+@media(prefers-reduced-motion:reduce){#aghai-app-lock .lock-logo{animation:none}}
+</style>
+
+
+<script id="aghai-full-app-lock-script">
+(()=>{
+ const overlay=document.createElement('div');overlay.id='aghai-app-lock';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','AGHAI TV app lock');
+ overlay.innerHTML=`<div class="lock-card"><div class="lock-logo">S</div><h1>AGHAI TV</h1><p>Private access · Enter your password to open the software.</p><form id="aghai-lock-form"><input id="aghai-lock-pass" type="password" autocomplete="current-password" placeholder="Enter password" aria-label="Enter password" required><button type="submit">UNLOCK SOFTWARE</button></form><div class="lock-status" id="aghai-lock-status" aria-live="polite"></div></div>`;
+ document.body.appendChild(overlay);
+ const input=overlay.querySelector('#aghai-lock-pass'),status=overlay.querySelector('#aghai-lock-status');
+ let failures=0,blockedUntil=0,idleTimer;
+ function lock(){overlay.hidden=false;input.value='';status.textContent='';setTimeout(()=>input.focus(),40)}
+ function resetIdle(){clearTimeout(idleTimer);if(overlay.hidden)idleTimer=setTimeout(lock,10*60*1000)}
+ overlay.querySelector('form').addEventListener('submit',e=>{
+  e.preventDefault();if(Date.now()<blockedUntil){status.textContent='Too many attempts. Please wait a little and try again.';return}
+  let expected='AGHAI7860';try{expected=localStorage.getItem('aghaipass')||expected}catch(e){}
+  if(input.value===expected){failures=0;overlay.hidden=true;status.textContent='';resetIdle()}else{failures++;input.value='';status.textContent='Incorrect password. Try again.';if(failures>=5){blockedUntil=Date.now()+30000;failures=0;status.textContent='Too many attempts. Locked for 30 seconds.'}}
+ });
+ ['pointerdown','keydown','touchstart','click'].forEach(ev=>document.addEventListener(ev,resetIdle,{passive:true}));
+ document.addEventListener('visibilitychange',()=>{if(document.hidden){clearTimeout(idleTimer)}else if(overlay.hidden)resetIdle()});
+ lock();
+})();
+</script>
+
+<!-- AGHAI-15DAY-ACCESS-GATE: basic client-side access code; not secure payment enforcement -->
+<style id="aghai-access-style">
+#aghaiAccessGate{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(ellipse at 20% 10%,#17364b,#080c13 70%);color:#edf7ff;font:15px system-ui,Arial,sans-serif}
+#aghaiAccessGate .ag-gate-card{width:min(100%,420px);padding:25px;border:1px solid #38f5c588;border-radius:20px;background:linear-gradient(145deg,#111e30f7,#080f19f7);box-shadow:0 0 45px #38f5c522;text-align:center}
+#aghaiAccessGate .ag-gate-logo{width:66px;height:66px;margin:0 auto 14px;display:grid;place-items:center;border:2px solid #d4fff7;border-radius:50%;font-size:32px;font-weight:1000;color:#38f5c5;box-shadow:0 0 22px #38f5c544}
+#aghaiAccessGate h2{margin:0 0 8px;font-size:24px;letter-spacing:1px}
+#aghaiAccessGate p{color:#9aafc4;font-size:13px;line-height:1.5}
+#aghaiAccessGate input{width:100%;margin:12px 0;background:#080f19;color:#edf7ff;border:1px solid #26384c;border-radius:10px;padding:13px}
+#aghaiAccessGate button{width:100%;border:0;border-radius:10px;padding:13px;background:linear-gradient(120deg,#38f5c5,#53a8ff);color:#06111a;font-weight:900}
+#aghaiAccessStatus{min-height:20px;color:#ff8ba3;font-size:12px;margin-top:10px}
+#aghaiAccessExpiry{color:#38f5c5;font-size:12px;margin-top:12px}
+</style>
+<div id="aghaiAccessGate" role="dialog" aria-modal="true" aria-labelledby="aghaiAccessTitle">
+ <div class="ag-gate-card">
+  <div class="ag-gate-logo">S</div>
+  <h2 id="aghaiAccessTitle">AGHAI TV VIP</h2>
+  <p>Enter your 15-day access code to unlock AGHAI TV on this browser.</p>
+  <form id="aghaiAccessForm">
+   <input id="aghaiAccessCode" type="password" autocomplete="off" placeholder="Enter access code" aria-label="Access code" required>
+   <button type="submit">ACTIVATE 15-DAY ACCESS</button>
+  </form>
+  <div id="aghaiAccessStatus" role="status"></div>
+  <div id="aghaiAccessExpiry"></div>
+  <p>Access is stored on this device/browser. Clearing browser data or changing the device clock can affect this basic trial.</p>
+ </div>
+</div>
+<script id="aghai-access-script">
+(()=>{
+ const CODE='AGHAI-15-786';
+ const KEY='aghai_tv_15day_access_v1';
+ const gate=document.getElementById('aghaiAccessGate');
+ const form=document.getElementById('aghaiAccessForm');
+ const field=document.getElementById('aghaiAccessCode');
+ const status=document.getElementById('aghaiAccessStatus');
+ const expiryLabel=document.getElementById('aghaiAccessExpiry');
+ const PERIOD=15*24*60*60*1000;
+ let access=null;
+ try{access=JSON.parse(localStorage.getItem(KEY)||'null')}catch{}
+ function valid(){return access&&Number.isFinite(access.started)&&Number.isFinite(access.expires)&&Date.now()<access.expires&&access.expires-access.started===PERIOD}
+ function unlock(){gate.style.display='none';document.documentElement.style.overflow='';}
+ function lock(){gate.style.display='flex';document.documentElement.style.overflow='hidden';}
+ if(valid()){
+  expiryLabel.textContent='Access active until '+new Date(access.expires).toLocaleString();
+  unlock();
+ }else{
+  if(access&&access.expires<=Date.now())status.textContent='Your 15-day access has expired. Enter a valid access code to activate again.';
+  lock();
+ }
+ form.addEventListener('submit',e=>{
+  e.preventDefault();
+  if(field.value.trim().toUpperCase()!==CODE){status.textContent='Invalid access code. Please check and try again.';return;}
+  const started=Date.now();access={started,expires:started+PERIOD};
+  try{localStorage.setItem(KEY,JSON.stringify(access))}catch{}
+  expiryLabel.textContent='Access active until '+new Date(access.expires).toLocaleString();
+  status.textContent='Access activated for 15 days.';unlock();
+ });
+})();
+</script>
+
+</body></html>
+
+<style id="aghai-broadcast-finish">
+/* Compact QTV-style channel bug: always inside the video frame */
+.screen:after{content:none!important;display:none!important}
+.station-bug{position:absolute!important;top:10px!important;left:10px!important;right:auto!important;bottom:auto!important;z-index:6!important;display:inline-flex!important;align-items:center!important;gap:6px!important;width:max-content!important;max-width:calc(100% - 20px)!important;min-width:0!important;padding:4px 7px!important;border:1px solid #ffffff55!important;border-radius:5px!important;background:linear-gradient(135deg,#07131deF,#10253bd9)!important;box-shadow:0 2px 8px #0008,inset 0 1px 0 #ffffff24!important;letter-spacing:.2px!important;overflow:hidden!important}
+.station-bug:before{display:none!important}
+.station-bug .live-mark{display:grid!important;place-items:center!important;width:20px!important;height:20px!important;flex:0 0 20px!important;border-radius:50%!important;background:linear-gradient(145deg,#e9ffff,#49e9df 45%,#1470a4)!important;color:#06131b!important;font-size:12px!important;font-weight:1000!important;box-shadow:0 1px 0 #fff8,0 0 8px #38f5c544!important}
+.station-bug .live-brand{font-size:clamp(9px,1.8vw,12px)!important;font-weight:1000!important;letter-spacing:.8px!important;white-space:nowrap!important;text-shadow:0 1px 4px #000!important}
+.station-bug .live-brand b{color:#5ef5dd!important}
+.station-bug .live-label{display:inline-flex!important;align-items:center!important;gap:4px!important;padding:3px 4px!important;border-radius:3px!important;background:#c81738!important;color:white!important;font-size:7px!important;letter-spacing:.7px!important;line-height:1!important}
+.station-bug .live-label i{display:inline-block!important;width:5px!important;height:5px!important;flex:0 0 5px!important;margin:0!important;background:#fff!important;border-radius:50%!important;box-shadow:0 0 5px #fff!important;animation:liveBlink 1.5s infinite!important}
+.reel-copy{top:0!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;max-width:100%!important;padding:0!important;pointer-events:none!important;animation:none!important}
+.reel-copy .station-bug{pointer-events:none!important}
+.reel-copy h3,.reel-copy p,.reel-actions,.reel-dots{pointer-events:auto!important}
+.reel-copy h3{position:absolute!important;left:clamp(12px,4%,32px)!important;bottom:clamp(52px,13%,90px)!important;max-width:75%!important;margin:0!important;text-shadow:0 3px 15px #000,0 1px 3px #000!important}
+.reel-copy p{position:absolute!important;left:clamp(12px,4%,32px)!important;bottom:clamp(34px,8%,58px)!important;max-width:75%!important;margin:0!important;text-shadow:0 2px 7px #000!important}
+.reel-actions{position:absolute!important;left:clamp(12px,4%,32px)!important;bottom:9px!important;gap:5px!important}
+.reel-actions button{padding:6px 9px!important;font-size:10px!important}
+.reel-dots{position:absolute!important;right:10px!important;bottom:12px!important;margin:0!important}
+.reel-watermark{display:none!important}
+.logo{animation:logoGlow 4s ease-in-out infinite!important}
+@keyframes logoLiveBob{0%,100%{transform:none}50%{transform:none}}
+@media(max-width:420px){.station-bug{top:7px!important;left:7px!important;padding:3px 5px!important;gap:4px!important}.station-bug .live-mark{width:17px!important;height:17px!important;flex-basis:17px!important;font-size:10px!important}.station-bug .live-brand{font-size:8px!important}.station-bug .live-label{font-size:6px!important}.reel-copy h3{bottom:58px!important;font-size:15px!important;max-width:85%!important}.reel-copy p{bottom:39px!important;font-size:9px!important;max-width:85%!important}.reel-actions{bottom:6px!important}.reel-actions button{font-size:9px!important;padding:5px 7px!important}.reel-dots{display:none!important}}
+
+/* Final screen-safe station bug: anchored to the video frame, never the bottom text block. */
+.screen{position:relative;overflow:hidden;contain:paint}
+.auto-reel{position:absolute;inset:0;overflow:hidden;min-width:0;min-height:0}
+.auto-reel>.station-bug{position:absolute!important;top:clamp(6px,2%,12px)!important;left:clamp(6px,2%,12px)!important;right:auto!important;bottom:auto!important;z-index:8!important;display:inline-flex!important;align-items:center!important;gap:5px!important;width:max-content!important;max-width:calc(100% - 16px)!important;min-width:0!important;overflow:hidden!important;white-space:nowrap!important;padding:3px 6px!important;border:1px solid #ffffff55!important;border-radius:5px!important;background:#07131def!important;box-shadow:0 2px 8px #0008!important}
+.auto-reel>.station-bug .live-mark{width:17px!important;height:17px!important;flex:0 0 17px!important;font-size:10px!important}
+.auto-reel>.station-bug .live-brand{font-size:clamp(8px,1.7vw,11px)!important;letter-spacing:.5px!important}
+.auto-reel>.station-bug .live-label{font-size:7px!important;padding:3px 4px!important}
+.auto-reel>.station-bug .live-label i{animation:liveBlink 1.5s infinite!important}
+.brand h1,.logo{animation:none!important;transform:none!important}
+@media(max-width:420px){.auto-reel>.station-bug{top:6px!important;left:6px!important;max-width:calc(100% - 12px)!important;padding:3px 5px!important;gap:4px!important}.auto-reel>.station-bug .live-brand{font-size:8px!important}}
+
+/* Compact branded shortcut icons; original channel lists remain intact. */
+.header-tagline{font-size:12px;line-height:1.45;font-weight:800;color:#d9fff8;letter-spacing:.35px;padding:5px 0 0;}
+.brand{align-items:flex-start;gap:10px}.brand .header-live-pill{margin-top:1px;}
+.brand h1,.brand small{display:none!important;}
+./* Keep original search, category tabs, channel cards, and side panels visible. */
+.app-launcher{margin:14px 0 18px;padding:14px;}
+.app-launcher h2{margin-bottom:13px;}
+.launcher-grid{grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px;}
+.app-tile.portrait-tile{height:86px;min-height:86px;padding:7px 5px;display:flex;flex-direction:column;justify-content:center;gap:5px;border-radius:12px;background:linear-gradient(155deg,#1b3044,#0b1421 75%);box-shadow:inset 0 0 14px #38f5c511,0 3px 8px #0003;}
+.portrait-tile .app-icon{width:36px;height:36px;display:grid;place-items:center;font-size:23px;border-radius:10px;background:linear-gradient(135deg,#38f5c522,#53a8ff20);border:1px solid #53a8ff66;box-shadow:0 0 10px #38f5c522;font-weight:1000;}
+.portrait-tile span:last-child{font-size:12px;line-height:1.2;font-weight:800;text-align:center;}
+.layout{grid-template-columns:minmax(0,1.7fr) minmax(260px,1fr);}
+@media(max-width:420px){.launcher-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.app-tile.portrait-tile{height:82px;min-height:82px}.portrait-tile .app-icon{width:32px;height:32px;font-size:21px}.header-tagline{font-size:11px}.brand .header-live-pill{padding:4px 6px}}
+</style>
+<style id="aghai-final-player-and-wallpaper-override">
+.layout{grid-template-columns:minmax(0,1.7fr) minmax(260px,1fr)!important;align-items:start!important}
+.layout>.panel:first-child{min-width:0!important;width:100%!important}
+.layout>.panel:first-child .screen{display:grid!important;width:100%!important;max-width:100%!important;min-width:0!important;aspect-ratio:16/9!important;min-height:clamp(215px,34vw,430px)!important;height:auto!important;box-sizing:border-box!important}
+#ag-wallpaper-layer{position:fixed!important;inset:0!important;z-index:0!important;pointer-events:none!important;overflow:hidden!important;background-color:#111827!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+#ag-wallpaper-layer .ag-wallpaper{display:none!important;animation:none!important;opacity:0!important}
+#ag-wallpaper-layer .ag-wallpaper-shade{position:absolute!important;inset:0!important;background:linear-gradient(180deg,rgba(6,12,25,.48),rgba(6,12,25,.68))!important;pointer-events:none!important}
+@media(max-width:600px){.layout{grid-template-columns:minmax(0,1fr)!important}.layout>.panel:first-child .screen{min-height:215px!important;aspect-ratio:16/9!important}}
+</style>
+
+
+<style id="aghai-media-wallpaper-s-logo">
+/* Rich, subtle media-studio background; player dimensions deliberately untouched. */
+#ag-wallpaper-layer{background:#08111f!important;background-image:radial-gradient(ellipse at 12% 18%,#ff3f8b30,transparent 34%),radial-gradient(ellipse at 82% 24%,#7555ff35,transparent 36%),radial-gradient(ellipse at 52% 88%,#00d6d030,transparent 38%),linear-gradient(130deg,#08111f,#18203a 52%,#101b2b)!important;background-size:cover!important;background-position:center!important;transition:background-image .45s ease!important}
+#ag-wallpaper-layer .ag-wallpaper{display:none!important}
+#ag-media-s-bug{position:absolute;top:clamp(8px,2.2%,15px);left:clamp(8px,2.2%,15px);z-index:12;width:clamp(34px,5.5vw,48px);height:clamp(34px,5.5vw,48px);display:grid;place-items:center;border-radius:14px;overflow:hidden;isolation:isolate;color:#f7ffff;font:1000 clamp(23px,4vw,33px)/1 system-ui,sans-serif;font-style:italic;letter-spacing:-2px;text-shadow:0 1px 0 #fff,0 3px 0 #2771a4,0 5px 0 #133c65,0 8px 13px #000b,0 0 15px #46f3ff; background:linear-gradient(145deg,#e8ffff 0%,#4de6ed 24%,#2474d9 55%,#16234d 78%,#d5aaff 100%);border:1px solid #d8ffffc9;box-shadow:inset 2px 2px 5px #fff9,inset -3px -4px 7px #07152dbb,0 0 0 2px #5ceeff35,0 0 18px #37dfff70;animation:aghaiSRotate 5.5s linear infinite;transform-style:preserve-3d;pointer-events:none}
+#ag-media-s-bug:before{content:"";position:absolute;inset:3px;border-radius:10px;border:1px solid #ffffff70;box-shadow:inset 0 0 8px #fff6;pointer-events:none}
+@keyframes aghaiSRotate{0%{transform:perspective(180px) rotateY(0deg) rotateZ(-5deg)}50%{transform:perspective(180px) rotateY(180deg) rotateZ(5deg)}100%{transform:perspective(180px) rotateY(360deg) rotateZ(-5deg)}}
+@media(prefers-reduced-motion:reduce){#ag-media-s-bug{animation:none}}
+</style>
+<script id="aghai-media-wallpaper-controls">
+(()=>{
+ const layer=document.getElementById('ag-wallpaper-layer');
+ const next=document.getElementById('socialWallpaperBtn');
+ const file=document.getElementById('customWallpaperInput');
+ const screen=document.getElementById('screen');
+ if(!layer)return;
+ // Media-inspired wallpapers made from CSS, so the main choices also work offline.
+ const wallpapers=[
+  'radial-gradient(ellipse at 18% 22%,#ff3d8f70,transparent 32%),radial-gradient(ellipse at 78% 30%,#714cff80,transparent 38%),linear-gradient(130deg,#101327,#25183e 55%,#101e36)',
+  'radial-gradient(ellipse at 15% 18%,#ff5b6570,transparent 34%),radial-gradient(ellipse at 84% 75%,#ffc85755,transparent 34%),linear-gradient(135deg,#171324,#37212b 55%,#101b2a)',
+  'radial-gradient(ellipse at 20% 80%,#00e5ff65,transparent 38%),radial-gradient(ellipse at 80% 18%,#4778ff75,transparent 38%),linear-gradient(130deg,#06192b,#12334a 55%,#12162e)',
+  'radial-gradient(ellipse at 15% 25%,#ed5cff65,transparent 34%),radial-gradient(ellipse at 85% 65%,#38f5c565,transparent 36%),linear-gradient(135deg,#101529,#251c43 52%,#0b2732)',
+  'radial-gradient(ellipse at 22% 18%,#f9d97660,transparent 32%),radial-gradient(ellipse at 80% 76%,#f472b660,transparent 35%),linear-gradient(135deg,#171b2b,#343044 55%,#10232e)',
+  'radial-gradient(ellipse at 25% 30%,#ff4d8d60,transparent 30%),radial-gradient(ellipse at 70% 70%,#53a8ff70,transparent 35%),linear-gradient(135deg,#091522,#16263d 50%,#20152f)',
+  'linear-gradient(135deg,#07111eaa,#07111eaa),url("https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1800&q=85")',
+  'linear-gradient(135deg,#07111e99,#07111ecc),url("https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=1800&q=85")',
+  'linear-gradient(135deg,#07111e99,#07111ecc),url("https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1800&q=85")',
+  /* Media-studio looks: broadcast desk, podcast set, and professional camera studio */
+  'linear-gradient(135deg,#07111ec7,#07111e8c),url("https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1800&q=85")',
+  'linear-gradient(135deg,#07111ec7,#07111e8c),url("https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1800&q=85")',
+  'linear-gradient(135deg,#07111ec7,#07111e8c),url("https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=1800&q=85")',
+  'linear-gradient(135deg,#07111ec7,#07111e8c),url("https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=1800&q=85")',
+  /* Studio lighting presets: LED wall, warm key lights, RGB stage beams, broadcast control room */
+  'radial-gradient(ellipse at 16% 12%,#ffdf8b99 0%,#ffdf8b00 20%),radial-gradient(ellipse at 84% 12%,#ffdf8b99 0%,#ffdf8b00 20%),radial-gradient(ellipse at 50% 30%,#e84cff50 0%,transparent 34%),linear-gradient(180deg,#14172b 0%,#080d19 58%,#121b30 100%)',
+  'radial-gradient(ellipse at 8% 18%,#ff315f99 0%,transparent 22%),radial-gradient(ellipse at 92% 18%,#19d8ff99 0%,transparent 24%),radial-gradient(ellipse at 50% 0%,#ffffff55 0%,transparent 28%),linear-gradient(145deg,#080d1d,#1b2040 55%,#080c17)',
+  'radial-gradient(ellipse at 22% 10%,#f8f1c899 0%,transparent 19%),radial-gradient(ellipse at 78% 10%,#f8f1c899 0%,transparent 19%),radial-gradient(ellipse at 50% 40%,#2ce7ff40 0%,transparent 35%),linear-gradient(180deg,#20243a,#080b14 72%,#101a2a)',
+  'radial-gradient(ellipse at 10% 25%,#ff3d9a88 0%,transparent 24%),radial-gradient(ellipse at 90% 25%,#6d5cff99 0%,transparent 25%),radial-gradient(ellipse at 50% 4%,#ffffff66 0%,transparent 18%),linear-gradient(135deg,#090c1a,#191b35 52%,#071421)'
+ ];
+ let idx=0,chosenUrl=null;
+ function apply(bg){layer.style.setProperty('background-image',bg,'important');layer.style.setProperty('background-size','cover','important');layer.style.setProperty('background-position','center','important');layer.style.setProperty('background-repeat','no-repeat','important');}
+ function cycle(){if(chosenUrl){URL.revokeObjectURL(chosenUrl);chosenUrl=null;}idx=(idx+1)%wallpapers.length;apply(wallpapers[idx]);try{localStorage.setItem('aghaiMediaWallpaperIndex',String(idx));localStorage.removeItem('aghaiMediaWallpaperData')}catch(e){}}
+ try{const saved=Number(localStorage.getItem('aghaiMediaWallpaperIndex'));if(Number.isInteger(saved)&&saved>=0&&saved<wallpapers.length)idx=saved;const savedData=localStorage.getItem('aghaiMediaWallpaperData');if(savedData&&savedData.startsWith('data:image/'))apply('linear-gradient(135deg,#07111e44,#07111e66),url("'+savedData+'")');else apply(wallpapers[idx]);}catch(e){apply(wallpapers[idx]);}
+ if(next){next.addEventListener('click',e=>{e.preventDefault();cycle()});next.textContent='✨ New Media Wallpaper';}
+ if(file)file.addEventListener('change',()=>{const f=file.files&&file.files[0];if(!f)return;if(chosenUrl)URL.revokeObjectURL(chosenUrl);chosenUrl=URL.createObjectURL(f);apply('linear-gradient(135deg,#07111e35,#07111e66),url("'+chosenUrl+'")');try{const reader=new FileReader();reader.onload=()=>{try{localStorage.setItem('aghaiMediaWallpaperData',reader.result);localStorage.removeItem('aghaiMediaWallpaperIndex')}catch(e){}};reader.readAsDataURL(f)}catch(e){}});
+ if(screen&&!document.getElementById('ag-media-s-bug')){const s=document.createElement('div');s.id='ag-media-s-bug';s.textContent='S';s.setAttribute('aria-label','Rotating 3D S logo');screen.appendChild(s);}
+})();
+</script>
+
+
+<style id="aghai-studio-wallpaper-final-polish">
+/* S logo is placed inside the player's TOP-RIGHT corner. Player frame dimensions remain unchanged. */
+#ag-media-s-bug{top:10px!important;right:10px!important;left:auto!important;bottom:auto!important;width:clamp(48px,7vw,62px)!important;height:clamp(48px,7vw,62px)!important;font-size:clamp(31px,5vw,43px)!important;border-radius:15px!important;z-index:20!important;max-width:calc(100% - 20px)!important;max-height:calc(100% - 20px)!important;box-sizing:border-box!important;background:linear-gradient(145deg,#f4ffff 0%,#a6f7ff 12%,#39d9ec 27%,#3178db 52%,#18275a 76%,#c9a5ff 100%)!important;color:#f9ffff!important;text-shadow:0 1px 0 #fff,0 3px 0 #3676a8,0 5px 0 #142f57,0 8px 12px #000c,0 0 16px #43eaff!important;border:1px solid #d8ffff!important;box-shadow:inset 2px 2px 6px #fff9,inset -4px -5px 8px #07152dbb,0 0 0 2px #5ceeff38,0 0 22px #37dfff8a!important;animation:aghaiSRotate 7s ease-in-out infinite!important;transform-origin:center!important}
+#ag-media-s-bug:before{border-radius:11px!important;inset:3px!important;border-color:#ffffff88!important}
+.screen{position:relative!important;overflow:hidden!important}
+</style>
+
+<style id="aghai-contact-social-footer-style">
+#aghai-contact-social-footer{width:100%;box-sizing:border-box;margin:26px auto 8px;padding:18px 14px 16px;border:1px solid #55d9ef55;border-radius:20px;background:linear-gradient(135deg,#081321ed,#101b31f0 55%,#19142eef);box-shadow:0 0 24px #20c9e91c,inset 0 1px 0 #ffffff12;color:#edfaff;text-align:center;position:relative;overflow:hidden}
+#aghai-contact-social-footer:before{content:"";position:absolute;inset:-60% -20%;background:conic-gradient(from 0deg,transparent,#27e7ff12,transparent,#bc65ff12,transparent);animation:aghaiFooterAura 16s linear infinite;pointer-events:none}
+#aghai-contact-social-footer>*{position:relative;z-index:1}
+#aghai-contact-social-footer .ag-footer-title{font-size:clamp(17px,3vw,22px);font-weight:900;letter-spacing:.08em;margin-bottom:5px;background:linear-gradient(90deg,#fff,#83f4ff,#d7b4ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+#aghai-contact-social-footer .ag-footer-sub{font-size:12px;opacity:.78;margin-bottom:14px}
+#aghai-contact-social-footer .ag-social-row{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:10px 0 14px}
+#aghai-contact-social-footer .ag-social-link{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:8px 13px;border-radius:13px;color:#f7ffff;text-decoration:none;font-size:13px;font-weight:750;border:1px solid #ffffff25;background:#ffffff0b;transition:transform .2s ease,box-shadow .2s ease}
+#aghai-contact-social-footer .ag-social-link:hover{transform:translateY(-2px);box-shadow:0 0 16px #40e7ff35}
+#aghai-contact-social-footer .ag-social-icon{display:grid;place-items:center;width:25px;height:25px;border-radius:8px;font-size:18px;font-weight:900;line-height:1}
+#aghai-contact-social-footer .ag-wa .ag-social-icon{background:#19b968;color:white}
+#aghai-contact-social-footer .ag-tt .ag-social-icon{background:#101116;color:white;text-shadow:2px 0 #ff3b75,-2px 0 #34e7ff}
+#aghai-contact-social-footer .ag-footer-s{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:8px;font-weight:1000;font-style:italic;color:#f7ffff;background:linear-gradient(145deg,#b9ffff,#31d6e8 35%,#306bd0 67%,#bba1ff);box-shadow:inset 1px 1px 3px #fff9,0 0 12px #42e7ff66;text-shadow:0 2px 0 #173b70;animation:aghaiFooterS 3s ease-in-out infinite;transform-style:preserve-3d}
+#aghai-contact-social-footer .ag-contact-lines{display:flex;justify-content:center;gap:8px 18px;flex-wrap:wrap;font-size:12px;color:#d7e8f5}
+#aghai-contact-social-footer .ag-contact-lines span{padding:5px 8px;border-radius:8px;background:#ffffff08}
+@keyframes aghaiFooterS{0%,100%{transform:perspective(120px) rotateY(-18deg) translateY(0)}50%{transform:perspective(120px) rotateY(18deg) translateY(-2px)}}
+@keyframes aghaiFooterAura{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){#aghai-contact-social-footer:before,#aghai-contact-social-footer .ag-footer-s{animation:none}}
+</style>
+<script id="aghai-contact-social-footer-script">
+(()=>{
+ if(document.getElementById('aghai-contact-social-footer'))return;
+ const footer=document.createElement('footer');footer.id='aghai-contact-social-footer';footer.innerHTML=`
+  <div class="ag-footer-title">AGHAI TV</div>
+  <div class="ag-footer-sub">Your personal media studio · Connect &amp; share</div>
+  <div class="ag-social-row">
+   <a class="ag-social-link ag-wa" href="https://wa.me/?text=${encodeURIComponent('Check out AGHAI TV — my personal media hub.') }" target="_blank" rel="noopener noreferrer"><span class="ag-social-icon" aria-hidden="true">☎</span>WhatsApp</a>
+   <a class="ag-social-link ag-tt" href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer"><span class="ag-social-icon" aria-hidden="true">♪</span>TikTok</a>
+   <span class="ag-social-link ag-s-only" aria-label="AGHAI TV animated S logo"><span class="ag-footer-s">S</span></span>
+  </div>
+  <div class="ag-contact-lines"><span>✉ Email: <b><a href="mailto:ahmedsunny538@gmail.com">ahmedsunny538@gmail.com</a></b></span><span>☎ Mobile: <b><a href="tel:+923441808060">+92 344 1808060</a></b></span></div>`;
+ const app=document.querySelector('main.app')||document.body;app.appendChild(footer);
+})();
+</script>
