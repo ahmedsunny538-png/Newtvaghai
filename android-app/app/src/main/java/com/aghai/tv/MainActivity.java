@@ -6,7 +6,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebSettings;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.google.android.gms.ads.AdRequest;
@@ -34,7 +33,7 @@ public class MainActivity extends Activity {
 
         AdView adView = new AdView(this);
         adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-2437759700185612/6470981442");
+        adView.setAdUnitId("ca-app-pub-2437759700185612/7719735503");
         root.addView(adView, new LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
