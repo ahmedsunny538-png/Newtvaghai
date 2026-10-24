@@ -212,6 +212,23 @@ body:before{content:none!important;display:none!important}
 #ag-wallpaper-layer .ag-wallpaper-shade{position:absolute!important;inset:0!important;background:linear-gradient(180deg,rgba(6,12,25,.48),rgba(6,12,25,.68))!important;pointer-events:none!important}
 @media(max-width:600px){.layout{grid-template-columns:minmax(0,1fr)!important}.layout>.panel:first-child .screen{min-height:215px!important;aspect-ratio:16/9!important}#socialWallpaperBtn,#customWallpaperLabel{font-size:11px;padding:8px 9px;white-space:normal}}
 
+
+/* Mobile sizing fix: compact, aligned channel and app icons without changing the player. */
+@media(max-width:600px){
+ .app{padding:10px!important}
+ .channelgrid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+ .channel{min-width:0!important;padding:9px 7px!important;gap:7px!important}
+ .channel .symbol{width:34px!important;height:34px!important;min-width:34px!important;border-radius:9px!important;font-size:19px!important}
+ .channel img{width:34px!important;height:34px!important;max-width:34px!important;object-fit:contain!important}
+ .channel .name,.channel .title{font-size:12px!important;line-height:1.25!important;overflow-wrap:anywhere}
+ .app-grid,.apps-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:7px!important}
+ .app-tile{min-width:0!important;padding:7px 4px!important;gap:5px!important}
+ .app-tile .app-icon{width:32px!important;height:32px!important;font-size:19px!important;flex:none!important}
+ .app-tile img{width:32px!important;height:32px!important;max-width:32px!important;object-fit:contain!important}
+ .app-tile .label,.app-tile span{font-size:10px!important;line-height:1.2!important;overflow-wrap:anywhere}
+}
+@media(max-width:380px){.channelgrid{grid-template-columns:repeat(3,minmax(0,1fr))!important}.channel .symbol,.channel img{width:30px!important;height:30px!important;min-width:30px!important}.app-tile .app-icon,.app-tile img{width:28px!important;height:28px!important}}
+
 </style></head>
 <body><div id="ag-wallpaper-layer" aria-hidden="true"><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper-shade"></div></div><div class="edge-frame" aria-hidden="true"></div><main class="app">
 
