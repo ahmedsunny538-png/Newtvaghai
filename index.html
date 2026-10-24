@@ -229,6 +229,20 @@ body:before{content:none!important;display:none!important}
 }
 @media(max-width:380px){.channelgrid{grid-template-columns:repeat(3,minmax(0,1fr))!important}.channel .symbol,.channel img{width:30px!important;height:30px!important;min-width:30px!important}.app-tile .app-icon,.app-tile img{width:28px!important;height:28px!important}}
 
+
+/* Actual mobile channel-card correction */
+@media(max-width:600px){
+ .channelgrid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important}
+ .channel{padding:7px 6px!important;border-radius:10px!important}
+ .channel .thumb{height:54px!important;margin-bottom:5px!important;object-fit:contain!important}
+ .channel .symbol{width:30px!important;height:30px!important;font-size:17px!important;border-radius:8px!important;margin:1px auto 5px!important}
+ .channel h3{font-size:11px!important;line-height:1.2!important;margin:4px 0!important}
+ .channel p{font-size:10px!important;line-height:1.25!important;margin:0 0 6px!important}
+ .channel .actions{gap:4px!important}
+ .channel button{font-size:10px!important;padding:5px 6px!important}
+}
+@media(max-width:380px){.channel .thumb{height:46px!important}.channel{padding:6px 4px!important}}
+
 </style></head>
 <body><div id="ag-wallpaper-layer" aria-hidden="true"><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper-shade"></div></div><div class="edge-frame" aria-hidden="true"></div><main class="app">
 
