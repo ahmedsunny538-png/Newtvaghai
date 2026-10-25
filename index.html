@@ -846,3 +846,16 @@ document.addEventListener('DOMContentLoaded',function(){
 .live-mark:after{content:none!important}
 .live-brand{font-size:inherit!important}
 </style>
+
+<script id="aghai-final-pakistan-flag-country-fix">
+document.addEventListener('DOMContentLoaded',function(){
+ const el=document.getElementById('pakTime');
+ if(el){
+  const fix=()=>{
+   const time=new Intl.DateTimeFormat('en-PK',{timeZone:'Asia/Karachi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}).format(new Date());
+   el.textContent='🇵🇰 Pakistan · '+time;
+  };
+  fix();setInterval(fix,1000);
+ }
+});
+</script>
