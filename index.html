@@ -859,3 +859,27 @@ document.addEventListener('DOMContentLoaded',function(){
  }
 });
 </script>
+
+<style id="aghai-pakistan-flag-name-one-row">
+#pakTime{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ flex-wrap:nowrap!important;white-space:nowrap!important;gap:7px!important;
+ width:auto!important;max-width:100%!important;box-sizing:border-box!important;
+ padding:7px 10px!important;line-height:1.2!important;overflow:hidden!important;
+}
+#pakTime .pk-flag{display:inline-block!important;flex:0 0 auto!important;font-size:18px!important;line-height:1!important}
+#pakTime .pk-country{display:inline-block!important;flex:0 1 auto!important;white-space:nowrap!important}
+#pakTime .pk-clock{display:inline-block!important;flex:0 0 auto!important;white-space:nowrap!important;font-variant-numeric:tabular-nums!important}
+@media(max-width:420px){#pakTime{gap:5px!important;padding:6px 7px!important;font-size:12px!important}#pakTime .pk-flag{font-size:16px!important}}
+</style>
+<script id="aghai-pakistan-one-row-render">
+document.addEventListener('DOMContentLoaded',function(){
+ const el=document.getElementById('pakTime');
+ if(!el)return;
+ const fix=()=>{
+  const t=new Intl.DateTimeFormat('en-PK',{timeZone:'Asia/Karachi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}).format(new Date());
+  el.innerHTML='<span class="pk-flag" aria-label="Pakistan flag">🇵🇰</span><span class="pk-country">Pakistan</span><span class="pk-clock">· '+t+'</span>';
+ };
+ fix();setInterval(fix,1000);
+});
+</script>
