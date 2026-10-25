@@ -762,3 +762,22 @@ bar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
 })();
 </script>
+
+<style id="aghai-final-mobile-fit">
+/* Final compact layout: two channel columns and controls always visible */
+#aghai-screen-size-controls,#aghai-size-controls{position:fixed!important;left:50%!important;bottom:10px!important;top:auto!important;transform:translateX(-50%)!important;width:max-content!important;max-width:calc(100vw - 18px)!important;margin:0!important;padding:6px 8px!important;gap:6px!important;background:#071321f7!important;z-index:999999!important;box-shadow:0 0 12px #22dfff44!important}
+#aghai-screen-size-controls button,#aghai-size-controls button{min-width:34px!important;min-height:32px!important;padding:3px 9px!important}
+#aghai-screen-size-controls span,#aghai-size-controls strong{font-size:11px!important}
+#aghai-screen-size-controls output,#aghai-size-controls span{font-size:12px!important;min-width:38px!important}
+.channelgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+.channel{padding:9px!important;min-width:0!important}
+.channel .thumb,.channel img{height:72px!important;max-width:100%!important;object-fit:cover!important}
+.channel h3{font-size:12px!important;line-height:1.25!important}
+.channel p{font-size:11px!important;line-height:1.3!important}
+.channel .actions{gap:5px!important}
+.channel .actions button{padding:6px!important;font-size:11px!important}
+.screen{aspect-ratio:16/9!important;min-height:0!important}
+.app{padding:10px 10px 68px!important}
+@media(min-width:761px){.channelgrid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important}}
+</style>
