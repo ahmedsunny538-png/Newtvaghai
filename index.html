@@ -539,19 +539,24 @@ $('adminToggle').onclick=()=>{const panel=$('adminPanel');panel.classList.toggle
  function unlock(){gate.style.display='none';document.documentElement.style.overflow='';}
  function lock(){gate.style.display='flex';document.documentElement.style.overflow='hidden';}
  if(valid()){
-  expiryLabel.textContent='Access active until '+new Date(access.expires).toLocaleString();
+  expiryLabel.textContent='Free access active until '+new Date(access.expires).toLocaleString();
+  unlock();
+ }else if(!access){
+  const started=Date.now();access={started,expires:started+PERIOD};
+  try{localStorage.setItem(KEY,JSON.stringify(access))}catch{}
+  expiryLabel.textContent='Free 10-day access active until '+new Date(access.expires).toLocaleString();
   unlock();
  }else{
-  if(access&&access.expires<=Date.now())status.textContent='Your 10-day access has expired. Enter the access code again to reactivate.';
+  status.textContent='Your free 10-day access has expired. Enter the access password to continue.';
   lock();
  }
  form.addEventListener('submit',e=>{
   e.preventDefault();
-  if(field.value.trim().toUpperCase()!==CODE){status.textContent='Wrong 10-day access password.';return;}
+  if(field.value.trim()!==CODE){status.textContent='Wrong access password.';return;}
   const started=Date.now();access={started,expires:started+PERIOD};
   try{localStorage.setItem(KEY,JSON.stringify(access))}catch{}
-  expiryLabel.textContent='Access active until '+new Date(access.expires).toLocaleString();
-  status.textContent='Access activated for 10 days.';unlock();
+  expiryLabel.textContent='Access renewed for 10 days, until '+new Date(access.expires).toLocaleString();
+  status.textContent='Access password accepted.';field.value='';unlock();
  });
  document.getElementById('aghaiAdminLogin').addEventListener('click',()=>{
   const pw=prompt('Enter separate Admin password:');
