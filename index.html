@@ -569,6 +569,26 @@ $('adminToggle').onclick=()=>{const panel=$('adminPanel');panel.classList.toggle
 })();
 </script>
 
+
+<style id="aghai-user-size-controls">
+#aghai-size-controls{display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;margin:10px 0 14px;padding:9px;border:1px solid #38f5c566;border-radius:12px;background:#0a1422}
+#aghai-size-controls strong{font-size:12px;color:#dffff8}
+#aghai-size-controls button{min-width:42px;padding:7px 12px;font-size:18px;font-weight:900;border-radius:9px}
+#aghai-size-controls span{font-size:12px;color:#9aafc4;min-width:42px;text-align:center}
+</style>
+<script id="aghai-user-size-controls-script">
+(()=>{function init(){if(document.getElementById('aghai-size-controls'))return;
+const root=document.querySelector('main.app');if(!root)return;
+const bar=document.createElement('div');bar.id='aghai-size-controls';bar.innerHTML='<strong>Screen Size</strong><button type="button" id="aghai-size-down" aria-label="Chhota karo">−</button><span id="aghai-size-value">100%</span><button type="button" id="aghai-size-up" aria-label="Bara karo">+</button><button type="button" id="aghai-size-reset" style="font-size:12px">Reset</button>';
+const anchor=root.querySelector('.top');if(anchor)anchor.insertAdjacentElement('afterend',bar);else root.prepend(bar);
+let scale=1;try{const n=Number(localStorage.getItem('aghaiUserUiScale'));if(n>=.75&&n<=1.25)scale=n}catch(e){}
+function apply(){root.style.zoom=String(scale);bar.querySelector('#aghai-size-value').textContent=Math.round(scale*100)+'%';try{localStorage.setItem('aghaiUserUiScale',String(scale))}catch(e){}}
+bar.querySelector('#aghai-size-down').addEventListener('click',()=>{scale=Math.max(.75,Math.round((scale-.05)*100)/100);apply()});
+bar.querySelector('#aghai-size-up').addEventListener('click',()=>{scale=Math.min(1.25,Math.round((scale+.05)*100)/100);apply()});
+bar.querySelector('#aghai-size-reset').addEventListener('click',()=>{scale=1;apply()});apply();
+}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();})();
+</script>
+
 </body></html>
 
 <style id="aghai-broadcast-finish">
