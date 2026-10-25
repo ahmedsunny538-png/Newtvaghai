@@ -827,3 +827,15 @@ document.addEventListener('DOMContentLoaded',function(){
  if(el){const fix=()=>{const d=new Date();el.textContent='🇵🇰 Islamic Republic of Pakistan · '+new Intl.DateTimeFormat('en-PK',{timeZone:'Asia/Karachi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}).format(d);};fix();setInterval(fix,1000);}
 });
 </script>
+
+<style id="aghai-remove-pk-from-logo">
+.live-mark{font-size:0!important}
+.live-mark:before{content:""!important}
+.live-mark:after{content:""!important}
+</style>
+<script id="aghai-clean-pak-time-label">
+document.addEventListener('DOMContentLoaded',function(){
+ const el=document.getElementById('pakTime');
+ if(el){const fix=()=>{el.textContent='Pakistan Time · '+new Intl.DateTimeFormat('en-PK',{timeZone:'Asia/Karachi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}).format(new Date());};fix();setInterval(fix,1000);}
+});
+</script>
