@@ -744,3 +744,21 @@ bar.querySelector('#aghai-size-reset').addEventListener('click',()=>{scale=1;app
 </script>
 
 <script>if("serviceWorker" in navigator){window.addEventListener("load",async()=>{try{const r=await navigator.serviceWorker.register("./service-worker.js?v=2",{updateViaCache:"none"});await r.update();}catch(e){}});}</script>
+
+
+<style id="aghai-screen-size-controls-style">
+#aghai-screen-size-controls{position:sticky;top:0;z-index:99999;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:9px;margin:6px auto 12px;background:#071321f5;border:1px solid #37eaff;border-radius:12px;color:#fff;font:700 14px system-ui;box-shadow:0 0 14px #22dfff44}
+#aghai-screen-size-controls button{min-width:42px;min-height:38px;border:1px solid #5cecff;border-radius:9px;background:#102a40;color:#fff;font-size:20px;font-weight:900;padding:4px 12px}
+#aghai-screen-size-controls output{min-width:48px;text-align:center;color:#80f5ff}
+</style>
+<script id="aghai-screen-size-controls-script">
+(()=>{function setup(){if(document.getElementById('aghai-screen-size-controls'))return;
+const bar=document.createElement('div');bar.id='aghai-screen-size-controls';
+bar.innerHTML='<span>Screen Size</span><button type="button" data-step="-1" aria-label="Make screen smaller">−</button><output>100%</output><button type="button" data-step="1" aria-label="Make screen bigger">+</button><button type="button" data-reset="1" style="font-size:14px">Reset</button>';
+const app=document.querySelector('main.app')||document.body;app.insertBefore(bar,app.firstChild);
+let scale=100;try{scale=Number(localStorage.getItem('aghai-tv-scale'))||100}catch(e){}
+const apply=()=>{scale=Math.max(60,Math.min(120,scale));const target=document.querySelector('main.app');if(target){for(const child of target.children){if(child.id!=='aghai-screen-size-controls')child.style.zoom=(scale/100)}}bar.querySelector('output').textContent=scale+'%';try{localStorage.setItem('aghai-tv-scale',scale)}catch(e){}};
+bar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.hasAttribute('data-reset'))scale=100;else scale+=Number(b.dataset.step)*5;apply()});apply();}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
+})();
+</script>
