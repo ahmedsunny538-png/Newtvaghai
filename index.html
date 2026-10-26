@@ -673,61 +673,7 @@ bar.querySelector('#aghai-size-reset').addEventListener('click',()=>{scale=1;app
  const setup=document.getElementById('aghai-setup-missing');if(setup)setup.textContent='FINAL SETUP INCOMPLETE · Firebase config + AdMob App ID + Ad Unit IDs required';
 }catch(e){} })();
 
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
-<script id="aghai-firebase-live-integration">
-(()=> {
-  const cfg = {
-    apiKey: "AIzaSyCQsVIRLtrx-dgE5Bc5xUHt1pDqvSe-1Yo",
-    authDomain: "aghai-tv-likho.firebaseapp.com",
-    databaseURL: "https://aghai-tv-likho-default-rtdb.firebaseio.com",
-    projectId: "aghai-tv-likho",
-    storageBucket: "aghai-tv-likho.firebasestorage.app",
-    messagingSenderId: "422014110288",
-    appId: "1:422014110288:web:b0dd1637f76fb0a0e55f55",
-    measurementId: "G-B8GK9N132K"
-  };
-  const viewsEl=document.getElementById('aghai-views-display');
-  const liveEl=document.getElementById('aghai-live-display');
-  const setupEl=document.getElementById('aghai-setup-missing');
-  const say=(el,msg)=>{if(el)el.textContent=msg;};
-  try {
-    if(!window.firebase || !firebase.database || !firebase.auth) throw new Error('Firebase SDK could not load');
-    if(!firebase.apps.length) firebase.initializeApp(cfg);
-    const db=firebase.database();
-    firebase.auth().signInAnonymously().then(async cred=>{
-      const uid=cred.user.uid;
-      const presenceRef=db.ref('onlineUsers/'+uid);
-      await presenceRef.onDisconnect().remove();
-      await presenceRef.set({connectedAt:firebase.database.ServerValue.TIMESTAMP});
-      db.ref('.info/connected').on('value',snap=>{
-        if(snap.val()===true) presenceRef.onDisconnect().remove().then(()=>presenceRef.set({connectedAt:firebase.database.ServerValue.TIMESTAMP})).catch(()=>{});
-      });
-      db.ref('onlineUsers').on('value',snap=>{
-        const data=snap.val()||{};
-        say(liveEl,'Online viewers: '+Object.keys(data).length);
-      },()=>say(liveEl,'Online viewers: database rules need setup'));
-      const visitRef=db.ref('stats/totalViews');
-      const visitOnce='aghai_firebase_view_counted_v1';
-      if(!sessionStorage.getItem(visitOnce)){
-        await visitRef.transaction(v=>(Number(v)||0)+1);
-        sessionStorage.setItem(visitOnce,'1');
-      }
-      visitRef.on('value',snap=>say(viewsEl,'Total views: '+(Number(snap.val())||0)),()=>say(viewsEl,'Total views: database rules need setup'));
-      say(setupEl,'Firebase connected · shared counters initializing');
-    }).catch(err=>{
-      console.warn('AGHAI TV Firebase setup:',err);
-      say(liveEl,'Online viewers: Firebase setup required');
-      say(viewsEl,'Total views: Firebase setup required');
-      say(setupEl,'Firebase app added · enable Anonymous sign-in and configure Realtime Database rules');
-    });
-  } catch(err) {
-    console.warn('AGHAI TV Firebase setup:',err);
-    say(setupEl,'Firebase SDK unavailable · check internet connection');
-  }
-})();
-</script></script></body></html>
+</script>
 
 <style id="aghai-broadcast-finish">
 /* Compact QTV-style channel bug: always inside the video frame */
@@ -983,3 +929,60 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 #pakTime{display:inline-flex!important;visibility:visible!important;opacity:1!important;align-items:center!important;justify-content:center!important;flex-direction:row!important;flex-wrap:nowrap!important;gap:8px!important;white-space:nowrap!important;width:max-content!important;max-width:100%!important;overflow:visible!important}
 #pakTime .pk-flag,#pakTime .pk-country,#pakTime .pk-clock{display:inline-block!important;visibility:visible!important;opacity:1!important;flex:none!important;white-space:nowrap!important}
 </style>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+<script id="aghai-firebase-live-integration">
+(()=> {
+  const cfg = {
+    apiKey: "AIzaSyCQsVIRLtrx-dgE5Bc5xUHt1pDqvSe-1Yo",
+    authDomain: "aghai-tv-likho.firebaseapp.com",
+    databaseURL: "https://aghai-tv-likho-default-rtdb.firebaseio.com",
+    projectId: "aghai-tv-likho",
+    storageBucket: "aghai-tv-likho.firebasestorage.app",
+    messagingSenderId: "422014110288",
+    appId: "1:422014110288:web:b0dd1637f76fb0a0e55f55",
+    measurementId: "G-B8GK9N132K"
+  };
+  const viewsEl=document.getElementById('aghai-views-display');
+  const liveEl=document.getElementById('aghai-live-display');
+  const setupEl=document.getElementById('aghai-setup-missing');
+  const say=(el,msg)=>{if(el)el.textContent=msg;};
+  try {
+    if(!window.firebase || !firebase.database || !firebase.auth) throw new Error('Firebase SDK could not load');
+    if(!firebase.apps.length) firebase.initializeApp(cfg);
+    const db=firebase.database();
+    firebase.auth().signInAnonymously().then(async cred=>{
+      const uid=cred.user.uid;
+      const presenceRef=db.ref('onlineUsers/'+uid);
+      await presenceRef.onDisconnect().remove();
+      await presenceRef.set({connectedAt:firebase.database.ServerValue.TIMESTAMP});
+      db.ref('.info/connected').on('value',snap=>{
+        if(snap.val()===true) presenceRef.onDisconnect().remove().then(()=>presenceRef.set({connectedAt:firebase.database.ServerValue.TIMESTAMP})).catch(()=>{});
+      });
+      db.ref('onlineUsers').on('value',snap=>{
+        const data=snap.val()||{};
+        say(liveEl,'Online viewers: '+Object.keys(data).length);
+      },()=>say(liveEl,'Online viewers: database rules need setup'));
+      const visitRef=db.ref('stats/totalViews');
+      const visitOnce='aghai_firebase_view_counted_v1';
+      if(!sessionStorage.getItem(visitOnce)){
+        await visitRef.transaction(v=>(Number(v)||0)+1);
+        sessionStorage.setItem(visitOnce,'1');
+      }
+      visitRef.on('value',snap=>say(viewsEl,'Total views: '+(Number(snap.val())||0)),()=>say(viewsEl,'Total views: database rules need setup'));
+      say(setupEl,'Firebase connected · shared counters initializing');
+    }).catch(err=>{
+      console.warn('AGHAI TV Firebase setup:',err);
+      say(liveEl,'Online viewers: Firebase setup required');
+      say(viewsEl,'Total views: Firebase setup required');
+      say(setupEl,'Firebase app added · enable Anonymous sign-in and configure Realtime Database rules');
+    });
+  } catch(err) {
+    console.warn('AGHAI TV Firebase setup:',err);
+    say(setupEl,'Firebase SDK unavailable · check internet connection');
+  }
+})();
+</script>
+</body></html>
