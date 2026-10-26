@@ -498,12 +498,12 @@ $('addChannel').onclick=()=>{if(!unlocked)return;const name=$('newName').value.t
  document.body.appendChild(overlay);
  const input=overlay.querySelector('#aghai-lock-pass'),status=overlay.querySelector('#aghai-lock-status');
  let failures=0,blockedUntil=0,idleTimer;
- function lock(){overlay.hidden=false;input.value='';status.textContent='';setTimeout(()=>input.focus(),40)}
- function resetIdle(){clearTimeout(idleTimer);if(overlay.hidden)idleTimer=setTimeout(lock,10*60*1000)}
+ function lock(){let unlocked=false;try{unlocked=localStorage.getItem('aghai_vip_unlocked_v1')==='yes'}catch(e){}if(unlocked){overlay.hidden=true;return}overlay.hidden=false;input.value='';status.textContent='';setTimeout(()=>input.focus(),40)}
+ function resetIdle(){clearTimeout(idleTimer)}
  overlay.querySelector('form').addEventListener('submit',e=>{
   e.preventDefault();if(Date.now()<blockedUntil){status.textContent='Too many attempts. Please wait a little and try again.';return}
   let expected='AGHAI7860';try{expected=localStorage.getItem('aghaipass')||expected}catch(e){}
-  if(input.value===expected){failures=0;overlay.hidden=true;status.textContent='';resetIdle()}else{failures++;input.value='';status.textContent='Incorrect password. Try again.';if(failures>=5){blockedUntil=Date.now()+30000;failures=0;status.textContent='Too many attempts. Locked for 30 seconds.'}}
+  if(input.value===expected){failures=0;try{localStorage.setItem('aghai_vip_unlocked_v1','yes')}catch(e){}overlay.hidden=true;status.textContent='';resetIdle()}else{failures++;input.value='';status.textContent='Incorrect password. Try again.';if(failures>=5){blockedUntil=Date.now()+30000;failures=0;status.textContent='Too many attempts. Locked for 30 seconds.'}}
  });
  ['pointerdown','keydown','touchstart','click'].forEach(ev=>document.addEventListener(ev,resetIdle,{passive:true}));
  document.addEventListener('visibilitychange',()=>{if(document.hidden){clearTimeout(idleTimer)}else if(overlay.hidden)resetIdle()});
@@ -523,7 +523,7 @@ $('addChannel').onclick=()=>{if(!unlocked)return;const name=$('newName').value.t
 #aghaiAccessStatus{min-height:20px;color:#ff8ba3;font-size:12px;margin-top:10px}
 #aghaiAccessExpiry{color:#38f5c5;font-size:12px;margin-top:12px}
 </style>
-<div id="aghaiAccessGate" role="dialog" aria-modal="true" aria-labelledby="aghaiAccessTitle">
+<div id="aghaiAccessGate" hidden role="dialog" aria-modal="true" aria-labelledby="aghaiAccessTitle">
  <div class="ag-gate-card">
   <div class="ag-gate-logo">S</div>
   <h2 id="aghaiAccessTitle">AGHAI TV VIP</h2>
