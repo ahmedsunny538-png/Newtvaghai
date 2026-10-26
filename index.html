@@ -977,7 +977,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       console.warn('AGHAI TV Firebase setup:',err);
       say(liveEl,'Online viewers: Firebase setup required');
       say(viewsEl,'Total views: Firebase setup required');
-      say(setupEl,'Firebase app added · enable Anonymous sign-in and configure Realtime Database rules');
+      say(setupEl,'Firebase connection error: '+(err.code||err.message||'unknown error'));
     });
   } catch(err) {
     console.warn('AGHAI TV Firebase setup:',err);
