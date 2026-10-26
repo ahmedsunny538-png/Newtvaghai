@@ -295,9 +295,9 @@ html,body{overflow-anchor:none!important;scroll-behavior:auto!important}
 </style>
 
 </head>
-<body><div id="ag-wallpaper-layer" aria-hidden="true"><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper-shade"></div></div><div class="edge-frame" aria-hidden="true"></div><main class="app"><div id="aghai-status-panel" style="margin:8px 16px;padding:10px 12px;border:1px solid #38f5c577;border-radius:12px;background:#0b1724;color:#edf7ff;font:12px system-ui;display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between"><span id="aghai-expiry-display">Expiry status: checking…</span><span id="aghai-views-display">This device visits: —</span><span id="aghai-live-display">Online viewers: live counter not connected</span></div><div id="aghai-setup-missing" style="flex-basis:100%;color:#ffcc80;font-weight:700">FINAL SETUP INCOMPLETE · Firebase config + AdMob IDs required</div>
+<body><div id="ag-wallpaper-layer" aria-hidden="true"><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper-shade"></div></div><div class="edge-frame" aria-hidden="true"></div><main class="app"><div id="aghai-status-panel" hidden style="margin:8px 16px;padding:10px 12px;border:1px solid #38f5c577;border-radius:12px;background:#0b1724;color:#edf7ff;font:12px system-ui;display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between"><span id="aghai-expiry-display">Expiry status: checking…</span><span id="aghai-views-display">This device visits: —</span><span id="aghai-live-display">Online viewers: live counter not connected</span></div><div id="aghai-setup-missing" style="flex-basis:100%;color:#ffcc80;font-weight:700">FINAL SETUP INCOMPLETE · Firebase config + AdMob IDs required</div>
 
-<header class="top"><div class="brand"><span class="live-pill header-live-pill" aria-label="AGHAI TV live"><span class="live-mark">A</span><span class="live-brand">AGHAI <b>TV</b></span><span class="live-label"><i></i> LIVE</span></span><div class="header-tagline">Drama • Cartoons<br>News • Music</div></div><div class="pak-time" id="pakTime" aria-label="Pakistan local time">🇵🇰 Pakistan · --:--:--</div><div class="theme-tools"><button id="socialWallpaperBtn" type="button" title="Try another soft social-media background">✨ New Social Wallpaper</button><label id="customWallpaperLabel" for="customWallpaperInput" title="Choose a wallpaper image from your phone">🖼️ My Wallpaper</label><input id="customWallpaperInput" type="file" accept="image/*" hidden><select id="colorTheme" aria-label="Color theme"><option value="mint">Mint Neon</option><option value="purple">Purple Glow</option><option value="blue">Electric Blue</option><option value="gold">Gold Luxe</option><option value="pink">Pink Neon</option><option value="ice">Ice Cyan</option><option value="red">Ruby Red</option><option value="lime">Lime Laser</option><option value="sunset">Sunset</option><option value="white">Pearl White</option></select><button id="animToggle">✨ Animations: ON</button><select id="animStyle" aria-label="Animation style"><option value="aurora">Classic Glow</option><option value="rainbow">Soft Color Edge</option><option value="scan">TV Scanlines</option><option value="pulse">Soft Panel Glow</option><option value="retro">Retro TV</option></select><button id="ambientMusicBtn" type="button" aria-pressed="false">🎵 Soft Music: OFF</button><span class="music-hint">Tap to enable gentle background music</span><button id="adminToggle">⚙ Admin / Channels</button></div></header>
+<header class="top"><div class="brand"><span class="live-pill header-live-pill" aria-label="AGHAI TV live"><span class="live-mark">A</span><span class="live-brand">AGHAI <b>TV</b></span><span class="live-label"><i></i> LIVE</span></span><div class="header-tagline">Drama • Cartoons<br>News • Music</div></div><div class="pak-time" id="pakTime" aria-label="Pakistan local time">🇵🇰 Pakistan · --:--:--</div><div class="theme-tools"><button id="socialWallpaperBtn" type="button" title="Try another soft social-media background">✨ New Social Wallpaper</button><label id="customWallpaperLabel" for="customWallpaperInput" title="Choose a wallpaper image from your phone">🖼️ My Wallpaper</label><input id="customWallpaperInput" type="file" accept="image/*" hidden><select id="colorTheme" aria-label="Color theme"><option value="mint">Mint Neon</option><option value="purple">Purple Glow</option><option value="blue">Electric Blue</option><option value="gold">Gold Luxe</option><option value="pink">Pink Neon</option><option value="ice">Ice Cyan</option><option value="red">Ruby Red</option><option value="lime">Lime Laser</option><option value="sunset">Sunset</option><option value="white">Pearl White</option></select><button id="animToggle">✨ Animations: ON</button><select id="animStyle" aria-label="Animation style"><option value="aurora">Classic Glow</option><option value="rainbow">Soft Color Edge</option><option value="scan">TV Scanlines</option><option value="pulse">Soft Panel Glow</option><option value="retro">Retro TV</option></select><button id="ambientMusicBtn" type="button" aria-pressed="false">🎵 Soft Music: OFF</button><span class="music-hint">Tap to enable gentle background music</span><button id="adminToggle">⚙ Admin / Channels</button><button id="aghai-admin-login" type="button">🔐 Owner Login</button></div></header>
 <div class="searchrow"><input id="search" placeholder="Search naats, news, dramas, movies, live channels…"><button id="searchBtn">Search</button></div>
 <section class="motivation"><span class="mot-icon">✦</span><div><strong>YOUR CHANNEL. YOUR WORLD.</strong><p>Drama • Cartoons • News • Music — Welcome to AGHAI TV, your personal entertainment network.</p></div><span class="mot-stars">✧ ✦ ✧</span></section><section class="panel app-launcher"><h2>📱 Explore Channels & Apps — apni pasand ka section kholein</h2><div class="launcher-grid" id="launcherGrid"></div><p class="note">Choice Channels ka maqsad: apni pasand ki category (Cartoons, Dramas, News, Sports, Naat ya Music) ek tap mein filter/open karna. Yeh alag channel list hai, video khud se create nahi karti.</p></section>
 <nav class="tabs" id="tabs"><button class="active" data-cat="All">All</button><button data-cat="News">News</button><button data-cat="Sports">Sports</button><button data-cat="Naat">Naat</button><button data-cat="Entertainment">🎭 Entertainment</button><button data-cat="Drama">📺 Dramas</button><button data-cat="Stories">📖 Stories</button><button data-cat="Audio Songs">🎵 Audio Songs</button><button data-cat="Live TV">📡 Live TV</button><button data-cat="Indian Dramas">🇮🇳 Indian Dramas</button><button data-cat="Turkish Dramas">🇹🇷 Turkish Dramas</button><button data-cat="HBO & English">🎬 HBO & English</button><button data-cat="TV Channels">📺 TV Channels</button><button data-cat="Cartoons">Cartoons</button><button data-cat="English Movies">English Movies</button><button data-cat="Hindi Movies">Hindi Movies</button><button data-cat="Pakistani Movies">Pakistani Movies</button><button data-cat="Islamic">Islamic</button><button data-cat="Bayanat">🎙️ Sirf Bayanat</button><button data-cat="Education">Education</button><button data-cat="Audio">Audio</button><button data-cat="Live">Live</button><button data-cat="Favourites">♥ Favourites</button></nav>
@@ -945,43 +945,82 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     appId: "1:422014110288:web:b0dd1637f76fb0a0e55f55",
     measurementId: "G-B8GK9N132K"
   };
+  const ADMIN_EMAIL = "ahmedsunny538@gmail.com";
+  const panel=document.getElementById('aghai-status-panel');
   const viewsEl=document.getElementById('aghai-views-display');
   const liveEl=document.getElementById('aghai-live-display');
   const setupEl=document.getElementById('aghai-setup-missing');
+  const loginBtn=document.getElementById('aghai-admin-login');
   const say=(el,msg)=>{if(el)el.textContent=msg;};
+  const isAdmin=()=> {
+    const u=firebase.auth().currentUser;
+    return !!u && !!u.email && u.email.toLowerCase()===ADMIN_EMAIL;
+  };
+  const showAdminPanel=(yes)=>{
+    if(panel) panel.hidden=!yes;
+    if(loginBtn) loginBtn.textContent=yes?'🔓 Owner Logged In':'🔐 Owner Login';
+  };
+  const connectPresence=(db,uid)=>{
+    const ref=db.ref('onlineUsers/'+uid);
+    ref.onDisconnect().remove().then(()=>ref.set({connectedAt:firebase.database.ServerValue.TIMESTAMP})).catch(()=>{});
+    db.ref('.info/connected').on('value',snap=>{
+      if(snap.val()===true) ref.onDisconnect().remove().then(()=>ref.set({connectedAt:firebase.database.ServerValue.TIMESTAMP})).catch(()=>{});
+    });
+  };
+  const showCounters=(db)=>{
+    db.ref('onlineUsers').on('value',snap=>{
+      if(isAdmin()) say(liveEl,'Online viewers: '+Object.keys(snap.val()||{}).length);
+    },err=>{if(isAdmin())say(liveEl,'Online viewers: '+(err.code||'permission denied'));});
+    const visitRef=db.ref('stats/totalViews');
+    visitRef.on('value',snap=>{
+      if(isAdmin()) say(viewsEl,'Total views: '+(Number(snap.val())||0));
+    },err=>{if(isAdmin())say(viewsEl,'Total views: '+(err.code||'permission denied'));});
+    if(isAdmin()) say(setupEl,'Firebase connected · owner dashboard active');
+  };
   try {
     if(!window.firebase || !firebase.database || !firebase.auth) throw new Error('Firebase SDK could not load');
     if(!firebase.apps.length) firebase.initializeApp(cfg);
-    const db=firebase.database();
-    firebase.auth().signInAnonymously().then(async cred=>{
-      const uid=cred.user.uid;
-      const presenceRef=db.ref('onlineUsers/'+uid);
-      await presenceRef.onDisconnect().remove();
-      await presenceRef.set({connectedAt:firebase.database.ServerValue.TIMESTAMP});
-      db.ref('.info/connected').on('value',snap=>{
-        if(snap.val()===true) presenceRef.onDisconnect().remove().then(()=>presenceRef.set({connectedAt:firebase.database.ServerValue.TIMESTAMP})).catch(()=>{});
-      });
-      db.ref('onlineUsers').on('value',snap=>{
-        const data=snap.val()||{};
-        say(liveEl,'Online viewers: '+Object.keys(data).length);
-      },()=>say(liveEl,'Online viewers: database rules need setup'));
-      const visitRef=db.ref('stats/totalViews');
-      const visitOnce='aghai_firebase_view_counted_v1';
-      if(!sessionStorage.getItem(visitOnce)){
-        await visitRef.transaction(v=>(Number(v)||0)+1);
-        sessionStorage.setItem(visitOnce,'1');
+    const auth=firebase.auth(), db=firebase.database();
+    showAdminPanel(false);
+    auth.onAuthStateChanged(user=>{
+      if(user && user.email && user.email.toLowerCase()===ADMIN_EMAIL){
+        showAdminPanel(true);
+        connectPresence(db,user.uid);
+        showCounters(db);
+        say(setupEl,'Owner verified · admin counters visible only on this screen');
+      } else {
+        showAdminPanel(false);
+        if(user && user.isAnonymous) connectPresence(db,user.uid);
       }
-      visitRef.on('value',snap=>say(viewsEl,'Total views: '+(Number(snap.val())||0)),()=>say(viewsEl,'Total views: database rules need setup'));
-      say(setupEl,'Firebase connected · shared counters initializing');
-    }).catch(err=>{
-      console.warn('AGHAI TV Firebase setup:',err);
-      say(liveEl,'Online viewers: Firebase setup required');
-      say(viewsEl,'Total views: Firebase setup required');
-      say(setupEl,'Firebase connection error: '+(err.code||err.message||'unknown error'));
+    });
+    auth.signInAnonymously().catch(err=>console.warn('AGHAI TV anonymous session:',err));
+    if(loginBtn) loginBtn.addEventListener('click',async()=>{
+      try{
+        if(isAdmin()){
+          await auth.signOut();
+          await auth.signInAnonymously().catch(()=>{});
+          showAdminPanel(false);
+          if(loginBtn) loginBtn.textContent='🔐 Owner Login';
+          return;
+        }
+        const provider=new firebase.auth.GoogleAuthProvider();
+        const result=await auth.signInWithPopup(provider);
+        if(!result.user || !result.user.email || result.user.email.toLowerCase()!==ADMIN_EMAIL){
+          await auth.signOut();
+          await auth.signInAnonymously().catch(()=>{});
+          alert('Access denied. Please sign in with the owner Gmail account.');
+          return;
+        }
+        showAdminPanel(true);
+      }catch(err){
+        console.warn('AGHAI TV owner login:',err);
+        alert('Owner login failed: '+(err.code||err.message||'unknown error'));
+      }
     });
   } catch(err) {
     console.warn('AGHAI TV Firebase setup:',err);
-    say(setupEl,'Firebase SDK unavailable · check internet connection');
+    showAdminPanel(false);
+    if(loginBtn) loginBtn.textContent='Owner Login unavailable';
   }
 })();
 </script>
