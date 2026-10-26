@@ -983,3 +983,42 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 #pakTime{display:inline-flex!important;visibility:visible!important;opacity:1!important;align-items:center!important;justify-content:center!important;flex-direction:row!important;flex-wrap:nowrap!important;gap:8px!important;white-space:nowrap!important;width:max-content!important;max-width:100%!important;overflow:visible!important}
 #pakTime .pk-flag,#pakTime .pk-country,#pakTime .pk-clock{display:inline-block!important;visibility:visible!important;opacity:1!important;flex:none!important;white-space:nowrap!important}
 </style>
+
+
+<style id="aghai-mobile-readable-fit-v1">
+/* Readable mobile text without enlarging the whole page or causing horizontal overflow */
+html{font-size:16px!important;-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}
+body{font-size:16px!important;line-height:1.45!important;overflow-x:hidden!important}
+.app{width:100%!important;max-width:1200px!important;margin-inline:auto!important}
+.panel{padding:14px!important}
+.panel h2{font-size:19px!important;line-height:1.3!important}
+.brand h1{font-size:clamp(21px,5.8vw,28px)!important;letter-spacing:1px!important;line-height:1.15!important}
+.brand small{font-size:13px!important}
+button,input,select{font-size:15px!important;line-height:1.3!important}
+button{min-height:40px!important;padding:9px 11px!important}
+input,select{min-height:44px!important}
+.app-tile{min-height:82px!important;padding:9px 6px!important}
+.app-tile .app-icon{font-size:29px!important}
+.app-tile span:last-child{font-size:13px!important;line-height:1.25!important;overflow-wrap:anywhere!important}
+.channelgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+.channel{min-width:0!important;padding:10px!important}
+.channel h3{font-size:14px!important;line-height:1.35!important;overflow-wrap:anywhere!important}
+.channel p,.note,.footer{font-size:13px!important;line-height:1.45!important}
+.channel .actions{gap:6px!important}
+.channel .actions button{font-size:13px!important;min-height:38px!important;padding:7px 8px!important;flex:1 1 auto!important}
+.screen{width:100%!important;min-height:0!important;aspect-ratio:16/9!important}
+img,iframe,video{max-width:100%}
+@media(max-width:380px){
+ .app{padding:8px 8px 72px!important}
+ .panel{padding:10px!important}
+ .brand{gap:8px!important}
+ .logo{width:44px!important;height:44px!important}
+ .brand h1{font-size:20px!important}
+ .channelgrid{gap:7px!important}
+ .channel{padding:8px!important}
+ .channel .thumb,.channel img.thumb{height:clamp(112px,36vw,145px)!important;min-height:112px!important;max-height:145px!important}
+ .channel h3{font-size:13px!important}
+ .channel .actions button{font-size:12px!important;padding:6px!important}
+ #aghai-screen-size-controls,#aghai-size-controls{bottom:7px!important;max-width:calc(100vw - 12px)!important}
+}
+</style>
