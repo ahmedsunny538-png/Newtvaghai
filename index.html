@@ -1022,3 +1022,30 @@ img,iframe,video{max-width:100%}
  #aghai-screen-size-controls,#aghai-size-controls{bottom:7px!important;max-width:calc(100vw - 12px)!important}
 }
 </style>
+
+
+<style id="aghai-resolution-readable-v2">
+/* Restore comfortable visual size: enlarge icons and controls, keep layout within mobile width */
+html{font-size:17px!important}
+body{font-size:17px!important;line-height:1.5!important}
+.brand .logo,.logo{width:56px!important;height:56px!important;flex:0 0 56px!important}
+.brand h1{font-size:clamp(24px,6.4vw,32px)!important}
+.brand small{font-size:14px!important}
+.app-tile{min-height:100px!important;padding:12px 8px!important}
+.app-tile .app-icon{font-size:38px!important;line-height:1.15!important}
+.app-tile span:last-child{font-size:15px!important;line-height:1.3!important}
+button{font-size:16px!important;min-height:46px!important;padding:10px 13px!important}
+input,select{font-size:16px!important;min-height:46px!important}
+.panel h2{font-size:21px!important}
+.channel h3{font-size:15px!important}
+.channel p,.note,.footer{font-size:14px!important}
+.channel .actions button{font-size:14px!important;min-height:42px!important}
+.channel .thumb,.channel img.thumb{height:clamp(160px,42vw,230px)!important;min-height:160px!important;max-height:230px!important}
+#pakTime{font-size:14px!important}
+@media(max-width:380px){
+ .brand .logo,.logo{width:50px!important;height:50px!important;flex-basis:50px!important}
+ .app-tile .app-icon{font-size:34px!important}
+ .app-tile span:last-child{font-size:14px!important}
+ .channel .thumb,.channel img.thumb{height:150px!important;min-height:150px!important;max-height:150px!important}
+}
+</style>
