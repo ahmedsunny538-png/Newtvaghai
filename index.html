@@ -989,3 +989,17 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 
 
+
+
+<style id="aghai-safe-layout-fix-v1">
+/* Keep the existing AGHAI TV design; remove the duplicate zoom bar and improve readability. */
+#aghai-screen-size-controls{display:none!important}
+#aghai-size-controls{position:relative!important;inset:auto!important;z-index:20!important;display:flex!important;flex-wrap:wrap!important;justify-content:center!important;align-items:center!important;margin:10px auto!important;max-width:100%!important;width:max-content!important;box-sizing:border-box!important}
+main.app{max-width:100%!important;min-width:0!important;box-sizing:border-box!important}
+@media(max-width:600px){
+  main.app{padding-left:10px!important;padding-right:10px!important}
+  .channel-card img,.channel-logo img,.channel-thumb img,.channel-item img,.channel-card .thumb img{width:100%!important;height:auto!important;max-height:190px!important;object-fit:contain!important}
+  .channel-card,.channel-item{min-width:0!important}
+  .channel-card button,.channel-item button{font-size:14px!important;line-height:1.35!important}
+}
+</style>
