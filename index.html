@@ -984,6 +984,13 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     if(!firebase.apps.length) firebase.initializeApp(cfg);
     const auth=firebase.auth(), db=firebase.database();
     showAdminPanel(false);
+    auth.getRedirectResult().catch(err=>{
+      console.warn('AGHAI TV Google redirect result:',err);
+      if(loginBtn) loginBtn.textContent='🔐 Owner Login';
+      const code=err.code||err.message||'unknown error';
+      say(setupEl,'Owner login failed: '+code);
+      alert('Owner login failed: '+code+'\nFirebase Authentication → Settings → Authorized domains mein ahmedsunny538-png.github.io add karein.');
+    });
     auth.onAuthStateChanged(user=>{
       if(user && user.email && user.email.toLowerCase()===ADMIN_EMAIL){
         showAdminPanel(true);
@@ -1018,15 +1025,9 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
         }
         const provider=new firebase.auth.GoogleAuthProvider();
         provider.setCustomParameters({login_hint:enteredEmail});
+        if(loginBtn) loginBtn.textContent='Opening Google login…';
         await auth.signInWithRedirect(provider);
         return;
-        if(!result.user || !result.user.email || result.user.email.toLowerCase()!==ADMIN_EMAIL){
-          await auth.signOut();
-          await auth.signInAnonymously().catch(()=>{});
-          alert('Access denied. Please sign in with the owner Gmail account.');
-          return;
-        }
-        showAdminPanel(true);
       }catch(err){
         console.warn('AGHAI TV owner login:',err);
         alert('Owner login failed: '+(err.code||err.message||'unknown error'));
