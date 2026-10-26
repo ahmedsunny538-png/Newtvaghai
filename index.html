@@ -1018,7 +1018,8 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
         }
         const provider=new firebase.auth.GoogleAuthProvider();
         provider.setCustomParameters({login_hint:enteredEmail});
-        const result=await auth.signInWithPopup(provider);
+        await auth.signInWithRedirect(provider);
+        return;
         if(!result.user || !result.user.email || result.user.email.toLowerCase()!==ADMIN_EMAIL){
           await auth.signOut();
           await auth.signInAnonymously().catch(()=>{});
