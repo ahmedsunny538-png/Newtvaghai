@@ -1,27 +1,31 @@
-# AGHAI TV — missing configuration checklist
+# AGHAI TV — configuration status
 
-The current GitHub Pages app is a web app. It does not contain Firebase SDK setup or AdMob integration yet.
+## Already present in the Android project
 
-## Missing values
+- Google Mobile Ads SDK dependency is included in `android-app/app/build.gradle`.
+- Android manifest already contains an AdMob App ID.
+- `MainActivity.java` already creates and loads a banner ad.
+- GitHub Actions workflow exists for building the Android app.
 
-- Firebase Web App config: apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId.
-- Firebase Realtime Database URL (needed for a live shared viewer count).
-- Firebase Realtime Database security rules (must be configured before public writes).
-- AdMob Android App ID (format: ca-app-pub-...~...).
-- AdMob banner Ad Unit ID (format: ca-app-pub-.../...).
-- Optional interstitial Ad Unit ID (format: ca-app-pub-.../...).
+These existing settings have been preserved. Do not replace the current IDs unless you confirm they belong to the intended AdMob account.
 
-## Important limitations
+## Still missing / not verified
 
-- Do not paste Firebase service-account JSON, private keys, or admin credentials into this public repository.
-- Firebase web config alone does not make a secure global counter; database URL and suitable security rules are also required.
-- AdMob's native Android ads cannot be activated by adding an Ad Unit ID to this GitHub Pages HTML page. They require an Android app project with the Google Mobile Ads SDK and a new APK/AAB build.
-- Until the missing values and platform integration are supplied, the app must not claim that shared live viewers or ads are active.
-- Preserve the existing AGHAI TV page and its existing features while adding integrations.
+- Firebase Web App config (`apiKey`, `authDomain`, `projectId`, `storageBucket`, `messagingSenderId`, `appId`).
+- Firebase Realtime Database URL and properly configured database security rules (required for a shared live viewer count).
+- Optional AdMob interstitial Ad Unit ID (no interstitial unit is currently configured in the Android source).
+- Successful fresh Android build and real ad serving have not yet been verified.
 
-## Where to get the values
+## Safety and limitations
+
+- Never add Firebase service-account JSON, private keys, or admin credentials to this public repository.
+- A Firebase web config is not enough by itself for a secure global counter. Database URL, rules, and a suitable presence/counting design are needed.
+- The GitHub Pages website itself cannot show native AdMob ads; the existing banner integration is in the Android wrapper.
+- Until Firebase is configured and tested, the website must not claim that shared live viewers or global total views are active.
+- Preserve the existing AGHAI TV page and its existing features.
+
+## Where to get missing values
 
 1. Firebase Console → Project settings → General → Your apps → Web app → SDK setup/config.
 2. Firebase Console → Build → Realtime Database → copy the database URL and configure secure rules.
-3. AdMob Console → Apps → select/create the Android app → App settings for the App ID.
-4. AdMob Console → Ad units → create/copy banner and (if wanted) interstitial unit IDs.
+3. AdMob Console → Apps → select the Android app → Ad units → create/copy an interstitial unit ID if you want interstitial ads.
