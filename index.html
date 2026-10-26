@@ -554,7 +554,7 @@ $('addChannel').onclick=()=>{if(!unlocked)return;const name=$('newName').value.t
  const now=Date.now();
  function valid(){return access&&Number.isFinite(access.started)&&Number.isFinite(access.expires)&&access.expires-access.started===PERIOD&&now<access.expires}
  function unlock(){gate.style.display='none';document.documentElement.style.overflow='';}
- function lock(){gate.style.display='none';document.documentElement.style.overflow='';}
+ function lock(){gate.style.display='flex';document.documentElement.style.overflow='hidden';}
  // First visit starts a free 10-day period automatically; no password on first opening.
  if(!access||!Number.isFinite(access.started)||!Number.isFinite(access.expires)||access.expires-access.started!==PERIOD){
    access={started:now,expires:now+PERIOD};
