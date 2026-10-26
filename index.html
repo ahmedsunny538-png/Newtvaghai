@@ -674,9 +674,26 @@ bar.querySelector('#aghai-size-reset').addEventListener('click',()=>{scale=1;app
 }catch(e){} })();
 </script>
 
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+<script>
+/* AGHAI TV Firebase SDK loader: retry official Firebase CDN with a stable v8 compat build if v10 is blocked. */
+(function(){
+  const files=[
+    ['https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js','https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js'],
+    ['https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js','https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js'],
+    ['https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js','https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js']
+  ];
+  function load(url, fallback){
+    return new Promise(resolve=>{
+      const el=document.createElement('script'); el.src=url; el.onload=()=>resolve(true);
+      el.onerror=()=>{el.remove(); if(!fallback){resolve(false);return;}
+        const alt=document.createElement('script');alt.src=fallback;alt.onload=()=>resolve(true);alt.onerror=()=>{alt.remove();resolve(false);};document.head.appendChild(alt);
+      };
+      document.head.appendChild(el);
+    });
+  }
+  window.aghaiFirebaseSdkReady=files.reduce((p,pair)=>p.then(ok=>ok?load(pair[0],pair[1]):false),Promise.resolve(true));
+})();
+</script>
 <script id="aghai-firebase-live-integration">
 (()=> {
   const cfg = {
@@ -693,8 +710,9 @@ bar.querySelector('#aghai-size-reset').addEventListener('click',()=>{scale=1;app
   const liveEl=document.getElementById('aghai-live-display');
   const setupEl=document.getElementById('aghai-setup-missing');
   const say=(el,msg)=>{if(el)el.textContent=msg;};
+  (window.aghaiFirebaseSdkReady||Promise.resolve(false)).then(ready=>{
   try {
-    if(!window.firebase || !firebase.database || !firebase.auth) throw new Error('Firebase SDK could not load');
+    if(!ready || !window.firebase || !firebase.database || !firebase.auth) throw new Error('Firebase SDK could not load from either CDN');
     if(!firebase.apps.length) firebase.initializeApp(cfg);
     const db=firebase.database();
     firebase.auth().signInAnonymously().then(async cred=>{
@@ -725,8 +743,9 @@ bar.querySelector('#aghai-size-reset').addEventListener('click',()=>{scale=1;app
     });
   } catch(err) {
     console.warn('AGHAI TV Firebase setup:',err);
-    say(setupEl,'Firebase SDK unavailable · check internet connection');
+    say(setupEl,'Firebase SDK unavailable from both official CDN attempts · check internet connection or browser content blocking');
   }
+  });
 })();
 </script>
 
