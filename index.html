@@ -282,6 +282,18 @@ body:before{content:none!important;display:none!important}
 }
 </style>
 
+
+<style id="aghai-tv-mobile-stability-fix">
+/* Mobile WebView stability: prevent layout shifts and hide the extra clock glyph over the flag. */
+html,body{overflow-anchor:none!important;scroll-behavior:auto!important}
+.pak-time:before,#pakTime:before{content:none!important;display:none!important}
+#pakTime{display:inline-flex!important;align-items:center!important;justify-content:flex-start!important;flex-wrap:nowrap!important;gap:7px!important;white-space:nowrap!important;width:max-content!important;max-width:100%!important;min-height:34px!important;overflow:hidden!important;font-variant-numeric:tabular-nums!important}
+#pakTime .pk-flag{font-size:19px!important;line-height:1!important;flex:0 0 auto!important}
+#pakTime .pk-country{flex:0 0 auto!important;white-space:nowrap!important}
+#pakTime .pk-clock{flex:0 0 auto!important;white-space:nowrap!important;font-variant-numeric:tabular-nums!important}
+@media(max-width:760px){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.social-watermark{transform:none!important}}
+</style>
+
 </head>
 <body><div id="ag-wallpaper-layer" aria-hidden="true"><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper-shade"></div></div><div class="edge-frame" aria-hidden="true"></div><main class="app">
 
@@ -604,12 +616,10 @@ bar.querySelector('#aghai-size-reset').addEventListener('click',()=>{scale=1;app
 }if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();})();
 </script>
 
-<script id="aghai-pak-time-hard-fix">(function(){function tick(){var el=document.getElementById('pakTime');if(!el)return;var t=new Intl.DateTimeFormat('en-PK',{timeZone:'Asia/Karachi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}).format(new Date());el.textContent='🇵🇰 Pakistan Time · '+t;el.style.setProperty('display','inline-flex','important');el.style.setProperty('visibility','visible','important');el.style.setProperty('opacity','1','important');}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',tick);else tick();setInterval(tick,1000);})();</script>
-
 <script id="aghai-reliable-controls-fix">
 (function(){
  function bind(id,fn){var e=document.getElementById(id);if(e)e.onclick=function(ev){try{fn(ev)}catch(err){console.error('AGHAI control '+id,err)}}}
- function time(){var e=document.getElementById('pakTime');if(!e)return;try{var t=new Intl.DateTimeFormat('en-PK',{timeZone:'Asia/Karachi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}).format(new Date());e.innerHTML='<span class="pk-flag">🇵🇰</span><span class="pk-country">Pakistan</span><span class="pk-clock">· '+t+'</span>';e.style.setProperty('display','inline-flex','important');e.style.setProperty('visibility','visible','important');e.style.setProperty('opacity','1','important')}catch(err){e.textContent='Pakistan Time'}}
+ function time(){}
  function open(url){window.open(url,'_blank','noopener,noreferrer')}
  function init(){
   time();setInterval(time,1000);
@@ -629,6 +639,19 @@ bar.querySelector('#aghai-size-reset').addEventListener('click',()=>{scale=1;app
   bind('telegramBtn',function(){open('https://web.telegram.org/')});
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+
+
+<script id="aghai-single-stable-pakistan-clock">
+(function(){
+ function render(){
+  var el=document.getElementById('pakTime'); if(!el)return;
+  var t=new Intl.DateTimeFormat('en-PK',{timeZone:'Asia/Karachi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}).format(new Date());
+  el.innerHTML='<span class="pk-flag" aria-label="Pakistan flag">🇵🇰</span><span class="pk-country">Pakistan</span><span class="pk-clock">· '+t+'</span>';
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render);else render();
+ setInterval(render,1000);
 })();
 </script>
 
@@ -854,44 +877,17 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 }
 @media(max-width:360px){.channel .thumb,.channel img.thumb{height:145px!important;min-height:145px!important}}
 </style>
-<script id="aghai-pakistan-time-label-fix">
-document.addEventListener('DOMContentLoaded',function(){
- const el=document.getElementById('pakTime');
- if(el){const fix=()=>{const d=new Date();el.textContent='🇵🇰 Islamic Republic of Pakistan · '+new Intl.DateTimeFormat('en-PK',{timeZone:'Asia/Karachi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}).format(d);};fix();setInterval(fix,1000);}
-});
-</script>
-
 <style id="aghai-remove-pk-from-logo">
 .live-mark{font-size:0!important}
 .live-mark:before{content:""!important}
 .live-mark:after{content:""!important}
 </style>
-<script id="aghai-clean-pak-time-label">
-document.addEventListener('DOMContentLoaded',function(){
- const el=document.getElementById('pakTime');
- if(el){const fix=()=>{el.textContent='Pakistan Time · '+new Intl.DateTimeFormat('en-PK',{timeZone:'Asia/Karachi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}).format(new Date());};fix();setInterval(fix,1000);}
-});
-</script>
-
 <style id="aghai-final-logo-icon-fix">
 .live-mark{position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:0!important;overflow:hidden!important;background:linear-gradient(145deg,#ff4b65,#c90035)!important;border:1px solid #ff9eb0!important}
 .live-mark:before{content:""!important;display:block!important;width:0!important;height:0!important;border-top:9px solid transparent!important;border-bottom:9px solid transparent!important;border-left:14px solid #fff!important;margin:0 0 0 3px!important}
 .live-mark:after{content:none!important}
 .live-brand{font-size:inherit!important}
 </style>
-
-<script id="aghai-final-pakistan-flag-country-fix">
-document.addEventListener('DOMContentLoaded',function(){
- const el=document.getElementById('pakTime');
- if(el){
-  const fix=()=>{
-   const time=new Intl.DateTimeFormat('en-PK',{timeZone:'Asia/Karachi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}).format(new Date());
-   el.textContent='🇵🇰 Pakistan · '+time;
-  };
-  fix();setInterval(fix,1000);
- }
-});
-</script>
 
 <style id="aghai-pakistan-flag-name-one-row">
 #pakTime{
@@ -905,36 +901,12 @@ document.addEventListener('DOMContentLoaded',function(){
 #pakTime .pk-clock{display:inline-block!important;flex:0 0 auto!important;white-space:nowrap!important;font-variant-numeric:tabular-nums!important}
 @media(max-width:420px){#pakTime{gap:5px!important;padding:6px 7px!important;font-size:12px!important}#pakTime .pk-flag{font-size:16px!important}}
 </style>
-<script id="aghai-pakistan-one-row-render">
-document.addEventListener('DOMContentLoaded',function(){
- const el=document.getElementById('pakTime');
- if(!el)return;
- const fix=()=>{
-  const t=new Intl.DateTimeFormat('en-PK',{timeZone:'Asia/Karachi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}).format(new Date());
-  el.innerHTML='<span class="pk-flag" aria-label="Pakistan flag">🇵🇰</span><span class="pk-country">Pakistan</span><span class="pk-clock">· '+t+'</span>';
- };
- fix();setInterval(fix,1000);
-});
-</script>
-
 <style id="aghai-pakistan-final-visible-fix">
 #pakTime{display:flex!important;align-items:center!important;justify-content:center!important;flex-direction:row!important;flex-wrap:nowrap!important;gap:8px!important;white-space:nowrap!important;width:max-content!important;max-width:100%!important;overflow:visible!important}
 #pakTime .pk-flag{display:inline-block!important;flex:none!important;font-size:19px!important;line-height:1!important}
 #pakTime .pk-country{display:inline-block!important;flex:none!important;font-size:inherit!important;white-space:nowrap!important}
 #pakTime .pk-clock{display:inline-block!important;flex:none!important;white-space:nowrap!important}
 </style>
-<script id="aghai-pakistan-final-visible-render">
-(function(){
- function fix(){
-  const el=document.getElementById('pakTime');if(!el)return;
-  const t=new Intl.DateTimeFormat('en-PK',{timeZone:'Asia/Karachi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}).format(new Date());
-  el.innerHTML='<span class="pk-flag">🇵🇰</span><span class="pk-country">Pakistan</span><span class="pk-clock">· '+t+'</span>';
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',fix);else fix();
- setInterval(fix,1000);
-})();
-</script>
-
 <style id="aghai-restore-pakistan-time">
 #pakTime{display:inline-flex!important;visibility:visible!important;opacity:1!important;align-items:center!important;justify-content:center!important;flex-direction:row!important;flex-wrap:nowrap!important;gap:8px!important;white-space:nowrap!important;width:max-content!important;max-width:100%!important;overflow:visible!important}
 #pakTime .pk-flag,#pakTime .pk-country,#pakTime .pk-clock{display:inline-block!important;visibility:visible!important;opacity:1!important;flex:none!important;white-space:nowrap!important}
