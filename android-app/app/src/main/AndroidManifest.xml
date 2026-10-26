@@ -5,7 +5,7 @@
         android:label="AGHAI TV"
         android:usesCleartextTraffic="false"
         android:theme="@android:style/Theme.Material.Light.NoActionBar"
-        android:icon="@android:drawable/ic_media_play">
+        android:icon="@drawable/aghai_tv_icon">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-2437759700185612~5349471469"/>
