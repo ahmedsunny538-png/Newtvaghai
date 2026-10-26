@@ -295,7 +295,7 @@ html,body{overflow-anchor:none!important;scroll-behavior:auto!important}
 </style>
 
 </head>
-<body><div id="ag-wallpaper-layer" aria-hidden="true"><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper-shade"></div></div><div class="edge-frame" aria-hidden="true"></div><main class="app">
+<body><div id="ag-wallpaper-layer" aria-hidden="true"><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper-shade"></div></div><div class="edge-frame" aria-hidden="true"></div><main class="app"><div id="aghai-status-panel" style="margin:8px 16px;padding:10px 12px;border:1px solid #38f5c577;border-radius:12px;background:#0b1724;color:#edf7ff;font:12px system-ui;display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between"><span id="aghai-expiry-display">Expiry status: checking…</span><span id="aghai-views-display">This device visits: —</span><span id="aghai-live-display">Online viewers: live counter not connected</span></div>
 
 <header class="top"><div class="brand"><span class="live-pill header-live-pill" aria-label="AGHAI TV live"><span class="live-mark">A</span><span class="live-brand">AGHAI <b>TV</b></span><span class="live-label"><i></i> LIVE</span></span><div class="header-tagline">Drama • Cartoons<br>News • Music</div></div><div class="pak-time" id="pakTime" aria-label="Pakistan local time">🇵🇰 Pakistan · --:--:--</div><div class="theme-tools"><button id="socialWallpaperBtn" type="button" title="Try another soft social-media background">✨ New Social Wallpaper</button><label id="customWallpaperLabel" for="customWallpaperInput" title="Choose a wallpaper image from your phone">🖼️ My Wallpaper</label><input id="customWallpaperInput" type="file" accept="image/*" hidden><select id="colorTheme" aria-label="Color theme"><option value="mint">Mint Neon</option><option value="purple">Purple Glow</option><option value="blue">Electric Blue</option><option value="gold">Gold Luxe</option><option value="pink">Pink Neon</option><option value="ice">Ice Cyan</option><option value="red">Ruby Red</option><option value="lime">Lime Laser</option><option value="sunset">Sunset</option><option value="white">Pearl White</option></select><button id="animToggle">✨ Animations: ON</button><select id="animStyle" aria-label="Animation style"><option value="aurora">Classic Glow</option><option value="rainbow">Soft Color Edge</option><option value="scan">TV Scanlines</option><option value="pulse">Soft Panel Glow</option><option value="retro">Retro TV</option></select><button id="ambientMusicBtn" type="button" aria-pressed="false">🎵 Soft Music: OFF</button><span class="music-hint">Tap to enable gentle background music</span><button id="adminToggle">⚙ Admin / Channels</button></div></header>
 <div class="searchrow"><input id="search" placeholder="Search naats, news, dramas, movies, live channels…"><button id="searchBtn">Search</button></div>
@@ -655,7 +655,23 @@ bar.querySelector('#aghai-size-reset').addEventListener('click',()=>{scale=1;app
 })();
 </script>
 
-</body></html>
+<script id="aghai-visible-status-script">
+(()=>{try{
+ const expiry=document.getElementById('aghai-expiry-display');
+ const views=document.getElementById('aghai-views-display');
+ const live=document.getElementById('aghai-live-display');
+ const key='aghai_tv_10day_access_v1';
+ let access=null;try{access=JSON.parse(localStorage.getItem(key)||'null')}catch(e){}
+ if(access&&Number.isFinite(access.expires)){
+  const date=new Date(access.expires);
+  expiry.textContent=(Date.now()<access.expires?'Trial status: ACTIVE · expires ':'Trial status: EXPIRED · expired ')+date.toLocaleDateString()+' '+date.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+ }else{expiry.textContent='Expiry status: trial record not found';}
+ const vk='aghai_tv_local_visits_v1';
+ let n=Number(localStorage.getItem(vk)||0);n=Number.isFinite(n)?n+1:1;localStorage.setItem(vk,String(n));
+ views.textContent='This device visits: '+n;
+ live.textContent='Online viewers: live counter needs shared database';
+}catch(e){} })();
+</script></body></html>
 
 <style id="aghai-broadcast-finish">
 /* Compact QTV-style channel bug: always inside the video frame */
