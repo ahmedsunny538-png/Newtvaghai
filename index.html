@@ -1063,5 +1063,45 @@ main.app{max-width:100%!important;min-width:0!important;box-sizing:border-box!im
 
 
 
+
+<script id="aghai-channel-emergency-recovery">
+/* Safe recovery: leave the existing layout intact; restore the channel grid if the main renderer fails. */
+(function(){
+  function recover(){
+    var grid=document.getElementById('channelGrid');
+    if(!grid || grid.children.length) return;
+    try { if(typeof render==='function'){ render(); if(grid.children.length) return; } } catch(e){}
+    var items=[
+      ['ARY News','News','https://arynews.tv/','📺'],['Geo News','News','https://www.geo.tv/','📺'],
+      ['BBC News','News','https://www.bbc.com/news','🌍'],['Al Jazeera','News','https://www.aljazeera.com/','🌐'],
+      ['YouTube','Video','https://www.youtube.com/','▶️'],['Tamasha','Entertainment','https://tamashaweb.com/','📱'],
+      ['PTV News','News','https://ptv.com.pk/ptvNews','📺'],['Dawn News','News','https://www.dawn.com/','📰'],
+      ['Google','Tools','https://www.google.com/','🔎'],['Wikipedia','Learning','https://www.wikipedia.org/','📚'],
+      ['Netflix','Entertainment','https://www.netflix.com/','🎬'],['ZEE5','Entertainment','https://www.zee5.com/','🎞️'],
+      ['Sony SAB','Entertainment','https://www.youtube.com/@SonySAB','📺'],['ARY Digital','Entertainment','https://www.youtube.com/@ARYDigitalasia','📺'],
+      ['Hum TV','Entertainment','https://www.youtube.com/@HUMTV','📺'],['Express News','News','https://www.express.pk/','📰'],
+      ['Live Sports','Sports','https://www.espn.com/','🏏'],['Al Arabiya','News','https://english.alarabiya.net/','🌍'],
+      ['Instagram','Social','https://www.instagram.com/','📸'],['Facebook','Social','https://www.facebook.com/','🔵']
+    ];
+    grid.innerHTML='';
+    items.forEach(function(c){
+      var card=document.createElement('article'); card.className='channel';
+      var sym=document.createElement('div'); sym.className='symbol'; sym.textContent=c[3];
+      var h=document.createElement('h3'); h.textContent=c[0];
+      var p=document.createElement('p'); p.textContent=c[1];
+      var actions=document.createElement('div'); actions.className='actions';
+      var b=document.createElement('button'); b.type='button'; b.textContent='Open';
+      b.addEventListener('click',function(){window.open(c[2],'_blank','noopener,noreferrer');});
+      actions.appendChild(b); card.appendChild(sym);card.appendChild(h);card.appendChild(p);card.appendChild(actions);grid.appendChild(card);
+    });
+    var empty=document.getElementById('emptyMsg'); if(empty) empty.textContent='Channel shortcuts restored. Select Open to visit a channel.';
+    var search=document.getElementById('search');
+    if(search) search.addEventListener('input',function(){var q=search.value.toLowerCase();Array.from(grid.children).forEach(function(el){el.style.display=el.textContent.toLowerCase().includes(q)?'':'none';});});
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',recover); else recover();
+  setTimeout(recover,800);
+})();
+</script>
+
 </body>
 </html>
