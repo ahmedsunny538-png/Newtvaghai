@@ -1082,28 +1082,5 @@ main.app{max-width:100%!important;min-width:0!important;box-sizing:border-box!im
 
 
 
-
-<style id="aghai-entertainment-screen-restore">
-/* Restore the original Entertainment reel and the existing soft wallpaper layer. */
-#ag-wallpaper-layer .ag-wallpaper{display:block!important;opacity:.20!important;animation:aghaiRestoredWallpaper 32s ease-in-out infinite!important}
-#ag-wallpaper-layer .ag-wallpaper:nth-child(2){animation-delay:-8s!important}
-#ag-wallpaper-layer .ag-wallpaper:nth-child(3){animation-delay:-16s!important}
-#ag-wallpaper-layer .ag-wallpaper:nth-child(4){animation-delay:-24s!important}
-@keyframes aghaiRestoredWallpaper{0%,22%{opacity:.24}28%,96%{opacity:0}100%{opacity:.24}}
-</style>
-<script id="aghai-restore-entertainment-on-open">
-/* Start the existing reel after all original functions and buttons have loaded. */
-try{
- if(typeof restoreEntertainmentScreen==='function')restoreEntertainmentScreen();
- if(typeof showReel==='function'&&typeof startReel==='function'){showReel(typeof reelIndex==='number'?reelIndex:0);startReel();}
- const play=document.getElementById('reelPlay');
- if(play&&typeof REEL_ITEMS!=='undefined')play.onclick=()=>{const item=REEL_ITEMS[typeof reelIndex==='number'?reelIndex:0];if(item)window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(item.q),'_blank','noopener,noreferrer');};
- const browse=document.getElementById('reelBrowse');
- if(browse&&typeof browseReel==='function')browse.onclick=()=>browseReel();
- if(typeof render==='function')render();
- if(typeof updatePakistanTime==='function')updatePakistanTime();
-}catch(e){console.error('AGHAI TV restore:',e)}
-</script>
-
 </body>
 </html>
