@@ -1092,7 +1092,8 @@ main.app{max-width:100%!important;min-width:0!important;box-sizing:border-box!im
 @keyframes aghaiRestoredWallpaper{0%,22%{opacity:.24}28%,96%{opacity:0}100%{opacity:.24}}
 </style>
 <script id="aghai-restore-entertainment-on-open">
-if(typeof restoreEntertainmentScreen==='function'){restoreEntertainmentScreen();}
+/* Restore the original rotating Entertainment reel and rebuild the full default channel list. */
+try{if(typeof restoreEntertainmentScreen==='function')restoreEntertainmentScreen();if(typeof showReel==='function'&&typeof startReel==='function'){showReel(typeof reelIndex==='number'?reelIndex:0);startReel()}if(typeof render==='function')render();if(typeof updatePakistanTime==='function')updatePakistanTime();}catch(e){console.error('AGHAI TV restore:',e)}
 </script>
 
 </body>
