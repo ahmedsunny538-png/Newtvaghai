@@ -317,8 +317,7 @@ html,body{overflow-anchor:none!important;scroll-behavior:auto!important}
 
 <footer class="footer">AGHAI TV • Personal streaming hub • Only authorized content</footer></main>
 <script>
-const DEFAULTS=[
-{name:'Latest News',cat:'News',url:'https://www.youtube.com/results?search_query=live+news+Pakistan',kind:'link',icon:'📰',image:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=80'},
+const DEFAULTS=[{name:'Latest News',cat:'News',url:'https://www.youtube.com/results?search_query=live+news+Pakistan',kind:'link',icon:'📰',image:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=80'},
 {name:'Naat Sharif',cat:'Naat',url:'https://www.youtube.com/results?search_query=naat+sharif',kind:'link',icon:'🤲',image:'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=600&q=80'},
 {name:'Islamic Lectures',cat:'Islamic',url:'https://www.youtube.com/results?search_query=islamic+lectures',kind:'link',icon:'☪',image:'https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=600&q=80'},
 {name:'Makkah Haram Live — Kaaba',cat:'Islamic',url:'https://www.youtube.com/results?search_query=Makkah+Haram+live+official+Kaaba',kind:'link',icon:'🕋',image:'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=600&q=80'},
@@ -363,7 +362,7 @@ const DEFAULTS=[
 {name:'Drums — Light Beat',cat:'Audio Songs',soundStyle:'drums',icon:'🥁',image:'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?auto=format&fit=crop&w=600&q=80',url:'https://www.youtube.com/results?search_query=light+drum+instrumental'},
 {name:'Light English Music',cat:'Audio Songs',soundStyle:'english',icon:'🎶',image:'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=600&q=80',url:'https://www.youtube.com/results?search_query=light+english+music+official'},
 {name:'Light Instrumental Mix',cat:'Audio Songs',soundStyle:'piano',icon:'🎼',image:'https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=600&q=80',url:'https://www.youtube.com/results?search_query=light+instrumental+music'},
-{name:'Live TV Channels — Pakistan',cat:'Live TV',url:'https://www.youtube.com/results?search_query=Pakistan+TV+channels+official+live',icon:'🇵🇰',image:'https://flagcdn.com/w640/pk.png'},
+{name:'Live TV Channels',cat:'Live TV',url:'https://www.youtube.com/results?search_query=Pakistan+TV+channels+official+live',icon:'📡',image:'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=600&q=80'},
 {name:'Pakistan Super League',cat:'Sports',url:'https://www.youtube.com/results?search_query=official+PSL+highlights+live',icon:'🏏',image:'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=600&q=80'},
 {name:'Football Highlights',cat:'Sports',url:'https://www.youtube.com/results?search_query=official+football+highlights',icon:'⚽',image:'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80'},
 {name:'Cricket Highlights',cat:'Sports',url:'https://www.youtube.com/results?search_query=official+cricket+highlights',icon:'🏆',image:'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=600&q=80'},
@@ -377,8 +376,8 @@ const DEFAULTS=[
 {name:'Indian Drama Official Search',cat:'Indian Dramas',url:'https://www.youtube.com/results?search_query=official+Indian+TV+serial+full+episode',icon:'🇮🇳',image:'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80'},
 {name:'MX Player',cat:'Indian Dramas',url:'https://www.mxplayer.in/',icon:'▶️',image:'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'},
 {name:'HBO Max — Official',cat:'HBO & English',url:'https://www.hbomax.com/',icon:'HBO',image:'https://images.unsplash.com/photo-1440404653325-ab127d49eac1?auto=format&fit=crop&w=600&q=80'},
-{name:'English Drama Series',cat:'HBO & English',url:'https://www.youtube.com/results?search_query=official+English+drama+series+episodes',icon:'🇬🇧',image:'https://flagcdn.com/w640/gb.png'},
-{name:'English Movies & Series',cat:'HBO & English',url:'https://www.youtube.com/results?search_query=official+English+movies+and+series',icon:'🇬🇧',image:'https://flagcdn.com/w640/gb.png'},
+{name:'English Drama Series',cat:'HBO & English',url:'https://www.youtube.com/results?search_query=official+English+drama+series+episodes',icon:'🇬🇧',image:'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80'},
+{name:'English Movies & Series',cat:'HBO & English',url:'https://www.youtube.com/results?search_query=official+English+movies+and+series',icon:'🎬',image:'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=600&q=80'},
 {name:'Turkish Dramas — Official Search',cat:'Turkish Dramas',url:'https://www.youtube.com/results?search_query=official+Turkish+drama+English+subtitles',icon:'🇹🇷',image:'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=600&q=80'},
 {name:'Kanal D International',cat:'Turkish Dramas',url:'https://www.kanald.com.tr/',icon:'🔷',image:'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80'},
 {name:'TRT — Turkish Series',cat:'Turkish Dramas',url:'https://www.trt1.com.tr/',icon:'🇹🇷',image:'https://images.unsplash.com/photo-1440404653325-ab127d49eac1?auto=format&fit=crop&w=600&q=80'},
@@ -394,6 +393,7 @@ const DEFAULTS=[
 {name:'GNN News',cat:'TV Channels',url:'https://gnnhd.tv/',icon:'📡',image:'https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=600&q=80'},
 {name:'A Sports',cat:'TV Channels',url:'https://www.youtube.com/results?search_query=A+Sports+Pakistan+official+live',icon:'🏏',image:'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=600&q=80'},
 {name:'TV Channels — Pakistan Live Search',cat:'TV Channels',url:'https://www.youtube.com/results?search_query=official+Pakistan+TV+channels+live',icon:'📡',image:'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=600&q=80'},
+{name:'Live TV Channels — Pakistan',cat:'Live TV',url:'https://www.youtube.com/results?search_query=Pakistan+TV+channels+official+live',icon:'🇵🇰',image:'https://flagcdn.com/w640/pk.png'},
 {name:'National Geographic',cat:'Documentary',url:'https://www.youtube.com/@NatGeo',icon:'🌍',image:'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=600&q=80'},
 {name:'National Geographic Live Search',cat:'Documentary',url:'https://www.youtube.com/results?search_query=National+Geographic+live+official',icon:'🦁',image:'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=600&q=80'},
 {name:'Al Jazeera English Live',cat:'International News',url:'https://www.youtube.com/@aljazeeraenglish/live',icon:'🌐',image:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=80'},
