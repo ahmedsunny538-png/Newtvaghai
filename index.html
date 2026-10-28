@@ -298,6 +298,19 @@ html,body{overflow-anchor:none!important;scroll-behavior:auto!important}
 @media(max-width:760px){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.social-watermark{transform:none!important}}
 </style>
 
+<style id="aghai-animation-final-fix">
+@keyframes agFinalHue{0%{filter:hue-rotate(0deg)}50%{filter:hue-rotate(35deg)}100%{filter:hue-rotate(0deg)}}
+@keyframes agFinalGlow{0%,100%{box-shadow:0 0 8px #38f5c533,0 0 0 1px #53a8ff33}50%{box-shadow:0 0 24px #38f5c588,0 0 0 1px #c084fc88}}
+@keyframes agFinalSweep{0%{background-position:-180% 0}100%{background-position:180% 0}}
+@keyframes agFinalFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+body:not(.no-anim) .app:before{animation:agFinalHue 8s ease-in-out infinite!important}
+body:not(.no-anim) .brand h1,body:not(.no-anim) .logo{animation:agFinalGlow 3s ease-in-out infinite!important}
+body:not(.no-anim) .panel,body:not(.no-anim) .channel{animation:agFinalGlow 4s ease-in-out infinite!important}
+body:not(.no-anim) .app-tile:before,body:not(.no-anim) .motivation:before{animation:agFinalSweep 7s linear infinite!important}
+body:not(.no-anim) .live-label i{animation:liveBlink 1.5s ease-in-out infinite!important}
+body:not(.no-anim) #animToggle{animation:agFinalFloat 2.4s ease-in-out infinite,agFinalGlow 3s ease-in-out infinite!important}
+body.no-anim *,body.no-anim *:before,body.no-anim *:after{animation:none!important;transition:none!important}
+</style>
 </head>
 <body><div id="ag-wallpaper-layer" aria-hidden="true"><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper-shade"></div></div><div class="edge-frame" aria-hidden="true"></div><main class="app">
 
