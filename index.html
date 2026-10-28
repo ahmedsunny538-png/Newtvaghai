@@ -1102,5 +1102,13 @@ main.app{max-width:100%!important;min-width:0!important;box-sizing:border-box!im
 })();
 </script>
 
+
+<style id="AGHAI_FOUR_SIDE_ANIMATED_BORDER">
+/* Decorative animated color frame on all four screen edges; does not intercept taps. */
+#aghaiFourSideFrame{position:fixed;inset:5px;z-index:99999;pointer-events:none;border:3px solid transparent;border-radius:13px;background:linear-gradient(transparent,transparent) padding-box,conic-gradient(from 0deg,#00f5ff,#4169ff,#ff00d4,#ffb000,#00ff85,#00f5ff) border-box;filter:drop-shadow(0 0 3px #00eaff88);animation:aghaiFrameHue 7s linear infinite;opacity:.9}
+@keyframes aghaiFrameHue{to{filter:hue-rotate(360deg) drop-shadow(0 0 4px #00eaff88)}}
+@media(prefers-reduced-motion:reduce){#aghaiFourSideFrame{animation:none}}
+</style>
+<div id="aghaiFourSideFrame" aria-hidden="true"></div>
 </body>
 </html>
