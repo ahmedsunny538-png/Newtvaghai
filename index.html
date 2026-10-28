@@ -298,7 +298,25 @@ html,body{overflow-anchor:none!important;scroll-behavior:auto!important}
 @media(max-width:760px){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.social-watermark{transform:none!important}}
 </style>
 
-</head>
+<style id="aghai-animation-enhancement">
+@keyframes aghaiRainbowEdge{0%{border-color:#ff4d8d;box-shadow:0 0 10px #ff4d8d66,inset 0 0 8px #ff4d8d22}25%{border-color:#ffd166;box-shadow:0 0 18px #ffd16677,inset 0 0 10px #ffd16622}50%{border-color:#37f5d0;box-shadow:0 0 18px #37f5d077,inset 0 0 10px #37f5d022}75%{border-color:#7b7dff;box-shadow:0 0 18px #7b7dff77,inset 0 0 10px #7b7dff22}100%{border-color:#ff4d8d;box-shadow:0 0 10px #ff4d8d66,inset 0 0 8px #ff4d8d22}}
+@keyframes aghaiColorFlow{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(360deg)}}
+@keyframes aghaiScan{0%{background-position:0 -40px}100%{background-position:0 40px}}
+@keyframes aghaiPulsePanel{0%,100%{box-shadow:0 0 0 #00e5ff00;border-color:#26384c}50%{box-shadow:0 0 22px #00e5ff55;border-color:#00e5ff}}
+@keyframes aghaiRetro{0%,100%{box-shadow:0 0 8px #ff4d8d44;border-color:#ff4d8d88}33%{box-shadow:0 0 16px #ffd16655;border-color:#ffd166}66%{box-shadow:0 0 16px #6ef3ff55;border-color:#6ef3ff}}
+body.anim-rainbow .app:before,body.anim-rainbow .panel,body.anim-rainbow .channel,body.anim-rainbow .screen:after{animation:aghaiRainbowEdge 5s linear infinite!important}
+body.anim-rainbow .brand h1{animation:aghaiColorFlow 12s linear infinite!important}
+body.anim-scan .screen:before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:repeating-linear-gradient(to bottom,transparent 0 5px,#54eaff20 6px 7px);background-size:100% 40px;animation:aghaiScan 1.8s linear infinite!important}
+body.anim-scan .app:before,body.anim-scan .channel{animation:aghaiRainbowEdge 7s linear infinite!important}
+body.anim-pulse .panel,body.anim-pulse .channel,body.anim-pulse .screen{animation:aghaiPulsePanel 3.4s ease-in-out infinite!important}
+body.anim-retro .panel,body.anim-retro .channel,body.anim-retro .app:before,body.anim-retro .screen:after{animation:aghaiRetro 4.8s linear infinite!important}
+body.anim-aurora .app:before,body.anim-aurora .brand h1,body.anim-aurora .channel{animation:edgePulse 4s ease-in-out infinite!important}
+body.anim-aurora .panel{animation:aghaiPulsePanel 5s ease-in-out infinite!important}
+body:not(.no-anim) .theme-tools button,body:not(.no-anim) .tabs button.active{animation:aghaiRainbowEdge 7s linear infinite}
+body.no-anim .app:before,body.no-anim:before,body.no-anim:after,body.no-anim .brand h1,body.no-anim .panel,body.no-anim .channel,body.no-anim .screen:after,body.no-anim .theme-tools button,body.no-anim .tabs button.active,body.no-anim .screen:before{animation:none!important;transition:none!important}
+@media(max-width:760px){body:not(.no-anim) .app:before,body:not(.no-anim) .brand h1,body:not(.no-anim) .panel,body:not(.no-anim) .channel,body:not(.no-anim) .screen:after,body:not(.no-anim) .theme-tools button{animation:aghaiRainbowEdge 7s linear infinite!important}}
+@media(prefers-reduced-motion:reduce){body:not(.no-anim) .app:before,body:not(.no-anim) .brand h1,body:not(.no-anim) .panel,body:not(.no-anim) .channel,body:not(.no-anim) .screen:after{animation:none!important}}
+</style></head>
 <body><div id="ag-wallpaper-layer" aria-hidden="true"><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper"></div><div class="ag-wallpaper-shade"></div></div><div class="edge-frame" aria-hidden="true"></div><main class="app">
 
 <div id="aghai-status-panel" style="margin:8px 16px;padding:10px 12px;border:1px solid #38f5c577;border-radius:12px;background:#0b1724;color:#edf7ff;font:12px system-ui;display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between"><span id="aghai-expiry-display">Expiry status: checking…</span><span id="aghai-views-display">This device visits: —</span><span id="aghai-live-display">Online viewers: live counter not connected</span></div><div id="aghai-setup-missing" style="flex-basis:100%;color:#ffcc80;font-weight:700">FINAL SETUP INCOMPLETE · Firebase config + AdMob IDs required</div>
